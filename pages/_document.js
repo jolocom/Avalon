@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
           <link rel="stylesheet" href="/static/css/scroll-effects.css" />
-          <style>{`
+          <style global jsx>{`
             html {
               color: #ffefdf;
               font-family: TTCommons;
@@ -37,12 +37,41 @@ export default class MyDocument extends Document {
             }
             p {
               font-size: 20px;
+              color: rgba(255, 239, 223, 0.8);
             }
             .ta-c {
               text-align: center;
             }
             .margin-center {
               margin: auto;
+            }
+            .translate-center {
+              margin-left: 50%;
+              transform: translateX(-50%);
+            }
+
+            a[data-tooltip] {
+              position:relative;
+              color: #fff;
+              text-decoration: none;
+            }
+            a[data-tooltip]:after {
+              content: attr(data-tooltip);
+              position: absolute;
+              left: 50%;
+              top: -6px;
+              transform: translateX(-50%) translateY(-100%);
+              background: #ffefdf;
+              text-align: center;
+              color: #05050d;
+              padding: 10px 16px;
+              font-size: 16px;
+              min-width: 300px;
+              border-radius: 2px;
+              display: none;
+            }
+            a[data-tooltip]:hover:after {
+              display: block;
             }
           `}</style>
         </Head>

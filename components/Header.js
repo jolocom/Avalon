@@ -23,6 +23,7 @@ const Header = ({ brandVersion = 'primary' }) => {
 
       <style jsx>{`
         header {
+          position: relative;
           display: inline-flex;
           align-items: center;
           margin-bottom: 40px;

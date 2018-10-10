@@ -11,7 +11,13 @@ const sections = [
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur eum culpa corporis
           rem nisi minima, sit aut! Aperiam, fugiat sapiente eos incidunt cumque ratione enim
-          maxime, quisquam dolores tempore asperiores.
+          maxime, quisquam dolores tempore asperiores.{' '}
+          <a
+            href="https://jolocom.io/"
+            data-tooltip="very brief explanation to some links goes as hover - just in order to not overload page"
+          >
+            Link with hover
+          </a>
         </p>
         <br />
         <Button>Start SSI experience</Button>
@@ -39,15 +45,20 @@ const sections = [
     bgImage: '/static/images/OSiP_02.jpg',
     content: (
       <>
-        <h1>Before tou arrive</h1>
+        <h1>Before you arrive</h1>
         <p>
           In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
           infrustructure and services.
         </p>
         <p>
-          As a visitor and potential temporary resident you also will need it. To download the
-          SmartWallet, scan the QR code:
+          As a visitor and potential temporary resident you also will need it. To download
+          the <u>SmartWallet</u>, scan the QR code:
         </p>
+        <img
+          className="translate-center"
+          src="/static/images/qr-google-play.svg"
+          alt="QR code to the google play"
+        />
       </>
     ),
   },
@@ -55,14 +66,9 @@ const sections = [
     bgImage: '/static/images/OSiP_03.jpg',
     content: (
       <>
-        <h1>Before tou arrive</h1>
+        <h1>Setup your identity</h1>
         <p>
-          In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
-          infrustructure and services.
-        </p>
-        <p>
-          As a visitor and potential temporary resident you also will need it. To download the
-          SmartWallet, scan the QR code:
+          Some text
         </p>
       </>
     ),

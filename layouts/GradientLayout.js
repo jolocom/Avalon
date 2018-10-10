@@ -73,6 +73,10 @@ class GradientLayout extends Component {
               ))}
             </div>
           </main>
+
+          <footer>
+            scroll
+          </footer>
         </div>
 
         <style jsx>{`
@@ -88,8 +92,9 @@ class GradientLayout extends Component {
           }
           .GradientLayout {
             background-image: url(${items[sectionIndex].bgImage || ''});
-            background-color: #000;
             background-position: top right;
+            background-repeat: no-repeat;
+            background-color: #000;
             background-size: 100%;
             overflow: hidden;
             min-height: 100vh;
@@ -100,8 +105,6 @@ class GradientLayout extends Component {
             padding: 65px 0 0 65px;
             height: 100%;
             width: 100%;
-            display: flex;
-            flex-direction: column;
           }
           main {
             position: relative;
@@ -121,13 +124,32 @@ class GradientLayout extends Component {
             height: 100%;
             overflow: hidden;
             max-width: 40%;
-            padding-top: 80px;
+            padding-top: 20vh;
           }
 
           :global(.ProgressSlider) {
             height: 100%;
             max-height: 100%;
             position: relative;
+          }
+
+          footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          footer:after {
+            content: '';
+            width: 1px;
+            height: 60px;
+            background-image: linear-gradient(to bottom,rgba(255,241,223,0),rgba(255, 222, 188, 0.7));
           }
         `}</style>
       </div>
