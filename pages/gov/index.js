@@ -70,7 +70,8 @@ class Home extends Component {
   ];
 
   handleInitiateLogin = ({ nextSection }) => {
-    this.props.initiateLogin(nextSection);
+    this.props.initiateLogin(nextSection)
+      .then(nextSection);
   }
 
   render() {

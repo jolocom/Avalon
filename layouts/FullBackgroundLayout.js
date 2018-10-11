@@ -91,7 +91,7 @@ class FullBackgroundLayout extends Component {
                   `}
                   style={item.style}
                 >
-                  {item.content({
+                  {React.createElement(item.content, {
                     nextSection: this.nextSection,
                     prevSection: this.prevSection,
                   })}

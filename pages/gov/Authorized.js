@@ -1,6 +1,7 @@
+import { connect } from 'react-redux';
 import { Button } from 'components';
 
-const AuthorizedGovSpace = () => {
+let AuthorizedGovSpace = ({ user }) => {
   return (
     <div>
       <img
@@ -8,7 +9,7 @@ const AuthorizedGovSpace = () => {
         alt="imaginary company logo"
       />
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
-      <h1>Welcome, Name!</h1>
+      <h1>Welcome, {user.givenName}!</h1>
       <p>
         You are officialy registered as visitor.
       </p>
@@ -78,5 +79,9 @@ const AuthorizedGovSpace = () => {
     </div>
   );
 };
+
+AuthorizedGovSpace = connect(state => ({
+  user: state.userData,
+}))(AuthorizedGovSpace);
 
 export default AuthorizedGovSpace;

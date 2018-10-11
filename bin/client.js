@@ -7,7 +7,7 @@ const { token } = require('./token');
   '[DEBUG] : WATCHING FOR KEY p98s3'
 */
 
-const randomUserId = '97ozl';
+const randomUserId = 'bo6vb';
 
 const options = {
   hostname: 'localhost',
