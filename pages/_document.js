@@ -12,7 +12,6 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
-          <link rel="stylesheet" href="/static/css/scroll-effects.css" />
           <style global jsx>{`
             html {
               color: #ffefdf;
@@ -38,6 +37,12 @@ export default class MyDocument extends Document {
             p {
               font-size: 20px;
               color: rgba(255, 239, 223, 0.8);
+            }
+            p.small {
+              font-size: 14px;
+            }
+            p.pink {
+              color: #942f51;
             }
             .ta-c {
               text-align: center;

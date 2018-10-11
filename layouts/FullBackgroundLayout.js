@@ -3,7 +3,7 @@ import throttle from 'lodash.throttle';
 
 import { ProgressSlider, Header } from 'components';
 
-class GradientLayout extends Component {
+class FullBackgroundLayout extends Component {
   constructor(props) {
     super(props);
 
@@ -44,47 +44,66 @@ class GradientLayout extends Component {
     }
   }
 
-  render() {
-    const { items, stepsWithoutHeader = [] } = this.props;
+  nextSection = () => {
     const { sectionIndex } = this.state;
-    const isFirstSlide = sectionIndex === 0;
-    const hideHeader = stepsWithoutHeader.includes(sectionIndex);
+    const { items } = this.props;
+    const newSectionIndex = sectionIndex + 1;
+
+    if (newSectionIndex >= 0 && newSectionIndex < items.length) {
+      this.setState({ sectionIndex: newSectionIndex });
+    }
+  }
+
+  prevSection = () => {
+    const { sectionIndex } = this.state;
+    const { items } = this.props;
+    const newSectionIndex = sectionIndex - 1;
+
+    if (newSectionIndex >= 0 && newSectionIndex < items.length) {
+      this.setState({ sectionIndex: newSectionIndex });
+    }
+  }
+
+  render() {
+    const { items } = this.props;
+    const { sectionIndex } = this.state;
 
     return (
-      <div className="GradientLayout">
-        <div className="GradientLayout__Container">
-          {!hideHeader && (
-            <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
-          )}
+      <div className="FullBackgroundLayout">
+        <div className="FullBackgroundLayout__Container">
+          <Header brandVersion="secondary" />
 
           <main>
             <ProgressSlider count={items.length} progress={sectionIndex} />
             <div
               ref={this.listRef}
-              className="GradientLayout__List__Section"
+              className="FullBackgroundLayout__List__Section"
               style={{
                 top: -(this.getListHeight()) * sectionIndex + 'px',
               }}
             >
-              {items.map(item => (
-                <section className={`
-                  GradientLayout__Section
-                  ${item.className ? item.className : ''}
-                `}>
-                  {item.content}
+              {items.map((item, index) => (
+                <section
+                  className={`
+                    FullBackgroundLayout__Section
+                    ${item.className ? item.className : ''}
+                    ${index !== sectionIndex ? 'hidden' : ''}
+                  `}
+                  style={item.style}
+                >
+                  {item.content({
+                    nextSection: this.nextSection,
+                    prevSection: this.prevSection,
+                  })}
                 </section>
               ))}
             </div>
           </main>
-
-          <footer>
-            scroll
-          </footer>
         </div>
 
         <style jsx>{`
           /* Prefetch images for all sections */
-          .GradientLayout:before {
+          .FullBackgroundLayout:before {
             content: '';
             content: ${items.map(item => item.bgImage ? `url(${item.bgImage})` : '').join(' ')};
             position:absolute;
@@ -93,28 +112,26 @@ class GradientLayout extends Component {
             overflow:hidden;
             z-index:-1;
           }
-          .GradientLayout {
+          .FullBackgroundLayout {
             background-image: url(${items[sectionIndex].bgImage || ''});
-            background-position: top right;
             background-repeat: no-repeat;
-            background-color: #000;
-            background-size: 100%;
+            background-size: cover;
             overflow: hidden;
             min-height: 100vh;
             height: 100vh;
           }
-          .GradientLayout__Container {
-            background-image: radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%);
+          .FullBackgroundLayout__Container {
+            display: flex;
+            flex-direction: column;
             padding: 65px 0 0 65px;
             height: 100%;
             width: 100%;
           }
           main {
-            position: relative;
             display: flex;
             height: 100%;
           }
-          .GradientLayout__List__Section {
+          .FullBackgroundLayout__List__Section {
             position: absolute;
             top: 0;
             height: 100%;
@@ -123,11 +140,15 @@ class GradientLayout extends Component {
             margin-right: -17px;
             transition: all 1s ease 0s;
           }
-          .GradientLayout__Section {
+          .FullBackgroundLayout__Section {
             height: 100%;
             overflow: hidden;
-            max-width: 40%;
-            padding-top: 20vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .FullBackgroundLayout__Section.hidden {
+            visibility: hidden;
           }
 
           :global(.ProgressSlider) {
@@ -135,29 +156,10 @@ class GradientLayout extends Component {
             max-height: 100%;
             position: relative;
           }
-
-          footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-          footer:after {
-            content: '';
-            width: 1px;
-            height: 60px;
-            background-image: linear-gradient(to bottom,rgba(255,241,223,0),rgba(255, 222, 188, 0.7));
-          }
         `}</style>
       </div>
     );
   }
 }
 
-export default GradientLayout;
+export default FullBackgroundLayout;

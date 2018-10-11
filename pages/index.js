@@ -68,55 +68,7 @@ const sections = [
       <>
         <h1>Setup your identity</h1>
         <p>
-          Some text
-        </p>
-      </>
-    ),
-  },
-  {
-    bgImage: '/static/images/OSiP_02.jpg',
-    content: (
-      <>
-        <h1>Before tou arrive</h1>
-        <p>
-          In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
-          infrustructure and services.
-        </p>
-        <p>
-          As a visitor and potential temporary resident you also will need it. To download the
-          SmartWallet, scan the QR code:
-        </p>
-      </>
-    ),
-  },
-  {
-    bgImage: '/static/images/OSiP_02.jpg',
-    content: (
-      <>
-        <h1>Before tou arrive</h1>
-        <p>
-          In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
-          infrustructure and services.
-        </p>
-        <p>
-          As a visitor and potential temporary resident you also will need it. To download the
-          SmartWallet, scan the QR code:
-        </p>
-      </>
-    ),
-  },
-  {
-    bgImage: '/static/images/OSiP_02.jpg',
-    content: (
-      <>
-        <h1>Before tou arrive</h1>
-        <p>
-          In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
-          infrustructure and services.
-        </p>
-        <p>
-          As a visitor and potential temporary resident you also will need it. To download the
-          SmartWallet, scan the QR code:
+          Some text, when you have your full name added to Wallet, please scroll.
         </p>
       </>
     ),
@@ -124,13 +76,12 @@ const sections = [
 ];
 
 class Home extends Component {
-  state = {
-    currentSection: 0,
-  }
-
   render() {
     return (
-      <GradientLayout items={sections} />
+      <GradientLayout
+        // stepsWithoutHeader={[4, 5]}
+        items={sections}
+      />
     );
   }
 }

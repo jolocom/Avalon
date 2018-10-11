@@ -1,7 +1,7 @@
-export default props => (
+const Button = props => (
   <button
-    className="Button"
     {...props}
+    className="Button"
   >
     {props.children}
 
@@ -31,3 +31,5 @@ export default props => (
     `}</style>
   </button>
 );
+
+export default Button;
