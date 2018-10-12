@@ -148,9 +148,10 @@ class GradientLayout extends Component {
           }
 
           :global(.ProgressSlider) {
-            height: 100%;
-            max-height: 100%;
             position: relative;
+            height: calc(100% - 15px);
+            max-height: 100%;
+            margin-left: 10px;
           }
 
           footer {

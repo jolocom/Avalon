@@ -45,13 +45,16 @@ const Header = ({ brandVersion = 'primary' }) => {
           visibility: ${isPrimaryBrandVersion ? 'visible' : 'hidden'};
           cursor: ${isPrimaryBrandVersion ? 'default' : 'pointer'};
           color: rgba(255, 255, 255, 0.4);
-          font-size: 14px;
-          line-height: 14px;
+          font-size: 12px;
+          line-height: 12px;
           letter-spacing: 2.6px;
         }
         .Brand a {
-          color: #fff;
+          color: rgba(255,255,255,0.4);
           text-decoration: none;
+        }
+        .Brand a:hover {
+          color: #fff;
         }
       `}</style>
     </header>
