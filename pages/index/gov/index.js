@@ -1,18 +1,27 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { FullBackgroundLayout } from 'layouts';
 import { Button } from 'components';
 import Authorized from './Authorized';
 
-import { initiateLogin } from '../../actions/auth';
+import { initiateLogin } from '../../../actions/auth';
 
-class Home extends Component {
-  sections = [
-    {
-      bgImage: '/static/images/GOV_01.jpg',
-      content: ({ nextSection }) => (
-        <div className="ta-c">
+class GovSpace extends Component {
+  state = {
+    sectionIndex: 0,
+  }
+
+  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
+
+  handleInitiateLogin = () => {
+    this.props.initiateLogin(this.nextSection)
+      .then(this.nextSection);
+  }
+
+  render() {
+    const sections = [
+      (
+        <div className="ta-c margin-center">
           <h1>Welcome to Lingberg!</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur eum culpa corporis
@@ -20,26 +29,23 @@ class Home extends Component {
             maxime, quisquam dolores tempore asperiores.
           </p>
           <br />
-          <Button onClick={() => this.handleInitiateLogin({ nextSection })}>
+          <Button onClick={() => this.handleInitiateLogin()}>
             Register my arrival
           </Button>
 
           <style jsx>{`
-          div {
-            background-color: #fff;
-            width: 50%;
-            padding: 70px 65px;
-          }
-          div, p {
-            color: #000;
-          }
-        `}</style>
+            div {
+              background-color: #fff;
+              width: 50%;
+              padding: 70px 65px;
+            }
+            div, p {
+              color: #000;
+            }
+          `}</style>
         </div>
       ),
-    },
-    {
-      bgImage: '/static/images/GOV_01.jpg',
-      content: () => (
+      (
         <div className="ta-c margin-center">
           <h4>Please, scan the QR-code with your SmartWallet:</h4>
           <img src={this.props.qrCode} width={400} />
@@ -54,39 +60,23 @@ class Home extends Component {
             width: 50%;
             padding: 70px 65px;
           }
-          div {
-            color: #000;
-          }
         `}</style>
         </div>
       ),
-    },
-    {
-      content: Authorized,
-      style: {
-        backgroundSize: '100%',
-      },
-    },
-  ];
+      Authorized,
+    ];
 
-  handleInitiateLogin = ({ nextSection }) => {
-    this.props.initiateLogin(nextSection)
-      .then(nextSection);
-  }
-
-  render() {
-    return (
-      <FullBackgroundLayout
-        items={this.sections}
-      />
-    );
+    const currentSection = sections[this.state.sectionIndex];
+    return typeof currentSection === 'function'
+      ? React.createElement(currentSection)
+      : currentSection;
   }
 }
 
-Home = connect(state => ({
+GovSpace = connect(state => ({
   qrCode: state.qrCode,
 }), {
   initiateLogin,
-})(Home);
+})(GovSpace);
 
-export default Home;
+export default GovSpace;

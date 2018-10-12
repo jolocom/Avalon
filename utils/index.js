@@ -2,13 +2,12 @@ const { JolocomLib } = require('jolocom-lib');
 
 const validateCredentialSignatures = async credentialResponse => {
   const suppliedCredentials = credentialResponse.getSuppliedCredentials();
-  // const registry = JolocomLib.registry.jolocom.create();
-  console.log(suppliedCredentials);
-  // const credSignatureValidity = await Promise.all(suppliedCredentials.map(cred => registry.validateSignature(cred)));
+  const registry = JolocomLib.registry.jolocom.create();
+  const credSignatureValidity = await Promise.all(suppliedCredentials.map(cred => registry.validateSignature(cred)));
 
-  // if (!credSignatureValidity.every(entry => entry)) {
-  //   throw new Error('Invalid signature on presented credentials');
-  // }
+  if (!credSignatureValidity.every(entry => entry)) {
+    throw new Error('Invalid signature on presented credentials');
+  }
 
   return true;
 };

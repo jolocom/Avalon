@@ -66,12 +66,19 @@ class GradientLayout extends Component {
                 top: -(this.getListHeight()) * sectionIndex + 'px',
               }}
             >
-              {items.map(item => (
-                <section className={`
+              {items.map((item, index) => (
+                <section
+                  className={`
                   GradientLayout__Section
+                  ${index !== sectionIndex ? 'hidden' : ''}
                   ${item.className ? item.className : ''}
-                `}>
-                  {item.content}
+                `}
+                  style={item.style}
+                >
+                  {typeof item.content === 'function'
+                    ? React.createElement(item.content)
+                    : item.content
+                  }
                 </section>
               ))}
             </div>
@@ -110,7 +117,6 @@ class GradientLayout extends Component {
             width: 100%;
           }
           main {
-            position: relative;
             display: flex;
             height: 100%;
           }
@@ -127,7 +133,12 @@ class GradientLayout extends Component {
             height: 100%;
             overflow: hidden;
             max-width: 40%;
-            padding-top: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .GradientLayout__Section.hidden {
+            visibility: hidden;
           }
 
           :global(.ProgressSlider) {

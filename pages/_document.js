@@ -41,8 +41,14 @@ export default class MyDocument extends Document {
             p.small {
               font-size: 14px;
             }
+            p.medium {
+              font-size: 15px;
+            }
             p.pink {
-              color: #942f51;
+              color: #942f51 !important;
+            }
+            p.gray {
+              color: rgba(5, 5, 13, 0.6) !important;
             }
             .ta-c {
               text-align: center;

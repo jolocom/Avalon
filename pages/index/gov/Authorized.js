@@ -2,6 +2,19 @@ import { connect } from 'react-redux';
 import { Button } from 'components';
 
 let AuthorizedGovSpace = ({ user }) => {
+  const services = [
+    {
+      img: 'residency',
+      title: 'Get a temporary residency',
+      description: 'Allows you to open your business, apply for a job or stay in the country ...',
+    },
+    {
+      img: 'driving-permit',
+      title: 'Get a driving permit',
+      description: 'Allows you to open your business, apply for a job or stay in the country ...',
+    },
+  ];
+
   return (
     <div>
       <img
@@ -19,34 +32,24 @@ let AuthorizedGovSpace = ({ user }) => {
       </p>
 
       <ul>
+        {services.map(service => (
+          <li>
+            <img
+              src={`/static/images/${service.img}.jpg`}
+              srcSet={`/static/images/${service.img}@2.jpg 2x`}
+              alt=""
+            />
+            <h3>{service.title}</h3>
+            <p className="medium gray">
+              {service.description}
+            </p>
+            <Button>Apply</Button>
+          </li>
+        ))}
         <li>
-          <img
-            src="/static/images/residency.jpg"
-            srcSet="/static/images/residency@2.jpg 2x"
-            alt=""
-          />
-          <h3>Get a temporary residency</h3>
-          <p>
-            Allows you to open your business, apply for a job or stay in the country ...
-          </p>
-          <Button>Apply</Button>
-        </li>
-        <li>
-          <img
-            src="/static/images/driving-permit.jpg"
-            srcSet="/static/images/driving-permit@2.jpg 2x"
-            alt=""
-          />
-          <h3>Get a driving permit</h3>
-          <p>
-            Allows you to open your business, apply for a job or stay in the country ...
-          </p>
-          <Button>Apply</Button>
-        </li>
-        <li>
-          <img src="" alt="" />
+          <img src="https://placehold.it/230x120/?text=Private company" alt="" />
           <h3>Open a private company</h3>
-          <p>
+          <p className="medium gray">
             Allows you to open your business, apply for a job or stay in the country ...
           </p>
           <p className="small pink">Comming soon in this demo</p>
@@ -59,10 +62,9 @@ let AuthorizedGovSpace = ({ user }) => {
             width: 100%;
             height: 100%;
             padding: 60px 50px;
-          }
-          div, p {
             color: #000;
           }
+
           .BarImage {
             position: fixed;
             left: 0;
@@ -74,6 +76,23 @@ let AuthorizedGovSpace = ({ user }) => {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+          }
+
+          li {
+            flex: 1;
+            padding-right: 50px;
+            padding-left: 20px;
+          }
+
+          li:hover,
+          li:hover p {
+            color: #942f51 !important;
+          }
+
+          li {
+            border-left: 1px solid #ececec;
           }
         `}</style>
     </div>

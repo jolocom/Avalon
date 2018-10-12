@@ -1,5 +1,5 @@
 // Private key associated with the service's identity
-const privateIdentityKey = Buffer.from('7A59BC95029803EC082BFEBBA8094F9D6B58AAB1A23B7CA2D9C6B96F21E1A0A4', 'hex');
+const privateIdentityKey = Buffer.from('3d77b86e0bf3d822d477c6fd2071a5a8488a1a63c46088d9e93e61fa0e2575bf', 'hex');
 
 // Where is your service deployed. E.g. https://demo-sso.jolocom.com
 const serviceUrl = 'http://localhost:3000';

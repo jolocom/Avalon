@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import { GradientLayout } from 'layouts';
 import { Button } from 'components';
+import Gov from './gov';
+import Residency from './residency';
 
 const sections = [
   {
@@ -73,13 +75,32 @@ const sections = [
       </>
     ),
   },
+  {
+    bgImage: '/static/images/GOV_01.jpg',
+    content: Gov,
+    style: {
+      width: '100%',
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  },
+  {
+    bgImage: '/static/images/recidency_bg.jpg',
+    content: Residency,
+    style: {
+      width: '100%',
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  },
 ];
 
 class Home extends Component {
   render() {
     return (
       <GradientLayout
-        // stepsWithoutHeader={[4, 5]}
         items={sections}
       />
     );
