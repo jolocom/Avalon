@@ -25,9 +25,10 @@ class ProgressSlider extends React.PureComponent {
     if (prevProps.progress !== this.props.progress) {
       return this.getCurrentStepPosition();
     }
+    return null;
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot) {
+    if (snapshot !== null) {
       this.setState({ currentStepPosition: snapshot });
     }
   }
