@@ -31,11 +31,12 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
             }
             h1 {
-              font-weight: 700;
+              font-weight: 400;
               font-size: 56px;
             }
             p {
               font-size: 20px;
+              font-weight: 300;
               color: rgba(255, 239, 223, 0.8);
             }
             p.small {

@@ -11,7 +11,7 @@ const Button = props => (
         border-radius: 4px;
         text-align: center;
         cursor: pointer;
-        padding: 13px 30px;
+        padding: 15px 30px 13px;
         background: #942f51;
         color: #fff;
         font-size: 20px;

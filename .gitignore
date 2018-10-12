@@ -1,5 +1,6 @@
 
 .env
+dump.rdb
 
 # dependencies
 /node_modules
