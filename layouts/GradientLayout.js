@@ -137,7 +137,6 @@ class GradientLayout extends Component {
           }
           .GradientLayout__Section {
             height: 100%;
-            overflow: hidden;
             max-width: 40%;
             display: flex;
             flex-direction: column;
