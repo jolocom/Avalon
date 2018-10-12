@@ -60,7 +60,8 @@ class Residency extends Component {
             width: 50%;
             padding: 70px 65px;
           }
-          div, p {
+          div,
+          div :global(p) {
             color: #000;
           }
         `}</style>

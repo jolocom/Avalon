@@ -44,6 +44,9 @@ class GradientLayout extends Component {
     }
   }
 
+  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
+  prevSection = () => this.setState({ sectionIndex: this.state.sectionIndex - 1 })
+
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
     const { sectionIndex } = this.state;
@@ -76,7 +79,10 @@ class GradientLayout extends Component {
                   style={item.style}
                 >
                   {typeof item.content === 'function'
-                    ? React.createElement(item.content)
+                    ? React.createElement(item.content, {
+                      nextSection: this.nextSection,
+                      prevSection: this.prevSection,
+                    })
                     : item.content
                   }
                 </section>

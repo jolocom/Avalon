@@ -21,7 +21,7 @@ class GovSpace extends Component {
   render() {
     const sections = [
       (
-        <div className="ta-c margin-center">
+        <>
           <h1>Welcome to Lingberg!</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur eum culpa corporis
@@ -32,44 +32,39 @@ class GovSpace extends Component {
           <Button onClick={() => this.handleInitiateLogin()}>
             Register my arrival
           </Button>
-
-          <style jsx>{`
-            div {
-              background-color: #fff;
-              width: 50%;
-              padding: 70px 65px;
-            }
-            div, p {
-              color: #000;
-            }
-          `}</style>
-        </div>
+        </>
       ),
       (
-        <div className="ta-c margin-center">
+        <>
           <h4>Please, scan the QR-code with your SmartWallet:</h4>
           <img src={this.props.qrCode} width={400} />
           <p className="small pink">
             Before scanning, please mase sure that you have added your full name to SmartWallet.
           </p>
-          <br />
-
-          <style jsx>{`
-          div {
-            background-color: #fff;
-            width: 50%;
-            padding: 70px 65px;
-          }
-        `}</style>
-        </div>
+        </>
       ),
       Authorized,
     ];
 
     const currentSection = sections[this.state.sectionIndex];
-    return typeof currentSection === 'function'
-      ? React.createElement(currentSection)
-      : currentSection;
+    return (
+      <div className="ta-c margin-center">
+        {typeof currentSection === 'function'
+          ? React.createElement(currentSection)
+          : currentSection}
+        <style jsx>{`
+          div {
+            background-color: #fff;
+            width: 50%;
+            padding: 70px 65px;
+          }
+          div,
+          div :global(p) {
+            color: #000;
+          }
+        `}</style>
+      </div>
+    );
   }
 }
 

@@ -7,7 +7,7 @@ import Residency from './residency';
 
 const sections = [
   {
-    content: (
+    content: ({ nextSection }) => (
       <div className="ta-c">
         <h1>Self-sovereign identity future</h1>
         <p>
@@ -22,7 +22,7 @@ const sections = [
           </a>
         </p>
         <br />
-        <Button>Start SSI experience</Button>
+        <Button onClick={nextSection}>Start SSI experience</Button>
       </div>
     ),
     className: 'margin-center',
