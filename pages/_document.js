@@ -77,13 +77,16 @@ export default class MyDocument extends Document {
               text-align: center;
               color: #05050d;
               padding: 10px 16px;
-              font-size: 16px;
+              font-size: 15px;
               min-width: 300px;
               border-radius: 2px;
-              display: none;
+              visibility: hidden;
+              opacity: 0;
+              transition: visibility 0s, opacity .4s linear;
             }
             a[data-tooltip]:hover:after {
-              display: block;
+              visibility: visible;
+              opacity: 1;
             }
           `}</style>
         </Head>
