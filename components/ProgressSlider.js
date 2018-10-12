@@ -1,4 +1,5 @@
 import React from 'react';
+import throttle from 'lodash.throttle';
 
 class ProgressSlider extends React.PureComponent {
   constructor(props) {
@@ -9,6 +10,29 @@ class ProgressSlider extends React.PureComponent {
     });
 
     this.listContainerRef = React.createRef();
+
+    this.state = {
+      currentStepPosition: this.getCurrentStepPosition(),
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', throttle(() => {
+      this.setState({ currentStepPosition: this.getCurrentStepPosition() });
+    }, 1500, { trailing: false }));
+  }
+  getSnapshotBeforeUpdate(prevProps) {
+    if (prevProps.progress !== this.props.progress) {
+      return this.getCurrentStepPosition();
+    }
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot) {
+      this.setState({ currentStepPosition: snapshot });
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize');
   }
 
   getCurrentStepPosition = () => {
@@ -21,12 +45,11 @@ class ProgressSlider extends React.PureComponent {
     const listContainerPosition = listContainerInfo.y || 0;
     const currentStepRelativePosition = currentStepPosition - listContainerPosition;
 
-    return currentStepRelativePosition;
+    return currentStepRelativePosition || 0;
   }
 
   render() {
     const { count } = this.props;
-    const currentStepPosition = this.getCurrentStepPosition() || 0;
 
     return (
       <div className="ProgressSlider">
@@ -35,7 +58,7 @@ class ProgressSlider extends React.PureComponent {
           className="ProgressSlider__Items"
         >
           <div className="ProgressSlider__Line" />
-          <div className="ProgressSlider__Active" />
+          <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
           {Array(count).fill().map((item, index) => {
             return (
               <li
@@ -98,7 +121,7 @@ class ProgressSlider extends React.PureComponent {
 
           .ProgressSlider__Active {
             position: absolute;
-            top: ${currentStepPosition}px;
+            top: 0;
             background-image: url('/static/images/glow-checkbox.svg');
             background-color: #fff;
             box-shadow: 0 0 20px 5px #f6b362;
