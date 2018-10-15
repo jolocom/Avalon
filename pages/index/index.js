@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { GradientLayout } from 'layouts';
 import { Button } from 'components';
@@ -99,12 +100,17 @@ const sections = [
 
 class Home extends Component {
   render() {
+    const { userData } = this.props;
+
     return (
       <GradientLayout
         items={sections}
+        // scrollValidations={{
+        //   4: !!userData.did,
+        // }}
       />
     );
   }
 }
 
-export default Home;
+export default connect(state => state)(Home);

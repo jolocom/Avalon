@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import { Button } from 'components';
 
-let AuthorizedGovSpace = ({ user }) => {
+let AuthorizedGovSpace = ({ user, nextSection }) => {
   const services = [
     {
       img: 'residency',
       title: 'Get a temporary residency',
       description: 'Allows you to open your business, apply for a job or stay in the country ...',
+      onApply: nextSection,
     },
     {
       img: 'driving-permit',
       title: 'Get a driving permit',
       description: 'Allows you to open your business, apply for a job or stay in the country ...',
+      onApply: nextSection,
     },
   ];
 
@@ -36,14 +38,14 @@ let AuthorizedGovSpace = ({ user }) => {
           <li>
             <img
               src={`/static/images/${service.img}.jpg`}
-              srcSet={`/static/images/${service.img}@2.jpg 2x`}
+              srcSet={`/static/images/${service.img}@2x.jpg 2x`}
               alt=""
             />
             <h3>{service.title}</h3>
             <p className="medium gray">
               {service.description}
             </p>
-            <Button>Apply</Button>
+            <Button onClick={service.onApply}>Apply</Button>
           </li>
         ))}
         <li>
@@ -58,10 +60,8 @@ let AuthorizedGovSpace = ({ user }) => {
 
       <style jsx>{`
           div {
-            background-color: #fff;
             width: 100%;
-            height: 100%;
-            padding: 60px 50px;
+            height: 100vh;
             color: #000;
           }
 

@@ -8,7 +8,7 @@ class GradientLayout extends Component {
     super(props);
 
     this.state = {
-      sectionIndex: 0,
+      sectionIndex: 3,
     };
     this.listRef = React.createRef();
   }
@@ -20,6 +20,13 @@ class GradientLayout extends Component {
     document.removeEventListener('mousewheel', throttle(this.handleScroll));
   }
 
+  canScroll = () => {
+    const { scrollValidations = {} } = this.props;
+    const canScroll = scrollValidations[this.state.sectionIndex];
+
+    return typeof canScroll === 'undefined' ? true : canScroll;
+  }
+
   getListHeight = () => {
     const element = this.listRef.current;
     const elementInfo = element ? element.getBoundingClientRect() : {};
@@ -28,6 +35,9 @@ class GradientLayout extends Component {
   }
 
   handleScroll = evt => {
+    if(!this.canScroll()) {
+      return;
+    }
     const delta = evt.wheelDeltaY;
     const { sectionIndex } = this.state;
     const { items } = this.props;
@@ -118,7 +128,7 @@ class GradientLayout extends Component {
           }
           .GradientLayout__Container {
             background-image: radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%);
-            padding: 65px 0 0 65px;
+            padding: 40px 0 0 40px;
             height: 100%;
             width: 100%;
           }
