@@ -10,20 +10,16 @@ const sections = [
   {
     content: ({ nextSection }) => (
       <div className="ta-c">
-        <h1>Self-sovereign identity future</h1>
+        <h1>The future of digital identity</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur eum culpa corporis
-          rem nisi minima, sit aut! Aperiam, fugiat sapiente eos incidunt cumque ratione enim
-          maxime, quisquam dolores tempore asperiores.{' '}
-          <a
-            href="https://jolocom.io/"
-            data-tooltip="very brief explanation to some links goes as hover - just in order to not overload page"
-          >
-            Link with hover
-          </a>
+          Have you ever thought about how digital citizenship could look like?
+        </p>
+        <p>
+          What will change for individuals and organisations if a country decides to make a leap
+          from countless user accounts to self-sovereign identity technology?
         </p>
         <br />
-        <Button onClick={nextSection}>Start SSI experience</Button>
+        <Button onClick={nextSection}>Start experience</Button>
       </div>
     ),
     className: 'margin-center',
@@ -32,14 +28,19 @@ const sections = [
     bgImage: '/static/images/OSiP_01.jpg',
     content: (
       <>
-        <h1>Lindberg, nowadays</h1>
+        <h1>Discover Avalon</h1>
         <p>
-          Situated on the border between Germany and France, hover link is well known for having
-          the highest level of urban infrustructure.
+          Avalon is a smal sovereign country situated on the North Sea coast known for having the
+          most urban infrastructure.
         </p>
         <p>
-          Government of Lindberg recently adopted a decentralized identity system in a push to
-          improve privacy for its citizens.
+          Avalon had it's dark days - as every country. Two years ago, when society reached its
+          limits of disengagement, its government decided to run a few experiments to improve
+          people's lives.
+        </p>
+        <p>
+          After several attempts, two implementations reached the level of mass adoption.
+          One of them is a new approach to identity management.
         </p>
       </>
     ),
@@ -48,14 +49,14 @@ const sections = [
     bgImage: '/static/images/OSiP_02.jpg',
     content: (
       <>
-        <h1>Before you arrive</h1>
+        <h1>Prepare for arrival</h1>
         <p>
-          In Lindberg, all people - residents and visitors - use the SmartWallet to access urban
-          infrustructure and services.
+          In Avalon, this new identity system lets everyone access services of urban infrastructure.
+          Wether you are visiting or relocating for good - a digital identity is the key to this
+          country.
         </p>
         <p>
-          As a visitor and potential temporary resident you also will need it. To download
-          the <u>SmartWallet</u>, scan the QR code:
+          To install the <u>SmartWallet</u>, please scan the QR code:
         </p>
         <img
           className="translate-center"
@@ -69,10 +70,17 @@ const sections = [
     bgImage: '/static/images/OSiP_03.jpg',
     content: (
       <>
-        <h1>Setup your identity</h1>
+        <h1>Set up your identity</h1>
         <p>
-          Some text, when you have your full name added to Wallet, please scroll.
+          Now it's time to create your own identity.
         </p>
+        <p>
+          1. Open the SmartWallet. <br />
+          2. Follow the instalation guide. <br />
+          3. Finally, add your <u>full name</u>.
+        </p>
+        <br /><br />
+        <p>Ready? Scroll down to enter the country.</p>
       </>
     ),
   },
@@ -105,9 +113,9 @@ class Home extends Component {
     return (
       <GradientLayout
         items={sections}
-        // scrollValidations={{
-        //   4: !!userData.did,
-        // }}
+        scrollValidations={{
+          4: !!userData.did,
+        }}
       />
     );
   }

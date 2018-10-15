@@ -8,7 +8,7 @@ class GradientLayout extends Component {
     super(props);
 
     this.state = {
-      sectionIndex: 3,
+      sectionIndex: 0,
     };
     this.listRef = React.createRef();
   }
@@ -60,6 +60,7 @@ class GradientLayout extends Component {
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
     const { sectionIndex } = this.state;
+    // const sectionIndex = 5;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
 

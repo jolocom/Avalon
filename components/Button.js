@@ -1,15 +1,21 @@
-const Button = props => (
+import classnames from 'classnames';
+
+const Button = ({ className, ...props }) => (
   <button
     {...props}
-    className="Button"
+    className={classnames(
+      'Button',
+      className
+    )}
   >
     {props.children}
 
     <style jsx>{`
       .Button {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 4px;
-        text-align: center;
         cursor: pointer;
         padding: 15px 30px 13px;
         background: #942f51;
@@ -19,6 +25,14 @@ const Button = props => (
         outline: none;
         border: none;
         transition: transform .15s ease;
+      }
+      .Button[disabled] {
+        background: #ffefdf;
+        color: #05050d;
+        pointer-events: none;
+      }
+      .Button > :global(* + *) {
+        margin-left: 10px;
       }
 
       .Button:hover {

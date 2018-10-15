@@ -57,6 +57,9 @@ export default class MyDocument extends Document {
             .margin-center {
               margin: auto;
             }
+            .mt {
+              margin-top: 64px;
+            }
             .translate-center {
               margin-left: 50%;
               transform: translateX(-50%);

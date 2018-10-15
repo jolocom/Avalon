@@ -1,7 +1,8 @@
 const { SSO } = require('jolocom-lib/js/sso/index');
 const io = require('socket.io');
 const { serviceUrl } = require('../config');
-const { claimsMetadata } = require('cred-types-jolocom-demo');
+const { claimsMetadata: demoCredentialTypes } = require('cred-types-jolocom-demo');
+const { claimsMetadata: coreCredentialTypes } = require('cred-types-jolocom-core');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 
 const configureSockets = (
@@ -25,7 +26,10 @@ const configureSockets = (
       typ: InteractionType.CredentialRequest,
       credentialRequest: {
         callbackURL,
-        credentialRequirements: Object.values(claimsMetadata),
+        credentialRequirements: [
+          coreCredentialTypes.emailAddress,
+          coreCredentialTypes.name,
+        ],
       },
     });
 

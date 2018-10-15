@@ -22,25 +22,27 @@ class GovSpace extends Component {
     const sections = [
       (
         <div className="half-width margin-center ta-c">
-          <h1>Welcome to Lingberg!</h1>
+          <h1>Welcome to Avalon!</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur eum culpa corporis
-            rem nisi minima, sit aut! Aperiam, fugiat sapiente eos incidunt cumque ratione enim
-            maxime, quisquam dolores tempore asperiores.
+            Please, register your arrival
           </p>
           <br />
           <Button onClick={() => this.handleInitiateLogin()}>
-            Register my arrival
+            <img
+              src="/static/images/jolocom-icon-transparent.svg"
+              alt="Jolocom logo"
+              height={20}
+            />
+            <span>
+              Continue with Jolocom
+            </span>
           </Button>
         </div>
       ),
       (
         <div className="half-width margin-center ta-c">
-          <h4>Please, scan the QR-code with your SmartWallet:</h4>
+          <h2>Scan the QR-code with your SmartWallet:</h2>
           <img src={this.props.qrCode} width={400} />
-          <p className="small pink">
-            Before scanning, please mase sure that you have added your full name to SmartWallet.
-          </p>
         </div>
       ),
       Authorized,

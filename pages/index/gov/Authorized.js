@@ -5,14 +5,14 @@ let AuthorizedGovSpace = ({ user, nextSection }) => {
   const services = [
     {
       img: 'residency',
-      title: 'Get a temporary residency',
-      description: 'Allows you to open your business, apply for a job or stay in the country ...',
+      title: 'Apply for citizenship',
+      description: 'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
       onApply: nextSection,
     },
     {
       img: 'driving-permit',
       title: 'Get a driving permit',
-      description: 'Allows you to open your business, apply for a job or stay in the country ...',
+      description: 'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
       onApply: nextSection,
     },
   ];
@@ -26,11 +26,7 @@ let AuthorizedGovSpace = ({ user, nextSection }) => {
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
       <h1>Welcome, {user.givenName}!</h1>
       <p>
-        You are officialy registered as visitor.
-      </p>
-      <p>
-        Now you can apply for documents that will give <br />
-        you equal status with Lindberg citizens:
+        Discover what services the Government of Avalon can offer you:
       </p>
 
       <ul>
@@ -52,7 +48,8 @@ let AuthorizedGovSpace = ({ user, nextSection }) => {
           <img src="https://placehold.it/230x120/?text=Private company" alt="" />
           <h3>Open a private company</h3>
           <p className="medium gray">
-            Allows you to open your business, apply for a job or stay in the country ...
+            Allows you to open your business, apply for a job or stay in the country …
+            something funny goes here.
           </p>
           <p className="small pink">Comming soon in this demo</p>
         </li>
