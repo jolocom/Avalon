@@ -29,7 +29,6 @@ const registry = JolocomLib.registry.jolocom.create();
 configureRoutes(app, { setAsync, getAsync, delAsync });
 registry.authenticate(privateIdentityKey)
   .then(identityWallet => {
-    console.log(identityWallet);
     configureSockets(server, identityWallet, new DbWatcher(getAsync), { getAsync, setAsync, delAsync });
   })
   .catch(e => console.log(e));

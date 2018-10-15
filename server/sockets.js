@@ -1,6 +1,7 @@
 const { SSO } = require('jolocom-lib/js/sso/index');
 const io = require('socket.io');
-const { credentialRequirements, serviceUrl } = require('../config');
+const { serviceUrl } = require('../config');
+const { claimsMetadata } = require('cred-types-jolocom-demo');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 
 const configureSockets = (
@@ -18,15 +19,13 @@ const configureSockets = (
 
   qrCodeSocket.on('connection', async socket => {
     const { userId } = socket.handshake.query;
-    console.log('connected');
-
     const callbackURL = `${serviceUrl}/authentication/${userId}`;
 
     const credentialRequest = await identityWallet.create.credentialRequestJSONWebToken({
       typ: InteractionType.CredentialRequest,
       credentialRequest: {
         callbackURL,
-        credentialRequirements,
+        credentialRequirements: Object.values(claimsMetadata),
       },
     });
 

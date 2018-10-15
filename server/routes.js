@@ -1,4 +1,4 @@
-const { credentialRequirements } = require('../config');
+const { claimsMetadata } = require('cred-types-jolocom-demo');
 const { validateCredentialSignatures, extractDataFromClaims } = require('../utils');
 const { JSONWebToken } = require('jolocom-lib/js/interactionFlows/JSONWebToken');
 const { CredentialRequest } = require('jolocom-lib/js/interactionFlows/credentialRequest/credentialRequest');
@@ -17,7 +17,7 @@ const configureRoutes = async(app, redisApi) => {
 
       const credentialRequest = CredentialRequest.create({
         callbackURL: '',
-        credentialRequirements,
+        credentialRequirements: Object.values(claimsMetadata),
       });
 
       if (!credentialResponse.satisfiesRequest(credentialRequest)) {
