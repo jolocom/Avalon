@@ -42,7 +42,7 @@ class GovSpace extends Component {
       (
         <div className="half-width margin-center ta-c">
           <h2>Scan the QR-code with your SmartWallet:</h2>
-          <img src={this.props.qrCode} width={400} />
+          <img src={this.props.qrCode} width={300} />
         </div>
       ),
       Authorized,

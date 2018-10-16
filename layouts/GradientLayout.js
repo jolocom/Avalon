@@ -60,7 +60,6 @@ class GradientLayout extends Component {
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
     const { sectionIndex } = this.state;
-    // const sectionIndex = 5;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
 

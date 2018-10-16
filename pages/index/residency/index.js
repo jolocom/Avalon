@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button, Input } from 'components';
+import { initiateResidency } from 'actions/residency';
 
 class Residency extends Component {
   state = {
@@ -12,7 +13,19 @@ class Residency extends Component {
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
   handleChangeInput = (key, value) => this.setState({ [key]: value })
+  handleInitiateResidency = evt => {
+    evt.preventDefault();
+    const { birthDate, birthPlace } = this.state;
 
+    this.props.initiateResidency(
+      {
+        birthDate,
+        birthPlace,
+      },
+      this.nextSection
+    )
+      .then(this.nextSection);
+  }
   render() {
     const { birthDate, birthPlace } = this.state;
     const sections = [
@@ -24,7 +37,7 @@ class Residency extends Component {
             Please, provide additional information:
           </p>
           <br />
-          <form>
+          <form onSubmit={this.handleInitiateResidency}>
             <Input
               placeholder="date of birth"
               onChange={evt => this.handleChangeInput('birthDate', evt.target.value)}
@@ -39,7 +52,6 @@ class Residency extends Component {
             />
             <Button
               className="mt"
-              onClick={this.nextSection}
               disabled={!birthDate || !birthPlace}
             >
               Next
@@ -65,7 +77,8 @@ class Residency extends Component {
           </p>
           <br />
           <img
-            src="https://placehold.it/200x200/?text=qr-code-here"
+            src={this.props.qrCode}
+            width={300}
             alt="qr code"
           />
         </>
@@ -87,6 +100,7 @@ class Residency extends Component {
       ),
     ];
     const currentSection = sections[this.state.sectionIndex];
+
     return (
       <div className="ta-c margin-center">
         <img
@@ -112,6 +126,10 @@ class Residency extends Component {
   }
 }
 
-Residency = connect()(Residency);
+Residency = connect(state => ({
+  qrCode: state.qrCode,
+}), {
+  initiateResidency,
+})(Residency);
 
 export default Residency;

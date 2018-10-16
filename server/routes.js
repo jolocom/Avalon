@@ -1,8 +1,9 @@
-const { claimsMetadata: demoCredentialTypes } = require('cred-types-jolocom-demo');
-const { claimsMetadata: coreCredentialTypes } = require('cred-types-jolocom-core');
-const { validateCredentialSignatures, extractDataFromClaims } = require('../utils');
+const { JolocomLib } = require('jolocom-lib');
 const { JSONWebToken } = require('jolocom-lib/js/interactionFlows/JSONWebToken');
 const { CredentialRequest } = require('jolocom-lib/js/interactionFlows/credentialRequest/credentialRequest');
+
+const { credentialRequirements, privateIdentityKey } = require('../config');
+const { validateCredentialSignatures, extractDataFromClaims } = require('./utils');
 
 const configureRoutes = async(app, redisApi) => {
   const { setAsync } = redisApi;
@@ -19,8 +20,8 @@ const configureRoutes = async(app, redisApi) => {
       const credentialRequest = CredentialRequest.create({
         callbackURL: '',
         credentialRequirements: [
-          coreCredentialTypes.emailAddress,
-          coreCredentialTypes.name,
+          credentialRequirements.email,
+          credentialRequirements.name,
         ],
       });
 
@@ -35,6 +36,28 @@ const configureRoutes = async(app, redisApi) => {
       };
 
       await setAsync(clientId, JSON.stringify({ status: 'success', data: userData }));
+
+      res.json('OK');
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  });
+
+  app.post('/residency', async(req, res, next) => {
+    const { jwt } = req.body;
+
+    try {
+      const registry = JolocomLib.registry.jolocom.create();
+      await registry.authenticate(privateIdentityKey);
+      const credReceive = await JSONWebToken.decode(jwt);
+      const providedCredentials = credReceive.getSignedCredentials();
+      const validCredSignature = await registry.validateSignature(providedCredentials[0]);
+
+      if (!validCredSignature) {
+        throw new Error('Credentials signature is not valid');
+      }
+      await setAsync(providedCredentials[0].claim.id, JSON.stringify({ status: 'success', data: validCredSignature }));
 
       res.json('OK');
     } catch (err) {

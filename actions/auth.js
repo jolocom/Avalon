@@ -1,6 +1,7 @@
 import * as ACTIONS from './';
 import io from 'socket.io-client';
 import { serviceUrl } from '../config';
+import { randomString } from 'utils';
 
 export const setQRCode = encodedImage => {
   return {
@@ -29,24 +30,18 @@ export const initiateLogin = cb => async dispatch => {
 };
 
 const getQrCode = async randomId => {
-  const socket = io(`${serviceUrl}/qr-code`, { query: { userId: randomId } });
+  const socket = io(`${serviceUrl}/sso/qr-code`, { query: { userId: randomId } });
   return new Promise(resolve => {
     socket.on(randomId, qrCode => resolve(qrCode));
   });
 };
 
-export const awaitUserData = async randomId=> {
-  const socket = io(`${serviceUrl}/sso-status`, {
+export const awaitUserData = async randomId => {
+  const socket = io(`${serviceUrl}/sso/status`, {
     query: { userId: randomId },
   });
 
   return new Promise(resolve => {
     socket.on(randomId, data => resolve(data));
   });
-};
-
-const randomString = length => {
-  return Math.random()
-    .toString(36)
-    .substr(2, length);
 };

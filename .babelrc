@@ -5,7 +5,9 @@
       {
         "alias": {
           "components": "./components",
-          "layouts": "./layouts"
+          "layouts": "./layouts",
+          "actions": "./actions",
+          "utils": "./utils"
         }
       }
     ]

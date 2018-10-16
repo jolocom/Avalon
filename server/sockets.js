@@ -1,9 +1,8 @@
 const { SSO } = require('jolocom-lib/js/sso/index');
 const io = require('socket.io');
-const { serviceUrl } = require('../config');
-const { claimsMetadata: demoCredentialTypes } = require('cred-types-jolocom-demo');
-const { claimsMetadata: coreCredentialTypes } = require('cred-types-jolocom-core');
+const { credentialRequirements, serviceUrl } = require('../config');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
+const { claimsMetadata } = require('cred-types-jolocom-demo');
 
 const configureSockets = (
   server,
@@ -15,10 +14,16 @@ const configureSockets = (
 
   const baseSocket = io(server).origins('*:*');
 
-  const qrCodeSocket = baseSocket.of('/qr-code');
-  const dataSocket = baseSocket.of('/sso-status');
+  const ssoSocket = {
+    qrCode: baseSocket.of('/sso/qr-code'),
+    status: baseSocket.of('/sso/status'),
+  };
+  const residencySocket = {
+    qrCode: baseSocket.of('/residency/qr-code'),
+    status: baseSocket.of('/residency/status'),
+  };
 
-  qrCodeSocket.on('connection', async socket => {
+  ssoSocket.qrCode.on('connection', async socket => {
     const { userId } = socket.handshake.query;
     const callbackURL = `${serviceUrl}/authentication/${userId}`;
 
@@ -27,8 +32,8 @@ const configureSockets = (
       credentialRequest: {
         callbackURL,
         credentialRequirements: [
-          coreCredentialTypes.emailAddress,
-          coreCredentialTypes.name,
+          credentialRequirements.email,
+          credentialRequirements.name,
         ],
       },
     });
@@ -37,13 +42,57 @@ const configureSockets = (
     socket.emit(userId, qrCode);
   });
 
-  dataSocket.on('connection', async socket => {
+  ssoSocket.status.on('connection', async socket => {
     const { userId } = socket.handshake.query;
     dbWatcher.addSubscription(userId);
     dbWatcher.on(userId, async() => {
       const userData = await getAsync(userId);
       await delAsync(userId);
       socket.emit(userId, userData);
+    });
+  });
+
+  residencySocket.qrCode.on('connection', async socket => {
+    try {
+      const {
+        givenName, familyName,
+        birthDate, birthPlace,
+        nationality = 'lindberger',
+        identifier,
+        id,
+      } = socket.handshake.query;
+      const residencySignedCredential = await identityWallet.create.signedCredential({
+        metadata: claimsMetadata.demoId,
+        claim: { givenName, familyName, birthDate, birthPlace, nationality, identifier },
+        subject: id,
+      });
+
+      const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
+        typ: InteractionType.CredentialsReceive,
+        credentialsReceive: {
+          signedCredentials: [residencySignedCredential],
+        },
+      });
+
+      const credentialReceiveJWT = credReceiveJWTClass.encode();
+
+      console.log(credentialReceiveJWT);
+
+      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
+
+      socket.emit(id, qrCode);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  residencySocket.status.on('connection', async socket => {
+    const { userDid } = socket.handshake.query;
+    dbWatcher.addSubscription(userDid);
+    dbWatcher.on(userDid, async() => {
+      const userData = await getAsync(userDid);
+      await delAsync(userDid);
+      socket.emit(userDid, userData);
     });
   });
 };

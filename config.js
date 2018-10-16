@@ -4,7 +4,27 @@ const privateIdentityKey = Buffer.from('3d77b86e0bf3d822d477c6fd2071a5a8488a1a63
 // Where is your service deployed. E.g. https://demo-sso.jolocom.com
 const serviceUrl = 'http://localhost:3000';
 
+const credentialRequirements = {
+  email: {
+    type: ['Credential', 'ProofOfEmailCredential'],
+    constraints: [{ '==': [true, true] }],
+  },
+  name: {
+    type: ['Credential', 'ProofOfNameCredential'],
+    constraints: [{ '==': [true, true] }],
+  },
+  residency: {
+    type: ['Credential', 'ProofOfDemoIdCredential'],
+    constraints: [{ '==': [true, true] }],
+  },
+  drivingLicense: {
+    type: ['Credential', 'ProofOfDemoDriversLicenceCredential'],
+    constraints: [{ '==': [true, true] }],
+  },
+};
+
 module.exports = {
   privateIdentityKey,
   serviceUrl,
+  credentialRequirements,
 };
