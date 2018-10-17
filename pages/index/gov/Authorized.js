@@ -4,12 +4,14 @@ import { Button } from 'components';
 let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
   const services = [
     {
+      name: 'residency',
       img: 'residency',
       title: 'Apply for citizenship',
       description: 'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
       onApply: () => setSection(mainSectionIndex + 1),
     },
     {
+      name: 'drivingLicence',
       img: 'driving-permit',
       title: 'Get a driving permit',
       description: 'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
@@ -41,7 +43,11 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             <p className="medium gray">
               {service.description}
             </p>
-            <Button onClick={service.onApply}>Apply</Button>
+            {user[service.name] ? (
+              <span className="green-text">Received</span>
+            ) : (
+              <Button onClick={service.onApply}>Apply</Button>
+            )}
           </li>
         ))}
         <li>

@@ -1,8 +1,9 @@
-const { SSO } = require('jolocom-lib/js/sso/index');
 const io = require('socket.io');
-const { credentialRequirements, serviceUrl } = require('../config');
+const { SSO } = require('jolocom-lib/js/sso/index');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 const { claimsMetadata } = require('cred-types-jolocom-demo');
+
+const { credentialRequirements, serviceUrl } = require('../config');
 
 const configureSockets = (
   server,
@@ -58,13 +59,10 @@ const configureSockets = (
 
   residencySocket.qrCode.on('connection', async socket => {
     try {
-      const {
-        user, identifier,
-        nationality = 'lindberger',
-      } = socket.handshake.query;
+      const { user, identifier } = socket.handshake.query;
       const residencySignedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoId,
-        claim: { ...user, nationality, identifier },
+        claim: { ...user, identifier },
         subject: user.id,
       });
 
@@ -80,7 +78,6 @@ const configureSockets = (
       console.log(credentialReceiveJWT);
 
       const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
-
       socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
@@ -100,8 +97,12 @@ const configureSockets = (
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
       const {
-        givenName, familyName,
-        birthDate, birthPlace,
+        user: {
+          givenName,
+          familyName,
+          birthDate,
+          birthPlace,
+        },
         identifier,
       } = socket.handshake.query;
       const signedCredential = await identityWallet.create.signedCredential({

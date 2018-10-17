@@ -51,6 +51,9 @@ export default class MyDocument extends Document {
             p.gray {
               color: rgba(5, 5, 13, 0.6) !important;
             }
+            .green-text {
+              color: #28a52d;
+            }
             .ta-c {
               text-align: center;
             }

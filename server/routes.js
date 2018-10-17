@@ -44,7 +44,7 @@ const configureRoutes = async(app, redisApi) => {
     }
   });
 
-  app.post('/residency/:identifier', async(req, res, next) => {
+  app.post('/get-claim/:identifier', async(req, res, next) => {
     const { identifier } = req.params;
     const { jwt } = req.body;
 

@@ -1,4 +1,3 @@
-
 const http = require('http');
 
 try {
@@ -7,7 +6,7 @@ try {
   const options = {
     hostname: 'localhost',
     port: 3000,
-    path: `/residency/${identifier}`,
+    path: `/get-claim/${identifier}`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   };

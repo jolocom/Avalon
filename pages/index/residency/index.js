@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button, Input } from 'components';
-import { initiateResidency } from 'actions/user';
+import { setResidency } from 'actions/user';
 
 class Residency extends Component {
   state = {
@@ -13,11 +13,11 @@ class Residency extends Component {
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
   handleChangeInput = (key, value) => this.setState({ [key]: value })
-  handleInitiateResidency = evt => {
+  handleSetResidency = evt => {
     evt.preventDefault();
     const { birthDate, birthPlace } = this.state;
 
-    this.props.initiateResidency(
+    this.props.setResidency(
       {
         birthDate,
         birthPlace,
@@ -38,7 +38,7 @@ class Residency extends Component {
             Please, provide additional information:
           </p>
           <br />
-          <form onSubmit={this.handleInitiateResidency}>
+          <form onSubmit={this.handleSetResidency}>
             <Input
               placeholder="date of birth"
               onChange={evt => this.handleChangeInput('birthDate', evt.target.value)}
@@ -130,7 +130,7 @@ class Residency extends Component {
 Residency = connect(state => ({
   qrCode: state.qrCode,
 }), {
-  initiateResidency,
+  setResidency,
 })(Residency);
 
 export default Residency;
