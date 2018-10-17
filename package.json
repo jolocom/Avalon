@@ -5,7 +5,7 @@
     "dev": "yarn redis:start; yarn server; yarn redis:stop",
     "server": "node server",
     "build": "next build",
-    "start": "yarn redis:start; next start -p $PORT; yarn redis:stop",
+    "start": "NODE_ENV=production yarn redis:start; node server; yarn redis:stop",
     "redis:start": "redis-server &",
     "redis:stop": "redis-cli SHUTDOWN",
     "heroku-postbuild": "npm run build",
