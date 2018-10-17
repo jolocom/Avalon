@@ -4,13 +4,13 @@ const next = require('next');
 const { JolocomLib } = require('jolocom-lib');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 
 const { DbWatcher } = require('./dbWatcher');
 const { configureRoutes } = require('./routes');
 const { configureRedisClient } = require('./redis');
 const { configureSockets } = require('./sockets');
 const { privateIdentityKey } = require('../config');
-
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 3000;
