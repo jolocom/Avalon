@@ -3,16 +3,15 @@ const { SSO } = require('jolocom-lib/js/sso/index');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 const { claimsMetadata } = require('cred-types-jolocom-demo');
 
-const { credentialRequirements } = require('../config');
-
 const configureSockets = (
   server,
   identityWallet,
   dbWatcher,
   redisApi,
 ) => {
+  const getConfig = require('next/config').default;
+  const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
   const { getAsync, delAsync } = redisApi;
-
   const baseSocket = io(server).origins('*:*');
 
   const ssoSocket = {
@@ -30,15 +29,15 @@ const configureSockets = (
 
   ssoSocket.qrCode.on('connection', async socket => {
     const { identifier } = socket.handshake.query;
-    const callbackURL = `${process.env.BASE_URL}/authentication/${identifier}`;
+    const callbackURL = `${publicRuntimeConfig.BASE_URL}/authentication/${identifier}`;
 
     const credentialRequest = await identityWallet.create.credentialRequestJSONWebToken({
       typ: InteractionType.CredentialRequest,
       credentialRequest: {
         callbackURL,
         credentialRequirements: [
-          credentialRequirements.email,
-          credentialRequirements.name,
+          serverRuntimeConfig.credentialRequirements.email,
+          serverRuntimeConfig.credentialRequirements.name,
         ],
       },
     });

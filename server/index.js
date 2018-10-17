@@ -10,7 +10,6 @@ const { DbWatcher } = require('./dbWatcher');
 const { configureRoutes } = require('./routes');
 const { configureRedisClient } = require('./redis');
 const { configureSockets } = require('./sockets');
-const { privateIdentityKey } = require('../config');
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 3000;
@@ -18,6 +17,8 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 const app = express();
 const server = new http.Server(app);
+const getConfig = require('next/config').default;
+const { serverRuntimeConfig } = getConfig();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,7 +28,7 @@ const { getAsync, setAsync, delAsync } = configureRedisClient();
 const registry = JolocomLib.registry.jolocom.create();
 
 configureRoutes(app, { setAsync, getAsync, delAsync });
-registry.authenticate(privateIdentityKey)
+registry.authenticate(serverRuntimeConfig.privateIdentityKey)
   .then(identityWallet => {
     configureSockets(server, identityWallet, new DbWatcher(getAsync), { getAsync, setAsync, delAsync });
   })

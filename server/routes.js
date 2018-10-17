@@ -2,11 +2,12 @@ const { JolocomLib } = require('jolocom-lib');
 const { JSONWebToken } = require('jolocom-lib/js/interactionFlows/JSONWebToken');
 const { CredentialRequest } = require('jolocom-lib/js/interactionFlows/credentialRequest/credentialRequest');
 
-const { credentialRequirements, privateIdentityKey } = require('../config');
 const { validateCredentialSignatures, extractDataFromClaims } = require('./utils');
 
 const configureRoutes = async(app, redisApi) => {
   const { setAsync } = redisApi;
+  const getConfig = require('next/config').default;
+  const { serverRuntimeConfig } = getConfig();
 
   app.post('/authentication/:identifier', async(req, res, next) => {
     const { identifier } = req.params;
@@ -20,8 +21,8 @@ const configureRoutes = async(app, redisApi) => {
       const credentialRequest = CredentialRequest.create({
         callbackURL: '',
         credentialRequirements: [
-          credentialRequirements.email,
-          credentialRequirements.name,
+          serverRuntimeConfig.credentialRequirements.email,
+          serverRuntimeConfig.credentialRequirements.name,
         ],
       });
 
@@ -50,7 +51,7 @@ const configureRoutes = async(app, redisApi) => {
 
     try {
       const registry = JolocomLib.registry.jolocom.create();
-      await registry.authenticate(privateIdentityKey);
+      await registry.authenticate(serverRuntimeConfig.privateIdentityKey);
       const credReceive = await JSONWebToken.decode(jwt);
       const providedCredentials = credReceive.getSignedCredentials();
       const validCredSignature = await registry.validateSignature(providedCredentials[0]);
