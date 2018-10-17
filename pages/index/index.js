@@ -5,6 +5,7 @@ import { GradientLayout } from 'layouts';
 import { Button } from 'components';
 import Gov from './gov';
 import Residency from './residency';
+import DrivingLicence from './drivingLicence';
 
 const sections = [
   {
@@ -97,6 +98,16 @@ const sections = [
   {
     bgImage: '/static/images/recidency_bg.jpg',
     content: Residency,
+    style: {
+      width: '100%',
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  },
+  {
+    bgImage: '/static/images/driver_licence_bg.jpg',
+    content: DrivingLicence,
     style: {
       width: '100%',
       maxWidth: '100%',

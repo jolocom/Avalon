@@ -54,14 +54,22 @@ class GradientLayout extends Component {
     }
   }
 
-  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
-  prevSection = () => this.setState({ sectionIndex: this.state.sectionIndex - 1 })
+  nextSection = () => this.setSection(this.state.sectionIndex + 1)
+  prevSection = () => this.setSection(this.state.sectionIndex - 1)
+  setSection = idx => this.setState({ sectionIndex: idx })
 
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
     const { sectionIndex } = this.state;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
+    const imagesToPrefetch = items
+      .map((item = {}) => item.bgImage ? `url(${item.bgImage})` : '').join(' ');
+    const currentSection = items[sectionIndex];
+    if (currentSection < 0) {
+      throw Error('Current section canoot be less than 0');
+    }
+    const currentImage = currentSection.bgImage || '';
 
     return (
       <div className="GradientLayout">
@@ -92,6 +100,8 @@ class GradientLayout extends Component {
                     ? React.createElement(item.content, {
                       nextSection: this.nextSection,
                       prevSection: this.prevSection,
+                      mainSectionIndex: sectionIndex,
+                      setSection: this.setSection,
                     })
                     : item.content
                   }
@@ -109,7 +119,7 @@ class GradientLayout extends Component {
           /* Prefetch images for all sections */
           .GradientLayout:before {
             content: '';
-            content: ${items.map(item => item.bgImage ? `url(${item.bgImage})` : '').join(' ')};
+            content: ${imagesToPrefetch};
             position:absolute;
             width:0;
             height:0;
@@ -117,7 +127,7 @@ class GradientLayout extends Component {
             z-index:-1;
           }
           .GradientLayout {
-            background-image: url(${items[sectionIndex].bgImage || ''});
+            background-image: url(${currentImage});
             background-position: top right;
             background-repeat: no-repeat;
             background-color: #000;

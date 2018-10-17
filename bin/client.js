@@ -1,11 +1,11 @@
 const http = require('http');
 const { token } = require('./token');
 
-const randomUserId = process.argv[2];
+const identifier = process.argv[2];
 const options = {
   hostname: 'localhost',
   port: 3000,
-  path: `/authentication/${randomUserId}`,
+  path: `/authentication/${identifier}`,
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
 };

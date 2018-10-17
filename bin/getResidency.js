@@ -3,10 +3,11 @@ const http = require('http');
 
 try {
   const jwt = process.argv[2];
+  const identifier = process.argv[3];
   const options = {
     hostname: 'localhost',
     port: 3000,
-    path: '/residency',
+    path: `/residency/${identifier}`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   };

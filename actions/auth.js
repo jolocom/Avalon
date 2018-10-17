@@ -1,7 +1,6 @@
 import * as ACTIONS from './';
-import io from 'socket.io-client';
-import { serviceUrl } from '../config';
 import { randomString } from 'utils';
+import { getQrCode, awaitStatus } from 'utils/sockets';
 
 export const setQRCode = encodedImage => {
   return {
@@ -18,30 +17,21 @@ export const setUserData = data => {
 };
 
 export const initiateLogin = cb => async dispatch => {
-  const randomId = randomString(5);
-  const qrCode = await getQrCode(randomId);
+  const identifier = randomString(5);
+  const qrCode = await getQrCode({
+    socketName: 'sso',
+    query: {
+      identifier,
+    },
+  });
 
   dispatch(setQRCode(qrCode));
   cb();
 
-  const data = await awaitUserData(randomId);
+  const data = await awaitStatus({
+    socketName: 'sso',
+    identifier,
+  });
 
   dispatch(setUserData(JSON.parse(data)));
-};
-
-const getQrCode = async randomId => {
-  const socket = io(`${serviceUrl}/sso/qr-code`, { query: { userId: randomId } });
-  return new Promise(resolve => {
-    socket.on(randomId, qrCode => resolve(qrCode));
-  });
-};
-
-export const awaitUserData = async randomId => {
-  const socket = io(`${serviceUrl}/sso/status`, {
-    query: { userId: randomId },
-  });
-
-  return new Promise(resolve => {
-    socket.on(randomId, data => resolve(data));
-  });
 };

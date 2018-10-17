@@ -17,9 +17,7 @@ class ProgressSlider extends React.PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', throttle(() => {
-      this.setState({ currentStepPosition: this.getCurrentStepPosition() });
-    }, 1500, { trailing: false }));
+    window.addEventListener('resize', throttle(this.setCurrentStepPosition, 1500, { trailing: false }));
   }
   getSnapshotBeforeUpdate(prevProps) {
     if (prevProps.progress !== this.props.progress) {
@@ -33,7 +31,11 @@ class ProgressSlider extends React.PureComponent {
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', throttle(this.setCurrentStepPosition, 1500, { trailing: false }));
+  }
+
+  setCurrentStepPosition = () => {
+    this.setState({ currentStepPosition: this.getCurrentStepPosition() });
   }
 
   getCurrentStepPosition = () => {

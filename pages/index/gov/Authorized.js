@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import { Button } from 'components';
 
-let AuthorizedGovSpace = ({ user, nextSection }) => {
+let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
   const services = [
     {
       img: 'residency',
       title: 'Apply for citizenship',
       description: 'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
-      onApply: nextSection,
+      onApply: () => setSection(mainSectionIndex + 1),
     },
     {
       img: 'driving-permit',
       title: 'Get a driving permit',
       description: 'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
-      onApply: nextSection,
+      onApply: () => setSection(mainSectionIndex + 2),
     },
   ];
 

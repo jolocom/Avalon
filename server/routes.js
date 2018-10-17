@@ -8,8 +8,8 @@ const { validateCredentialSignatures, extractDataFromClaims } = require('./utils
 const configureRoutes = async(app, redisApi) => {
   const { setAsync } = redisApi;
 
-  app.post('/authentication/:clientId', async(req, res, next) => {
-    const { clientId } = req.params;
+  app.post('/authentication/:identifier', async(req, res, next) => {
+    const { identifier } = req.params;
     const { token } = req.body;
 
     try {
@@ -35,7 +35,7 @@ const configureRoutes = async(app, redisApi) => {
         status: 'success',
       };
 
-      await setAsync(clientId, JSON.stringify({ status: 'success', data: userData }));
+      await setAsync(identifier, JSON.stringify({ status: 'success', data: userData }));
 
       res.json('OK');
     } catch (err) {
@@ -44,7 +44,8 @@ const configureRoutes = async(app, redisApi) => {
     }
   });
 
-  app.post('/residency', async(req, res, next) => {
+  app.post('/residency/:identifier', async(req, res, next) => {
+    const { identifier } = req.params;
     const { jwt } = req.body;
 
     try {
@@ -57,7 +58,7 @@ const configureRoutes = async(app, redisApi) => {
       if (!validCredSignature) {
         throw new Error('Credentials signature is not valid');
       }
-      await setAsync(providedCredentials[0].claim.id, JSON.stringify({ status: 'success', data: validCredSignature }));
+      await setAsync(identifier, JSON.stringify({ status: 'success', data: validCredSignature }));
 
       res.json('OK');
     } catch (err) {

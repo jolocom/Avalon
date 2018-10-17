@@ -32,7 +32,7 @@ class Residency extends Component {
     const sections = [
       (
         <>
-          <h1>Become <br /> an Avalonian citizen</h1>
+          <h1>Get Avalonian dirver's licence</h1>
           <h5>STEP 1</h5>
           <p>
             Please, provide additional information:
@@ -74,7 +74,7 @@ class Residency extends Component {
           <h1>Become an Avalonian citizen</h1>
           <h5>STEP 2</h5>
           <p>
-            Scan the QR-code with the SmartWallet to save your new digital ID:
+            Scan the QR-code with the SmartWallet to save your driver's licence:
           </p>
           <br />
           <img
@@ -86,14 +86,15 @@ class Residency extends Component {
       ),
       (
         <>
-          <h1>It's time to celebrate!</h1>
+          <h1>It's time to drive!</h1>
           <p>
-            Now, you can proudly call yourself an Avalonian citizen.
+            You have succefully received Avalonian driver’s licence. Please, drive carefully:
+            be fast, but never furious.
           </p>
           <br />
           <Button
             className="mt"
-            onClick={() => setSection(mainSectionIndex - 1)}
+            onClick={() => setSection(mainSectionIndex - 2)}
           >
             Return to home page
           </Button>

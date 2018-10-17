@@ -22,10 +22,14 @@ const configureSockets = (
     qrCode: baseSocket.of('/residency/qr-code'),
     status: baseSocket.of('/residency/status'),
   };
+  const drivingLicenceSocket = {
+    qrCode: baseSocket.of('/driving-licence/qr-code'),
+    status: baseSocket.of('/driving-licence/status'),
+  };
 
   ssoSocket.qrCode.on('connection', async socket => {
-    const { userId } = socket.handshake.query;
-    const callbackURL = `${serviceUrl}/authentication/${userId}`;
+    const { identifier } = socket.handshake.query;
+    const callbackURL = `${serviceUrl}/authentication/${identifier}`;
 
     const credentialRequest = await identityWallet.create.credentialRequestJSONWebToken({
       typ: InteractionType.CredentialRequest,
@@ -39,32 +43,29 @@ const configureSockets = (
     });
 
     const qrCode = await new SSO().JWTtoQR(credentialRequest.encode());
-    socket.emit(userId, qrCode);
+    socket.emit(identifier, qrCode);
   });
 
   ssoSocket.status.on('connection', async socket => {
-    const { userId } = socket.handshake.query;
-    dbWatcher.addSubscription(userId);
-    dbWatcher.on(userId, async() => {
-      const userData = await getAsync(userId);
-      await delAsync(userId);
-      socket.emit(userId, userData);
+    const { identifier } = socket.handshake.query;
+    dbWatcher.addSubscription(identifier);
+    dbWatcher.on(identifier, async() => {
+      const userData = await getAsync(identifier);
+      await delAsync(identifier);
+      socket.emit(identifier, userData);
     });
   });
 
   residencySocket.qrCode.on('connection', async socket => {
     try {
       const {
-        givenName, familyName,
-        birthDate, birthPlace,
+        user, identifier,
         nationality = 'lindberger',
-        identifier,
-        id,
       } = socket.handshake.query;
       const residencySignedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoId,
-        claim: { givenName, familyName, birthDate, birthPlace, nationality, identifier },
-        subject: id,
+        claim: { ...user, nationality, identifier },
+        subject: user.id,
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
@@ -80,19 +81,60 @@ const configureSockets = (
 
       const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
 
-      socket.emit(id, qrCode);
+      socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
     }
   });
 
   residencySocket.status.on('connection', async socket => {
-    const { userDid } = socket.handshake.query;
-    dbWatcher.addSubscription(userDid);
-    dbWatcher.on(userDid, async() => {
-      const userData = await getAsync(userDid);
-      await delAsync(userDid);
-      socket.emit(userDid, userData);
+    const { identifier } = socket.handshake.query;
+    dbWatcher.addSubscription(identifier);
+    dbWatcher.on(identifier, async() => {
+      const userData = await getAsync(identifier);
+      await delAsync(identifier);
+      socket.emit(identifier, userData);
+    });
+  });
+
+  drivingLicenceSocket.qrCode.on('connection', async socket => {
+    try {
+      const {
+        givenName, familyName,
+        birthDate, birthPlace,
+        identifier,
+      } = socket.handshake.query;
+      const signedCredential = await identityWallet.create.signedCredential({
+        metadata: claimsMetadata.demoDriversLicence,
+        claim: { givenName, familyName, birthDate, birthPlace, identifier },
+      });
+
+      const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
+        typ: InteractionType.CredentialsReceive,
+        credentialsReceive: {
+          signedCredentials: [signedCredential],
+        },
+      });
+
+      const credentialReceiveJWT = credReceiveJWTClass.encode();
+
+      console.log(credentialReceiveJWT);
+
+      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
+
+      socket.emit(identifier, qrCode);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  drivingLicenceSocket.status.on('connection', async socket => {
+    const { identifier } = socket.handshake.query;
+    dbWatcher.addSubscription(identifier);
+    dbWatcher.on(identifier, async() => {
+      const userData = await getAsync(identifier);
+      await delAsync(identifier);
+      socket.emit(identifier, userData);
     });
   });
 };
