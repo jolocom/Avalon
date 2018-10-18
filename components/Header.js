@@ -1,6 +1,9 @@
+import { connect } from 'react-redux';
 import SVG from 'react-inlinesvg';
 
-const Header = ({ brandVersion = 'primary' }) => {
+import { setAboutOverlayState } from 'actions/ui';
+
+let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
   const isPrimaryBrandVersion = brandVersion === 'primary';
 
   return (
@@ -15,7 +18,7 @@ const Header = ({ brandVersion = 'primary' }) => {
       ) : (
         <span
           className="Brand"
-          onClick={() => console.log('Opens a pop-over full screen overlay')}
+          onClick={() => setAboutOverlayState(true)}
         >
           About
         </span>
@@ -60,5 +63,9 @@ const Header = ({ brandVersion = 'primary' }) => {
     </header>
   );
 };
+
+Header = connect(null, {
+  setAboutOverlayState,
+})(Header);
 
 export default Header;

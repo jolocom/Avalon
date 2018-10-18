@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { GradientLayout } from 'layouts';
-import { Button, Footer } from 'components';
+import { Button, Footer, About } from 'components';
 import Gov from './gov';
 import Residency from './residency';
 import DrivingLicence from './drivingLicence';
@@ -138,15 +138,21 @@ const sections = [
 
 class Home extends Component {
   render() {
-    const { userData } = this.props;
+    const { userData, ui } = this.props;
 
     return (
-      <GradientLayout
-        items={sections}
-        scrollValidations={{
-          4: !!userData.did,
-        }}
-      />
+      <>
+        <GradientLayout
+          items={sections}
+          scrollValidations={{
+            4: !!userData.did,
+          }}
+        />
+
+        {ui.showAboutOverlay && (
+          <About />
+        )}
+      </>
     );
   }
 }

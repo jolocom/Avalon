@@ -8,6 +8,9 @@ export const defaultState = {
     familyName: '',
   },
   qrCode: '',
+  ui: {
+    showAboutOverlay: false,
+  },
 };
 
 export function rootReducer(state = defaultState, action) {
@@ -24,6 +27,14 @@ export function rootReducer(state = defaultState, action) {
       };
     case ACTIONS.QR_CODE_SET:
       return { ...state, qrCode: action.value };
+    case ACTIONS.SET_ABOUT_OVERLAY_STATE:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          showAboutOverlay: action.payload,
+        },
+      };
     default:
       return state;
   }

@@ -58,7 +58,7 @@ export default class MyDocument extends Document {
               color: #942f51 !important;
             }
             p.gray {
-              color: rgba(5, 5, 13, 0.6) !important;
+              color: #9B9B9F !important;
             }
             .green-text {
               color: #28a52d;
