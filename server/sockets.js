@@ -26,6 +26,10 @@ const configureSockets = (
     qrCode: baseSocket.of('/driving-licence/qr-code'),
     status: baseSocket.of('/driving-licence/status'),
   };
+  const mobSsoSocket = {
+    qrCode: baseSocket.of('/mob-sso/qr-code'),
+    status: baseSocket.of('/mob-ssi/status'),
+  };
 
   ssoSocket.qrCode.on('connection', async socket => {
     const { identifier } = socket.handshake.query;
@@ -139,7 +143,40 @@ const configureSockets = (
       socket.emit(identifier, userData);
     });
   });
+
+  mobSsoSocket.qrCode.on('connection', async socket => {
+    const { identifier } = socket.handshake.query;
+    const callbackURL = `${publicRuntimeConfig.BASE_URL}/mob-authentication/${identifier}`;
+
+    const credentialRequest = await identityWallet.create.credentialRequestJSONWebToken({
+      typ: InteractionType.CredentialRequest,
+      credentialRequest: {
+        callbackURL,
+        credentialRequirements: [
+          serverRuntimeConfig.credentialRequirements.drivingLicense,
+        ],
+      },
+    });
+
+    const credentialReceiveJWT = credentialRequest.encode();
+
+    console.log({ credentialReceiveJWT });
+
+    const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
+    socket.emit(identifier, qrCode);
+  });
+
+  mobSsoSocket.status.on('connection', async socket => {
+    const { identifier } = socket.handshake.query;
+    dbWatcher.addSubscription(identifier);
+    dbWatcher.on(identifier, async() => {
+      const userData = await getAsync(identifier);
+      await delAsync(identifier);
+      socket.emit(identifier, userData);
+    });
+  });
 };
+
 
 module.exports = {
   configureSockets,

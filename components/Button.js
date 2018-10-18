@@ -1,10 +1,11 @@
 import classnames from 'classnames';
 
-const Button = ({ className, ...props }) => (
+const Button = ({ className, full, ...props }) => (
   <button
     {...props}
     className={classnames(
       'Button',
+      { full: full },
       className
     )}
   >
@@ -30,6 +31,9 @@ const Button = ({ className, ...props }) => (
         background: #ffefdf;
         color: #05050d;
         pointer-events: none;
+      }
+      .Button.full {
+        width: 100%;
       }
       .Button > :global(* + *) {
         margin-left: 10px;

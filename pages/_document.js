@@ -10,8 +10,10 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+          <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
+        </Head>
+        <body>
           <style global jsx>{`
             html {
               color: #ffefdf;
@@ -31,13 +33,20 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
             }
             h1 {
+              font-size: 56px !important;
               font-weight: 400;
-              font-size: 56px;
+            }
+            h2 {
+              font-size: 32px !important;
+            }
+            h3 {
+              margin: 10px 0;
             }
             p {
               font-size: 20px;
               font-weight: 300;
               color: rgba(255, 239, 223, 0.8);
+              margin: 10px 0;
             }
             p.small {
               font-size: 14px;
@@ -94,9 +103,11 @@ export default class MyDocument extends Document {
               visibility: visible;
               opacity: 1;
             }
+            
+            .isvg {
+              display: inherit;
+            }
           `}</style>
-        </Head>
-        <body>
           <Main />
           <NextScript />
         </body>

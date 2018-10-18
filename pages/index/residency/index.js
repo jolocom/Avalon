@@ -71,7 +71,7 @@ class Residency extends Component {
       ),
       (
         <>
-          <h1>Become an Avalonian citizen</h1>
+          <h2>Become an Avalonian citizen</h2>
           <h5>STEP 2</h5>
           <p>
             Scan the QR-code with the SmartWallet to save your new digital ID:

@@ -61,11 +61,12 @@ class GradientLayout extends Component {
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
     const { sectionIndex } = this.state;
+    // const sectionIndex = 7;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
     const imagesToPrefetch = items
       .map((item = {}) => item.bgImage ? `url(${item.bgImage})` : '').join(' ');
-    const currentSection = items[sectionIndex];
+    const currentSection = items[sectionIndex] || {};
     if (currentSection < 0) {
       throw Error('Current section canoot be less than 0');
     }
@@ -109,10 +110,6 @@ class GradientLayout extends Component {
               ))}
             </div>
           </main>
-
-          <footer>
-            scroll
-          </footer>
         </div>
 
         <style jsx>{`
@@ -137,6 +134,8 @@ class GradientLayout extends Component {
             height: 100vh;
           }
           .GradientLayout__Container {
+            display: flex;
+            flex-direction: column;
             background-image: radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%);
             padding: 40px 0 0 40px;
             height: 100%;
@@ -144,20 +143,20 @@ class GradientLayout extends Component {
           }
           main {
             display: flex;
-            height: 100%;
+            flex: 1;
           }
           .GradientLayout__List__Section {
             position: absolute;
             top: 0;
             height: 100%;
             width: 100%;
-            margin-left: 50px;
+            margin-left: 70px;
             margin-right: -17px;
             transition: all 1s ease 0s;
           }
           .GradientLayout__Section {
             height: 100%;
-            max-width: 40%;
+            max-width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -166,30 +165,11 @@ class GradientLayout extends Component {
             visibility: hidden;
           }
 
-          :global(.ProgressSlider) {
+          .GradientLayout :global(.ProgressSlider) {
             position: relative;
             height: calc(100% - 15px);
             max-height: 100%;
             margin-left: 10px;
-          }
-
-          footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-          footer:after {
-            content: '';
-            width: 1px;
-            height: 60px;
-            background-image: linear-gradient(to bottom,rgba(255,241,223,0),rgba(255, 222, 188, 0.7));
           }
         `}</style>
       </div>

@@ -17,25 +17,23 @@ class ProgressSlider extends React.PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', throttle(this.setCurrentStepPosition, 1500, { trailing: false }));
+    window.addEventListener('resize', this.setCurrentStepPosition);
   }
-  getSnapshotBeforeUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.progress !== this.props.progress) {
-      return this.getCurrentStepPosition();
-    }
-    return null;
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot !== null) {
-      this.setState({ currentStepPosition: snapshot });
+      this.setState({ currentStepPosition: this.getCurrentStepPosition() });
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', throttle(this.setCurrentStepPosition, 1500, { trailing: false }));
+    window.removeEventListener('resize', this.setCurrentStepPosition);
   }
 
   setCurrentStepPosition = () => {
-    this.setState({ currentStepPosition: this.getCurrentStepPosition() });
+    return throttle(
+      () => this.setState({ currentStepPosition: this.getCurrentStepPosition() }),
+      1500,
+      { trailing: false }
+    );
   }
 
   getCurrentStepPosition = () => {
@@ -55,29 +53,23 @@ class ProgressSlider extends React.PureComponent {
     const { count } = this.props;
 
     return (
-      <div className="ProgressSlider">
-        <ul
-          ref={this.listContainerRef}
-          className="ProgressSlider__Items"
-        >
-          <div className="ProgressSlider__Line" />
-          <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
-          {Array(count).fill().map((item, index) => {
-            return (
-              <li
-                key={index}
-                ref={this[`${index}Ref`]}
-                className="ProgressSlider__Item"
-              />
-            );
-          })}
-        </ul>
+      <ul
+        ref={this.listContainerRef}
+        className="ProgressSlider"
+      >
+        <div className="ProgressSlider__Line" />
+        <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
+        {Array(count).fill().map((item, index) => {
+          return (
+            <li
+              key={index}
+              ref={this[`${index}Ref`]}
+              className="ProgressSlider__Item"
+            />
+          );
+        })}
 
         <style jsx>{`
-          .ProgressSlider {
-            display: inline-block;
-          }
-
           .ProgressSlider__Line {
             position: absolute;
             height: 100%;
@@ -88,7 +80,7 @@ class ProgressSlider extends React.PureComponent {
             transform: translateX(-50%);
           }
 
-          .ProgressSlider__Items {
+          .ProgressSlider {
             position: relative;
             list-style: none;
             display: inline-flex;
@@ -104,7 +96,9 @@ class ProgressSlider extends React.PureComponent {
             background: #684653;
             opacity: 1;
             width: 7px;
+            min-width: 7px;
             height: 7px;
+            min-height: 7px;
             border-radius: 50%;
             z-index: 1;
           }
@@ -135,7 +129,7 @@ class ProgressSlider extends React.PureComponent {
             z-index: 2;
           }
         `}</style>
-      </div>
+      </ul>
     );
   }
 }

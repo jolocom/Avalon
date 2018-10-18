@@ -2,10 +2,11 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { GradientLayout } from 'layouts';
-import { Button } from 'components';
+import { Button, Footer } from 'components';
 import Gov from './gov';
 import Residency from './residency';
 import DrivingLicence from './drivingLicence';
+import Mob from './mob';
 
 const sections = [
   {
@@ -21,6 +22,8 @@ const sections = [
         </p>
         <br />
         <Button onClick={nextSection}>Start experience</Button>
+
+        <Footer />
       </div>
     ),
     className: 'margin-center',
@@ -43,6 +46,8 @@ const sections = [
           After several attempts, two implementations reached the level of mass adoption.
           One of them is a new approach to identity management.
         </p>
+
+        <Footer />
       </>
     ),
   },
@@ -64,6 +69,8 @@ const sections = [
           src="/static/images/qr-google-play.svg"
           alt="QR code to the google play"
         />
+
+        <Footer />
       </>
     ),
   },
@@ -82,6 +89,8 @@ const sections = [
         </p>
         <br /><br />
         <p>Ready? Scroll down to enter the country.</p>
+
+        <Footer />
       </>
     ),
   },
@@ -108,6 +117,16 @@ const sections = [
   {
     bgImage: '/static/images/driver_licence_bg.jpg',
     content: DrivingLicence,
+    style: {
+      width: '100%',
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  },
+  {
+    bgImage: '/static/images/MOB_bg.jpg',
+    content: Mob,
     style: {
       width: '100%',
       maxWidth: '100%',

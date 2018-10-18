@@ -26,7 +26,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         alt="imaginary company logo"
       />
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
-      <h1>Welcome, {user.givenName}!</h1>
+      <h3>Welcome, {user.givenName}!</h3>
       <p>
         Discover what services the Government of Avalon can offer you:
       </p>
