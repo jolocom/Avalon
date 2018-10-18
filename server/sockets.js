@@ -76,7 +76,8 @@ const configureSockets = (
 
       console.log(credentialReceiveJWT);
 
-      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
+      const qrCode = await new SSO()
+        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'L', version: 40 });
       socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
@@ -120,7 +121,8 @@ const configureSockets = (
 
       console.log(credentialReceiveJWT);
 
-      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
+      const qrCode = await new SSO()
+        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'L', version: 40 });
 
       socket.emit(identifier, qrCode);
     } catch (error) {
