@@ -3631,9 +3631,9 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-jolocom-lib@^2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/jolocom-lib/-/jolocom-lib-2.0.10.tgz#75e261f61422ff5ddd1f2df5089fd65a87ece1c4"
+jolocom-lib@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/jolocom-lib/-/jolocom-lib-2.0.11.tgz#ce6a156ba7286854ea6d6724fce4d4068a2ab326"
   dependencies:
     base64url "^3.0.0"
     bip39 "^2.5.0"
