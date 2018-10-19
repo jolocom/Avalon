@@ -77,7 +77,7 @@ const configureSockets = (
       console.log(credentialReceiveJWT);
 
       const qrCode = await new SSO()
-        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'L', version: 40 });
+        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'M', version: 40 });
       socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
