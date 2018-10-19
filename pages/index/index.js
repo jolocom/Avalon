@@ -6,7 +6,6 @@ import { Button, Footer, About } from 'components';
 import Gov from './gov';
 import Residency from './residency';
 import DrivingLicence from './drivingLicence';
-import Mob from './mob';
 
 const sections = [
   {
@@ -117,16 +116,6 @@ const sections = [
   {
     bgImage: '/static/images/driver_licence_bg.jpg',
     content: DrivingLicence,
-    style: {
-      width: '100%',
-      maxWidth: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-    },
-  },
-  {
-    bgImage: '/static/images/MOB_bg.jpg',
-    content: Mob,
     style: {
       width: '100%',
       maxWidth: '100%',

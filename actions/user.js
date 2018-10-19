@@ -89,34 +89,3 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
     console.log(error);
   }
 };
-
-export const initiateMobSSO = cb => async dispatch => {
-  const identifier = randomString(5);
-  try {
-    const qrCode = await getQrCode({
-      socketName: 'mob-sso',
-      query: {
-        identifier,
-      },
-    });
-
-    dispatch(setQRCode(qrCode));
-    cb();
-
-    const data = await awaitStatus({
-      socketName: 'mob-sso',
-      identifier,
-    });
-    const dataJson = JSON.parse(data);
-
-    if (dataJson.status === 'success') {
-      dispatch(updateUserData({
-        mobSigned: true,
-      }));
-    }
-
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
