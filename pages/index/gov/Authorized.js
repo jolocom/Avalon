@@ -22,7 +22,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
   return (
     <div>
       <img
-        src="https://placehold.it/280x40/?text=logo_of_imaginary_company"
+        src="/static/images/Avalon_logo.png"
         alt="imaginary company logo"
       />
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />

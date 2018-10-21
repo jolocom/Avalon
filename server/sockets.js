@@ -1,5 +1,4 @@
-const io = require('socket.io');
-const { SSO } = require('jolocom-lib/js/sso/index');
+const io = require('socket.io'); const { SSO } = require('jolocom-lib/js/sso/index');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 const { claimsMetadata } = require('cred-types-jolocom-demo');
 
@@ -59,10 +58,12 @@ const configureSockets = (
   residencySocket.qrCode.on('connection', async socket => {
     try {
       const { user, identifier } = socket.handshake.query;
+
+
       const residencySignedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoId,
-        claim: { ...user, identifier },
-        subject: user.id,
+        claim: { ...JSON.parse(user), identifier },
+        subject: JSON.parse(user).id,
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
@@ -96,18 +97,12 @@ const configureSockets = (
 
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
-      const {
-        user: {
-          givenName,
-          familyName,
-          birthDate,
-          birthPlace,
-        },
-        identifier,
-      } = socket.handshake.query;
+      const { user, identifier, } = socket.handshake.query;
+      const {givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user)
       const signedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoDriversLicence,
         claim: { givenName, familyName, birthDate, birthPlace, identifier },
+	subject: id
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({

@@ -24,11 +24,11 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
     const qrCode = await getQrCode({
       socketName: 'residency',
       query: {
-        user: {
+        user: JSON.stringify({
           ...params,
           ...user,
           nationality: 'lindberger',
-        },
+        }),
         identifier,
       },
     });
@@ -61,11 +61,10 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
     const qrCode = await getQrCode({
       socketName: 'driving-licence',
       query: {
-        user: {
+        user: JSON.stringify({
           ...params,
           ...user,
-        },
-        identifier,
+        }), identifier,
       },
     });
 

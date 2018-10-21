@@ -32,7 +32,7 @@ class Residency extends Component {
     const sections = [
       (
         <>
-          <h1>Get Avalonian dirver's licence</h1>
+          <h1>Get Avalonian driver's licence</h1>
           <h5>STEP 1</h5>
           <p>
             Please, provide additional information:
@@ -71,7 +71,7 @@ class Residency extends Component {
       ),
       (
         <>
-          <h1>Get Avalonian dirver's licence</h1>
+          <h1>Get Avalonian driver's licence</h1>
           <h5>STEP 2</h5>
           <p>
             Scan the QR-code with the SmartWallet to save your driver's licence:
@@ -106,7 +106,7 @@ class Residency extends Component {
     return (
       <div className="ta-c margin-center">
         <img
-          src="https://placehold.it/280x40/?text=logo_of_city/country"
+          src="/static/images/Avalon_logo.png"
           alt="imaginary city or country logo"
         />
         {typeof currentSection === 'function'

@@ -105,7 +105,7 @@ class Residency extends Component {
     return (
       <div className="ta-c margin-center">
         <img
-          src="https://placehold.it/280x40/?text=logo_of_city/country"
+          src="/static/images/Avalon_logo.png"
           alt="imaginary city or country logo"
         />
         {typeof currentSection === 'function'
