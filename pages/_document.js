@@ -55,6 +55,11 @@ export default class MyDocument extends Document {
             p.medium {
               font-size: 15px;
             }
+            p.bold {
+              font-size: 32px;
+              line-height: 44px;
+              font-weight: 700;
+            }
             p.pink {
               color: #942f51 !important;
             }
