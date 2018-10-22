@@ -54,6 +54,7 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
         }
         .Brand a {
           color: rgba(255,255,255,0.4);
+          transition: color .4s;
           text-decoration: none;
         }
         .Brand a:hover {

@@ -12,20 +12,22 @@ const sections = [
     content: ({ nextSection }) => (
       <div className="ta-c">
         <h1>The future of digital identity</h1>
-        <p>
-          Have you ever thought about how digital citizenship could look like?
-        </p>
-        <p>
-          What will change for individuals and organisations if a country decides to make a leap
-          from countless user accounts to self-sovereign identity technology?
-        </p>
+        <div className="margin-center" style={{ width: 560 }}>
+          <p>
+            Have you ever thought about how digital citizenship could look like?
+          </p>
+          <p>
+            What will change for individuals and organisations if a country decides to make a leap
+            from countless user accounts to self-sovereign identity technology?
+          </p>
+        </div>
         <br />
         <Button onClick={nextSection}>Start experience</Button>
 
         <Footer />
       </div>
     ),
-    className: 'margin-center',
+    className: 'center',
   },
   {
     bgImage: '/static/images/OSiP_01.jpg',
@@ -49,6 +51,7 @@ const sections = [
         <Footer />
       </>
     ),
+    className: 'left',
   },
   {
     bgImage: '/static/images/OSiP_02.jpg',
@@ -63,15 +66,19 @@ const sections = [
         <p>
           To install the <u>SmartWallet</u>, please scan the QR code:
         </p>
-        <img
-          className="translate-center"
-          src="/static/images/qr-google-play.svg"
-          alt="QR code to the google play"
-        />
+        <div>
+          <img
+            src="/static/images/qr-google-play.svg"
+            alt="QR code to the google play"
+            style={{ marginLeft: 140 }}
+          />
+        </div>
+
 
         <Footer />
       </>
     ),
+    className: 'left',
   },
   {
     bgImage: '/static/images/OSiP_03.jpg',
@@ -92,6 +99,7 @@ const sections = [
         <Footer />
       </>
     ),
+    className: 'left',
   },
   {
     bgImage: '/static/images/GOV_01.jpg',
@@ -134,7 +142,9 @@ class Home extends Component {
         <GradientLayout
           items={sections}
           scrollValidations={{
-            4: !!userData.did,
+            4: {
+              forward: !!userData.did,
+            },
           }}
         />
 

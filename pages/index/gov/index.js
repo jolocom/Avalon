@@ -8,7 +8,7 @@ import { initiateLogin } from 'actions/auth';
 
 class GovSpace extends Component {
   state = {
-    sectionIndex: 0,
+    sectionIndex: 2,
   }
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
@@ -62,7 +62,7 @@ class GovSpace extends Component {
 
           .GovSpace > :global(div:first-child) {
             background-color: #fff;
-            padding: 40px 80px;
+            padding: 40px 100px;
           }
           .GovSpace :global(.half-width) {
             width: 50%;

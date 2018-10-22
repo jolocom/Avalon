@@ -9,6 +9,7 @@ class GradientLayout extends Component {
 
     this.state = {
       sectionIndex: 0,
+      direction: 0,
     };
     this.listRef = React.createRef();
   }
@@ -20,9 +21,16 @@ class GradientLayout extends Component {
     document.removeEventListener('mousewheel', throttle(this.handleScroll));
   }
 
-  canScroll = () => {
+  canScroll = delta => {
     const { scrollValidations = {} } = this.props;
-    const canScroll = scrollValidations[this.state.sectionIndex];
+    const validators = scrollValidations[this.state.sectionIndex] || {};
+    let canScroll;
+
+    if (delta > 0) {
+      canScroll = validators.back;
+    } else {
+      canScroll = validators.forward;
+    }
 
     return typeof canScroll === 'undefined' ? true : canScroll;
   }
@@ -35,22 +43,30 @@ class GradientLayout extends Component {
   }
 
   handleScroll = evt => {
-    if(!this.canScroll()) {
+    const delta = evt.wheelDeltaY;
+    if (!this.canScroll(delta)) {
       return;
     }
-    const delta = evt.wheelDeltaY;
-    const { sectionIndex } = this.state;
+    const { sectionIndex, direction } = this.state;
     const { items } = this.props;
     let newSectionIndex = 0;
+    let newDirection = direction;
 
     if (delta > 0) {
       newSectionIndex = sectionIndex - 1;
+      newDirection = 'top';
     } else {
       newSectionIndex = sectionIndex + 1;
+      newDirection = 'bottom';
     }
 
     if (newSectionIndex >= 0 && newSectionIndex < items.length) {
-      this.setState({ sectionIndex: newSectionIndex });
+      this.setState({ direction: newDirection + 'force' }, () => {
+        this.setState({
+          sectionIndex: newSectionIndex,
+          direction: newDirection,
+        });
+      });
     }
   }
 
@@ -60,8 +76,8 @@ class GradientLayout extends Component {
 
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
-    const { sectionIndex } = this.state;
-    // const sectionIndex = 7;
+    const { direction } = this.state;
+    const sectionIndex = 5;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
     const imagesToPrefetch = items
@@ -128,6 +144,7 @@ class GradientLayout extends Component {
             background-position: top right;
             background-repeat: no-repeat;
             background-color: #000;
+            animation: ${`slide-from-${direction}`} 1s;
             background-size: 100%;
             overflow: hidden;
             min-height: 100vh;
@@ -148,21 +165,29 @@ class GradientLayout extends Component {
           .GradientLayout__List__Section {
             position: absolute;
             top: 0;
+            right: 0;
+            left: 0;
             height: 100%;
-            width: 100%;
-            margin-left: 70px;
             margin-right: -17px;
             transition: all 1s ease 0s;
           }
           .GradientLayout__Section {
-            height: 100%;
-            max-width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            height: 100%;
+            max-height: 100vh;
+            overflow-y: auto;
+            max-width: 50%;
           }
           .GradientLayout__Section.hidden {
             visibility: hidden;
+          }
+          .GradientLayout__Section.center {
+            margin: auto;
+          }
+          .GradientLayout__Section.left {
+            margin-left: 120px;
           }
 
           .GradientLayout :global(.ProgressSlider) {
@@ -170,6 +195,23 @@ class GradientLayout extends Component {
             height: calc(100% - 15px);
             max-height: 100%;
             margin-left: 10px;
+          }
+
+          @keyframes slide-from-bottom {
+            0% {
+              background-position: 0% -100%;
+            }
+            100% {
+              background-position: 0% 0%;
+            }
+          }
+          @keyframes slide-from-top {
+            0% {
+              background-position: 0% 100%;
+            }
+            100% {
+              background-position: 0% 0%;
+            }
           }
         `}</style>
       </div>

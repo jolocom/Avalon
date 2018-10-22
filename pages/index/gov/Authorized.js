@@ -20,10 +20,10 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
   ];
 
   return (
-    <div>
+    <div className="Authorized">
       <img
         src="/static/images/Avalon_logo.png"
-        alt="imaginary company logo"
+        alt="Avalon logo"
       />
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
       <h2>Welcome, {user.givenName}!</h2>
@@ -62,7 +62,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       </ul>
 
       <style jsx>{`
-          div {
+          .Authorized {
             width: 100%;
             height: 100vh;
             color: #000;

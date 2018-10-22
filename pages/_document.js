@@ -43,8 +43,9 @@ export default class MyDocument extends Document {
               margin: 10px 0;
             }
             p {
-              font-size: 20px;
-              font-weight: 300;
+              font-size: 18px;
+              line-height: 26px;
+              font-weight: 400;
               color: rgba(255, 239, 223, 0.8);
               margin: 10px 0;
             }
