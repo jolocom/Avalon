@@ -12,7 +12,7 @@ const sections = [
     content: ({ nextSection }) => (
       <div className="ta-c">
         <h1>The future of digital identity</h1>
-        <div className="margin-center" style={{ width: 560 }}>
+        <div className="margin-center" style={{ width: 560, maxWidth: '100%' }}>
           <p>
             Have you ever thought about how digital citizenship could look like?
           </p>

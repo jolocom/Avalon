@@ -225,7 +225,7 @@ class GradientLayout extends Component {
           }
           @keyframes slide-from-bottom {
             0% {
-              background-position: 0% -100%;
+              background-position: 0% 100vh;
             }
             100% {
               background-position: 0% 0%;
@@ -233,7 +233,7 @@ class GradientLayout extends Component {
           }
           @keyframes slide-from-top {
             0% {
-              background-position: 0% 100%;
+              background-position: 0% -100vh;
             }
             100% {
               background-position: 0% 0%;
