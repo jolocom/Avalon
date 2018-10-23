@@ -22,7 +22,7 @@ const sections = [
           </p>
         </div>
         <br />
-        <Button onClick={nextSection}>Start experience</Button>
+        <Button className="mt" onClick={nextSection}>Start experience</Button>
       </div>
     ),
     className: 'center',

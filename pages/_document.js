@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
           <style global jsx>{`
             html {
               color: #ffefdf;
+              font-size: 12px;
               font-family: TTCommons;
               height: 100%;
               width: 100%;
@@ -33,8 +34,9 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
             }
             h1 {
-              font-size: 56px !important;
+              font-size: 4.67rem !important;
               font-weight: 300;
+              margin: 3.58rem 0 !important;
             }
             h2 {
               font-size: 32px !important;
@@ -43,7 +45,7 @@ export default class MyDocument extends Document {
               margin: 10px 0;
             }
             p {
-              font-size: 18px;
+              font-size: 1.5rem;
               line-height: 26px;
               font-weight: 400;
               color: rgba(255, 239, 223, 0.8);
@@ -76,7 +78,7 @@ export default class MyDocument extends Document {
               margin: auto;
             }
             .mt {
-              margin-top: 64px;
+              margin-top: 5rem;
             }
             .translate-center {
               margin-left: 50%;
