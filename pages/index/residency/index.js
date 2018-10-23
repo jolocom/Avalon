@@ -105,7 +105,7 @@ class Residency extends Component {
     return (
       <div className="ta-c margin-center">
         <img
-          src="/static/images/Avalon_logo.png"
+          src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
         />
         {typeof currentSection === 'function'

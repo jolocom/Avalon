@@ -8,7 +8,7 @@ import { initiateLogin } from 'actions/auth';
 
 class GovSpace extends Component {
   state = {
-    sectionIndex: 0,
+    sectionIndex: 2,
   }
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
@@ -23,7 +23,7 @@ class GovSpace extends Component {
       (
         <div className="half-width margin-center ta-c">
           <img
-            src="/static/images/Avalon_logo.png"
+            src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
           />
           <h1>Welcome to Avalon!</h1>
@@ -46,7 +46,7 @@ class GovSpace extends Component {
       (
         <div className="half-width margin-center ta-c">
           <img
-            src="/static/images/Avalon_logo.png"
+            src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
           />
           <h3>Scan the QR-code with your SmartWallet:</h3>
@@ -70,7 +70,6 @@ class GovSpace extends Component {
 
           .GovSpace > :global(div:first-child) {
             background-color: #fff;
-            padding: 40px 100px;
           }
           .GovSpace :global(.half-width) {
             width: 50%;

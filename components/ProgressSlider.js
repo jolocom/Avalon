@@ -81,6 +81,7 @@ class ProgressSlider extends React.PureComponent {
             margin: 0;
             padding: 0;
             height: 100%;
+            z-index: 1;
           }
 
           .ProgressSlider__opacity {

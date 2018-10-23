@@ -21,57 +21,61 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
   return (
     <div className="Authorized">
-      <img
-        src="/static/images/Avalon_logo.png"
-        alt="Avalon logo"
-      />
       <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
-      <h2>Welcome, {user.givenName}!</h2>
-      <p>
-        Discover what services the Government of Avalon can offer you:
-      </p>
+      <div className="Authorized__Content">
+        <img
+          src="/static/images/Avalon_logo.svg"
+          alt="Avalon logo"
+        />
+        <h2>Welcome, {user.givenName}!</h2>
+        <p>
+          Discover what services the Government of Avalon can offer you:
+        </p>
 
-      <ul>
-        {services.map(service => (
+        <ul>
+          {services.map(service => (
+            <li>
+              <img
+                src={`/static/images/${service.img}.jpg`}
+                srcSet={`/static/images/${service.img}@2x.jpg 2x`}
+                alt=""
+              />
+              <h3>{service.title}</h3>
+              <p className="medium gray">
+                {service.description}
+              </p>
+              {user[service.name] ? (
+                <span className="green-text">Received</span>
+              ) : (
+                <Button onClick={service.onApply}>Apply</Button>
+              )}
+            </li>
+          ))}
           <li>
-            <img
-              src={`/static/images/${service.img}.jpg`}
-              srcSet={`/static/images/${service.img}@2x.jpg 2x`}
-              alt=""
-            />
-            <h3>{service.title}</h3>
+            <img src="https://placehold.it/230x120/?text=Private company" alt="" />
+            <h3>Open a private company</h3>
             <p className="medium gray">
-              {service.description}
+              Allows you to open your business, apply for a job or stay in the country …
+              something funny goes here.
             </p>
-            {user[service.name] ? (
-              <span className="green-text">Received</span>
-            ) : (
-              <Button onClick={service.onApply}>Apply</Button>
-            )}
+            <p className="small pink">Comming soon in this demo</p>
           </li>
-        ))}
-        <li>
-          <img src="https://placehold.it/230x120/?text=Private company" alt="" />
-          <h3>Open a private company</h3>
-          <p className="medium gray">
-            Allows you to open your business, apply for a job or stay in the country …
-            something funny goes here.
-          </p>
-          <p className="small pink">Comming soon in this demo</p>
-        </li>
-      </ul>
+        </ul>
+      </div>
 
       <style jsx>{`
           .Authorized {
+            display: inline-flex;
             width: 100%;
             height: 100vh;
             color: #000;
           }
 
+          .Authorized__Content {
+            padding: 60px 50px;
+          }
+
           .BarImage {
-            position: fixed;
-            left: 0;
-            top: 0;
             height: 100vh;
           }
 

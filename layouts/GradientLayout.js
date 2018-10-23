@@ -9,7 +9,7 @@ class GradientLayout extends Component {
     super(props);
 
     this.state = {
-      sectionIndex: 0,
+      sectionIndex: 4,
       direction: 0,
       containerTopPosition: 0,
     };
@@ -75,20 +75,17 @@ class GradientLayout extends Component {
     }
   }
 
-  nextSection = () => this.setSection(this.state.sectionIndex + 1, {
-    direction: 'bottom',
-  })
-  prevSection = () => this.setSection(this.state.sectionIndex - 1, {
-    direction: 'top',
-  })
-  setSection = (idx, otherState = {}) => {
+  nextSection = () => this.setSection(this.state.sectionIndex + 1)
+  prevSection = () => this.setSection(this.state.sectionIndex - 1)
+  setSection = idx => {
     const { items } = this.props;
     const isInItemsRange = idx >= 0 && idx < items.length;
 
     if (isInItemsRange) {
+      const direction = this.state.sectionIndex < idx ? 'bottom' : 'top';
       this.setState({
         sectionIndex: idx,
-        ...otherState,
+        direction,
       });
     }
   }
