@@ -125,12 +125,12 @@ class ProgressSlider extends React.PureComponent {
             position: absolute;
             top: 0;
             background-image: url('/static/images/glow-checkbox.svg');
-            background-color: #fff;
-            box-shadow: 0 0 20px 5px #f6b362;
-            width: 7px;
-            height: 7px;
+            background-size: cover;
+            width: 51px;
+            height: 51px;
             border-radius: 50%;
             transition: all 1s ease 0s;
+            transform: translate(-42%, -42%);
             z-index: 2;
           }
         `}</style>
