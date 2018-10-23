@@ -7,6 +7,8 @@ import Gov from './gov';
 import Residency from './residency';
 import DrivingLicence from './drivingLicence';
 
+import { setAboutOverlayState } from 'actions/ui';
+
 const sections = [
   {
     content: ({ nextSection }) => (
@@ -151,11 +153,13 @@ class Home extends Component {
         />
 
         {ui.showAboutOverlay && (
-          <About />
+          <About onClose={() => this.props.setAboutOverlayState(false)} />
         )}
       </>
     );
   }
 }
 
-export default connect(state => state)(Home);
+export default connect(state => state, {
+  setAboutOverlayState,
+})(Home);

@@ -1,8 +1,8 @@
 import { Overlay } from 'components';
 
-const About = ({ setAboutOverlayState }) => {
+const About = ({ onClose }) => {
   return (
-    <Overlay onClose={() => setAboutOverlayState(false)}>
+    <Overlay onClose={onClose}>
       <h1>About</h1>
 
       <p className="bold">
