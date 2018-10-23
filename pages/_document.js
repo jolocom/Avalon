@@ -12,9 +12,7 @@ export default class MyDocument extends Document {
         <Head>
           <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
-        </Head>
-        <body>
-          <style global jsx>{`
+          <style>{`
             html {
               color: #ffefdf;
               font-size: 12px;
@@ -34,9 +32,9 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
             }
             h1 {
-              font-size: 4.67rem !important;
+              font-size: 4.67rem;
               font-weight: 300;
-              margin: 3.58rem 0 !important;
+              margin: 3.58rem 0;
             }
             h2 {
               font-size: 32px !important;
@@ -116,6 +114,8 @@ export default class MyDocument extends Document {
               display: inherit;
             }
           `}</style>
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>
