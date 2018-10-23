@@ -70,7 +70,7 @@ const sections = [
           <img
             src="/static/images/qr-google-play.svg"
             alt="QR code to the google play"
-            style={{ marginLeft: 140 }}
+            style={{ marginLeft: 130 }}
           />
         </div>
 
