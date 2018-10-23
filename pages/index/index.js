@@ -23,8 +23,6 @@ const sections = [
         </div>
         <br />
         <Button onClick={nextSection}>Start experience</Button>
-
-        <Footer />
       </div>
     ),
     className: 'center',

@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
             }
             h1 {
               font-size: 56px !important;
-              font-weight: 400;
+              font-weight: 300;
             }
             h2 {
               font-size: 32px !important;
