@@ -11,15 +11,34 @@ class GradientLayout extends Component {
     this.state = {
       sectionIndex: 0,
       direction: 0,
+      containerTopPosition: 0,
     };
     this.listRef = React.createRef();
   }
 
   componentDidMount() {
-    document.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener('resize', this.setContainerTopPosition());
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sectionIndex !== this.state.sectionIndex) {
+      this.setState({ containerTopPosition: this.containerTopPosition });
+    }
   }
   componentWillUnmount() {
-    document.removeEventListener('mousewheel', throttle(this.handleScroll));
+    window.removeEventListener('mousewheel', throttle(this.handleScroll));
+    window.removeEventListener('resize', this.setContainerTopPosition());
+  }
+  get containerTopPosition() {
+    return -(this.getListHeight()) * this.state.sectionIndex + 'px';
+  }
+
+  setContainerTopPosition = () => {
+    return throttle(
+      () => this.setState({ containerTopPosition: this.containerTopPosition }),
+      1500,
+      { trailing: false }
+    );
   }
 
   canScroll = delta => {
@@ -76,7 +95,7 @@ class GradientLayout extends Component {
 
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
-    const { sectionIndex, direction } = this.state;
+    const { sectionIndex, direction, containerTopPosition } = this.state;
     const isFirstSlide = sectionIndex === 0;
     const hideHeader = stepsWithoutHeader.includes(sectionIndex);
     const imagesToPrefetch = items
@@ -103,7 +122,7 @@ class GradientLayout extends Component {
               ref={this.listRef}
               className="GradientLayout__List__Section"
               style={{
-                top: -(this.getListHeight()) * sectionIndex + 'px',
+                top: containerTopPosition,
               }}
             >
               {items.map((item, index) => (
