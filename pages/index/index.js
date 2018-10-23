@@ -140,6 +140,9 @@ class Home extends Component {
         <GradientLayout
           items={sections}
           scrollValidations={{
+            0: {
+              forward: false,
+            },
             4: {
               forward: !!userData.did,
             },
