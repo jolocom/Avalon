@@ -8,7 +8,7 @@ import { initiateLogin } from 'actions/auth';
 
 class GovSpace extends Component {
   state = {
-    sectionIndex: 2,
+    sectionIndex: 0,
   }
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
