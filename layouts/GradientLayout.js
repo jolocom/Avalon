@@ -94,10 +94,9 @@ class GradientLayout extends Component {
   }
 
   render() {
-    const { items, stepsWithoutHeader = [] } = this.props;
+    const { items, noGradient } = this.props;
     const { sectionIndex, direction, containerTopPosition } = this.state;
     const isFirstSlide = sectionIndex === 0;
-    const hideHeader = stepsWithoutHeader.includes(sectionIndex);
     const imagesToPrefetch = items
       .map((item = {}) => item.bgImage ? `url(${item.bgImage})` : '').join(' ');
     const currentSection = items[sectionIndex] || {};
@@ -105,6 +104,9 @@ class GradientLayout extends Component {
       throw Error('Current section canoot be less than 0');
     }
     const currentImage = currentSection.bgImage || '';
+    const containerGradient = noGradient.includes(sectionIndex)
+      ? ''
+      : 'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
 
     return (
       <div className={classnames(
@@ -112,9 +114,7 @@ class GradientLayout extends Component {
         { [`slide-from-${direction}`]: direction }
       )}>
         <div className="GradientLayout__Container">
-          {!hideHeader && (
-            <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
-          )}
+          <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
 
           <main>
             <ProgressSlider count={items.length} progress={sectionIndex} />
@@ -173,7 +173,7 @@ class GradientLayout extends Component {
           .GradientLayout__Container {
             display: flex;
             flex-direction: column;
-            background-image: radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%);
+            background-image: ${containerGradient};
             padding: 40px 0 0 40px;
             height: 100%;
             width: 100%;
