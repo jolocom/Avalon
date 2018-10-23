@@ -57,29 +57,21 @@ class ProgressSlider extends React.PureComponent {
         ref={this.listContainerRef}
         className="ProgressSlider"
       >
-        <div className="ProgressSlider__Line" />
         <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
-        {Array(count).fill().map((item, index) => {
-          return (
-            <li
-              key={index}
-              ref={this[`${index}Ref`]}
-              className="ProgressSlider__Item"
-            />
-          );
-        })}
+        <div className="ProgressSlider__opacity">
+          <div className="ProgressSlider__Line" />
+          {Array(count).fill().map((item, index) => {
+            return (
+              <li
+                key={index}
+                ref={this[`${index}Ref`]}
+                className="ProgressSlider__Item"
+              />
+            );
+          })}
+        </div>
 
         <style jsx>{`
-          .ProgressSlider__Line {
-            position: absolute;
-            height: 100%;
-            left: 50%;
-            background-color: #fff;
-            opacity: .2;
-            width: 1px;
-            transform: translateX(-50%);
-          }
-
           .ProgressSlider {
             position: relative;
             list-style: none;
@@ -91,9 +83,22 @@ class ProgressSlider extends React.PureComponent {
             height: 100%;
           }
 
+          .ProgressSlider__opacity {
+            opacity: .2;
+          }
+
+          .ProgressSlider__Line {
+            position: absolute;
+            height: 100%;
+            left: 50%;
+            background-color: #fff;
+            width: 1px;
+            transform: translateX(-50%);
+          }
+
           .ProgressSlider__Item {
             position: relative;
-            background: #684653;
+            background-color: #fff;
             opacity: 1;
             width: 7px;
             min-width: 7px;
