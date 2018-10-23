@@ -144,6 +144,7 @@ class Home extends Component {
               forward: !!userData.did,
             },
           }}
+          noGradient={[4]}
         />
 
         {ui.showAboutOverlay && (
