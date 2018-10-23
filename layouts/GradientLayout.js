@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 
 import { ProgressSlider, Header } from 'components';
@@ -47,32 +48,31 @@ class GradientLayout extends Component {
     if (!this.canScroll(delta)) {
       return;
     }
-    const { sectionIndex, direction } = this.state;
-    const { items } = this.props;
-    let newSectionIndex = 0;
-    let newDirection = direction;
 
     if (delta > 0) {
-      newSectionIndex = sectionIndex - 1;
-      newDirection = 'top';
+      this.prevSection();
     } else {
-      newSectionIndex = sectionIndex + 1;
-      newDirection = 'bottom';
-    }
-
-    if (newSectionIndex >= 0 && newSectionIndex < items.length) {
-      this.setState({ direction: newDirection + 'force' }, () => {
-        this.setState({
-          sectionIndex: newSectionIndex,
-          direction: newDirection,
-        });
-      });
+      this.nextSection();
     }
   }
 
-  nextSection = () => this.setSection(this.state.sectionIndex + 1)
-  prevSection = () => this.setSection(this.state.sectionIndex - 1)
-  setSection = idx => this.setState({ sectionIndex: idx })
+  nextSection = () => this.setSection(this.state.sectionIndex + 1, {
+    direction: 'bottom',
+  })
+  prevSection = () => this.setSection(this.state.sectionIndex - 1, {
+    direction: 'top',
+  })
+  setSection = (idx, otherState = {}) => {
+    const { items } = this.props;
+    const isInItemsRange = idx >= 0 && idx < items.length;
+
+    if (isInItemsRange) {
+      this.setState({
+        sectionIndex: idx,
+        ...otherState,
+      });
+    }
+  }
 
   render() {
     const { items, stepsWithoutHeader = [] } = this.props;
@@ -88,7 +88,10 @@ class GradientLayout extends Component {
     const currentImage = currentSection.bgImage || '';
 
     return (
-      <div className="GradientLayout">
+      <div className={classnames(
+        'GradientLayout animate',
+        { [`slide-from-${direction}`]: direction }
+      )}>
         <div className="GradientLayout__Container">
           {!hideHeader && (
             <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
@@ -105,11 +108,11 @@ class GradientLayout extends Component {
             >
               {items.map((item, index) => (
                 <section
-                  className={`
-                  GradientLayout__Section
-                  ${index !== sectionIndex ? 'hidden' : ''}
-                  ${item.className ? item.className : ''}
-                `}
+                  className={classnames(
+                    'GradientLayout__Section',
+                    { hidden: index !== sectionIndex },
+                    item.className
+                  )}
                   style={item.style}
                 >
                   {typeof item.content === 'function'
@@ -143,7 +146,6 @@ class GradientLayout extends Component {
             background-position: top right;
             background-repeat: no-repeat;
             background-color: #000;
-            animation: ${`slide-from-${direction}`} 1s;
             background-size: 100%;
             overflow: hidden;
             min-height: 100vh;
@@ -196,6 +198,12 @@ class GradientLayout extends Component {
             margin-left: 10px;
           }
 
+          .animate.slide-from-top {
+            animation: slide-from-top 1s;
+          }
+          .animate.slide-from-bottom {
+            animation: slide-from-bottom 1s;
+          }
           @keyframes slide-from-bottom {
             0% {
               background-position: 0% -100%;
