@@ -10,7 +10,7 @@ const configureSockets = (
 ) => {
   const getConfig = require('next/config').default;
   const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
-  const { getAsync, delAsync } = redisApi;
+  const { getAsync, setAsync, delAsync } = redisApi;
   const baseSocket = io(server).origins('*:*');
 
   const ssoSocket = {
@@ -50,7 +50,6 @@ const configureSockets = (
     dbWatcher.addSubscription(identifier);
     dbWatcher.on(identifier, async() => {
       const userData = await getAsync(identifier);
-      await delAsync(identifier);
       socket.emit(identifier, userData);
     });
   });
@@ -58,27 +57,21 @@ const configureSockets = (
   residencySocket.qrCode.on('connection', async socket => {
     try {
       const { user, identifier } = socket.handshake.query;
+      await setAsync(JSON.parse(user).id, user)
+      const callbackURL = `${publicRuntimeConfig.BASE_URL}/receive/residency`;
 
+      const credOffer = await identityWallet.create.credentialOfferRequestJSONWebToken({
+        typ: InteractionType.CredentialOfferRequest,
+        credentialOffer: {
+          instant: true,
+          challenge: identifier,
+          requestedInput: {},
+          callbackURL: callbackURL
+        }
+      })
+      const credentialReceiveJWT = credOffer.encode();
 
-      const residencySignedCredential = await identityWallet.create.signedCredential({
-        metadata: claimsMetadata.demoId,
-        claim: { ...JSON.parse(user), identifier },
-        subject: JSON.parse(user).id,
-      });
-
-      const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
-        typ: InteractionType.CredentialsReceive,
-        credentialsReceive: {
-          signedCredentials: [residencySignedCredential],
-        },
-      });
-
-      const credentialReceiveJWT = credReceiveJWTClass.encode();
-
-      console.log(credentialReceiveJWT);
-
-      const qrCode = await new SSO()
-        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'M', version: 40 });
+      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
       socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
@@ -97,32 +90,54 @@ const configureSockets = (
 
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
-      const { user, identifier, } = socket.handshake.query;
-      const {givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user)
-      const signedCredential = await identityWallet.create.signedCredential({
-        metadata: claimsMetadata.demoDriversLicence,
-        claim: { givenName, familyName, birthDate, birthPlace, identifier },
-	subject: id
-      });
+      const { user, identifier } = socket.handshake.query;
+      await setAsync(JSON.parse(user).id, user)
+      const callbackURL = `${publicRuntimeConfig.BASE_URL}/receive/driving`;
 
-      const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
-        typ: InteractionType.CredentialsReceive,
-        credentialsReceive: {
-          signedCredentials: [signedCredential],
-        },
-      });
+      const credOffer = await identityWallet.create.credentialOfferRequestJSONWebToken({
+        typ: InteractionType.CredentialOfferRequest,
+        credentialOffer: {
+          instant: true,
+          challenge: identifier,
+          requestedInput: {},
+          callbackURL: callbackURL
+        }
+      })
+      const credentialReceiveJWT = credOffer.encode();
 
-      const credentialReceiveJWT = credReceiveJWTClass.encode();
-
-      console.log(credentialReceiveJWT);
-
-      const qrCode = await new SSO()
-        .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'L', version: 40 });
-
+      const qrCode = await new SSO().JWTtoQR(credentialReceiveJWT);
       socket.emit(identifier, qrCode);
     } catch (error) {
       console.log(error);
     }
+
+  //   try {
+  //     const { user, identifier, } = socket.handshake.query;
+  //     const {givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user)
+  //     const signedCredential = await identityWallet.create.signedCredential({
+  //       metadata: claimsMetadata.demoDriversLicence,
+  //       claim: { givenName, familyName, birthDate, birthPlace, identifier },
+	// subject: id
+  //     });
+
+  //     const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
+  //       typ: InteractionType.CredentialsReceive,
+  //       credentialsReceive: {
+  //         signedCredentials: [signedCredential],
+  //       },
+  //     });
+
+  //     const credentialReceiveJWT = credReceiveJWTClass.encode();
+
+  //     console.log(credentialReceiveJWT);
+
+  //     const qrCode = await new SSO()
+  //       .JWTtoQR(credentialReceiveJWT, { errorCorrectionLevel: 'L', version: 40 });
+
+  //     socket.emit(identifier, qrCode);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
   });
 
   drivingLicenceSocket.status.on('connection', async socket => {
