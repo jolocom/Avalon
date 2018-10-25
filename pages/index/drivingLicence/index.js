@@ -7,27 +7,27 @@ import { getDrivingLicence } from 'actions/user';
 class Residency extends Component {
   state = {
     sectionIndex: 0,
-    birthDate: '',
-    birthPlace: '',
+    residence: '',
+    postalCode: '',
   }
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
   handleChangeInput = (key, value) => this.setState({ [key]: value })
   handleGetDrivingLicence = evt => {
     evt.preventDefault();
-    const { birthDate, birthPlace } = this.state;
+    const { residence, postalCode } = this.state;
 
     this.props.getDrivingLicence(
       {
-        birthDate,
-        birthPlace,
+        residence,
+        postalCode,
       },
       this.nextSection
     )
       .then(this.nextSection);
   }
   render() {
-    const { birthDate, birthPlace } = this.state;
+    const { residence, postalCode } = this.state;
     const { setSection, mainSectionIndex } = this.props;
     const sections = [
       (
@@ -40,20 +40,20 @@ class Residency extends Component {
           <br />
           <form onSubmit={this.handleGetDrivingLicence}>
             <Input
-              placeholder="date of birth"
-              onChange={evt => this.handleChangeInput('birthDate', evt.target.value)}
-              value={birthDate}
-              labelText="date of birth"
+              placeholder="residence"
+              onChange={evt => this.handleChangeInput('residence', evt.target.value)}
+              value={residence}
+              labelText="residence"
             />
             <Input
-              placeholder="place of birth"
-              onChange={evt => this.handleChangeInput('birthPlace', evt.target.value)}
-              value={birthPlace}
-              labelText="place of birth"
+              placeholder="postal code"
+              onChange={evt => this.handleChangeInput('postalCode', evt.target.value)}
+              value={postalCode}
+              labelText="postal code"
             />
             <Button
               className="mt"
-              disabled={!birthDate || !birthPlace}
+              disabled={!residence || !postalCode}
             >
               Next
             </Button>
