@@ -20,14 +20,13 @@ export const updateUserData = data => {
 export const setResidency = (params, cb) => async(dispatch, getState) => {
   const identifier = randomString(5);
   try {
-    const { givenName, familyName } = getState().userData;
+    const user = getState().userData;
     const qrCode = await getQrCode({
       socketName: 'residency',
       query: {
         user: JSON.stringify({
           ...params,
-          familyName,
-          givenName,
+          ...user,
           nationality: 'avaloner',
         }),
         identifier,
@@ -58,14 +57,13 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
 export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
   const identifier = randomString(5);
   try {
-    const { givenName, familyName } = getState().userData;
+    const user = getState().userData;
     const qrCode = await getQrCode({
       socketName: 'driving-licence',
       query: {
         user: JSON.stringify({
           ...params,
-          familyName,
-          givenName,
+          ...user,
         }), identifier,
       },
     });
