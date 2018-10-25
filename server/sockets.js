@@ -98,10 +98,10 @@ const configureSockets = (
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
       const { user, identifier } = socket.handshake.query;
-      const { givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user);
+      const { givenName, familyName, residence, postalCode, id } = JSON.parse(user);
       const signedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoDriversLicence,
-        claim: { givenName, familyName, birthDate, birthPlace, identifier },
+        claim: { givenName, familyName, residence, postalCode, identifier },
 	      subject: id,
       });
 

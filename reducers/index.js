@@ -6,6 +6,8 @@ export const defaultState = {
     email: '',
     givenName: '',
     familyName: '',
+    residence: '',
+    postalCode: '',
   },
   qrCode: '',
   ui: {
