@@ -58,12 +58,12 @@ const configureSockets = (
   residencySocket.qrCode.on('connection', async socket => {
     try {
       const { user, identifier } = socket.handshake.query;
-
+      const { givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user);
 
       const residencySignedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoId,
-        claim: { ...JSON.parse(user), identifier },
-        subject: JSON.parse(user).id,
+        claim: { givenName, familyName, birthDate, birthPlace, identifier },
+        subject: id,
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
@@ -97,12 +97,12 @@ const configureSockets = (
 
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
-      const { user, identifier, } = socket.handshake.query;
-      const {givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user)
+      const { user, identifier } = socket.handshake.query;
+      const { givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user);
       const signedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoDriversLicence,
         claim: { givenName, familyName, birthDate, birthPlace, identifier },
-	subject: id
+	      subject: id,
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
