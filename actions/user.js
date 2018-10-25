@@ -27,7 +27,7 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
         user: JSON.stringify({
           ...params,
           ...user,
-          nationality: 'avaloner',
+          nationality: 'avalonier',
         }),
         identifier,
       },
