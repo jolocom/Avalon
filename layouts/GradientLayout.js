@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classnames from 'classnames';
 import throttle from 'lodash.throttle';
 
 import { ProgressSlider, Header } from 'components';
@@ -9,20 +10,47 @@ class GradientLayout extends Component {
 
     this.state = {
       sectionIndex: 0,
+      direction: 0,
+      containerTopPosition: 0,
     };
     this.listRef = React.createRef();
   }
 
   componentDidMount() {
-    document.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener('resize', this.setContainerTopPosition());
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sectionIndex !== this.state.sectionIndex) {
+      this.setState({ containerTopPosition: this.containerTopPosition });
+    }
   }
   componentWillUnmount() {
-    document.removeEventListener('mousewheel', throttle(this.handleScroll));
+    window.removeEventListener('mousewheel', throttle(this.handleScroll));
+    window.removeEventListener('resize', this.setContainerTopPosition());
+  }
+  get containerTopPosition() {
+    return -(this.getListHeight()) * this.state.sectionIndex + 'px';
   }
 
-  canScroll = () => {
+  setContainerTopPosition = () => {
+    return throttle(
+      () => this.setState({ containerTopPosition: this.containerTopPosition }),
+      1500,
+      { trailing: false }
+    );
+  }
+
+  canScroll = delta => {
     const { scrollValidations = {} } = this.props;
-    const canScroll = scrollValidations[this.state.sectionIndex];
+    const validators = scrollValidations[this.state.sectionIndex] || {};
+    let canScroll;
+
+    if (delta > 0) {
+      canScroll = validators.back;
+    } else {
+      canScroll = validators.forward;
+    }
 
     return typeof canScroll === 'undefined' ? true : canScroll;
   }
@@ -35,35 +63,37 @@ class GradientLayout extends Component {
   }
 
   handleScroll = evt => {
-    if(!this.canScroll()) {
+    const delta = evt.wheelDeltaY;
+    if (!this.canScroll(delta)) {
       return;
     }
-    const delta = evt.wheelDeltaY;
-    const { sectionIndex } = this.state;
-    const { items } = this.props;
-    let newSectionIndex = 0;
 
     if (delta > 0) {
-      newSectionIndex = sectionIndex - 1;
+      this.prevSection();
     } else {
-      newSectionIndex = sectionIndex + 1;
-    }
-
-    if (newSectionIndex >= 0 && newSectionIndex < items.length) {
-      this.setState({ sectionIndex: newSectionIndex });
+      this.nextSection();
     }
   }
 
   nextSection = () => this.setSection(this.state.sectionIndex + 1)
   prevSection = () => this.setSection(this.state.sectionIndex - 1)
-  setSection = idx => this.setState({ sectionIndex: idx })
+  setSection = idx => {
+    const { items } = this.props;
+    const isInItemsRange = idx >= 0 && idx < items.length;
+
+    if (isInItemsRange) {
+      const direction = this.state.sectionIndex < idx ? 'bottom' : 'top';
+      this.setState({
+        sectionIndex: idx,
+        direction,
+      });
+    }
+  }
 
   render() {
-    const { items, stepsWithoutHeader = [] } = this.props;
-    const { sectionIndex } = this.state;
-    // const sectionIndex = 7;
+    const { items, noGradient } = this.props;
+    const { sectionIndex, direction, containerTopPosition } = this.state;
     const isFirstSlide = sectionIndex === 0;
-    const hideHeader = stepsWithoutHeader.includes(sectionIndex);
     const imagesToPrefetch = items
       .map((item = {}) => item.bgImage ? `url(${item.bgImage})` : '').join(' ');
     const currentSection = items[sectionIndex] || {};
@@ -71,13 +101,17 @@ class GradientLayout extends Component {
       throw Error('Current section canoot be less than 0');
     }
     const currentImage = currentSection.bgImage || '';
+    const containerGradient = noGradient.includes(sectionIndex)
+      ? ''
+      : 'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
 
     return (
-      <div className="GradientLayout">
+      <div className={classnames(
+        'GradientLayout animate',
+        { [`slide-from-${direction}`]: direction }
+      )}>
         <div className="GradientLayout__Container">
-          {!hideHeader && (
-            <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
-          )}
+          <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
 
           <main>
             <ProgressSlider count={items.length} progress={sectionIndex} />
@@ -85,16 +119,16 @@ class GradientLayout extends Component {
               ref={this.listRef}
               className="GradientLayout__List__Section"
               style={{
-                top: -(this.getListHeight()) * sectionIndex + 'px',
+                top: containerTopPosition,
               }}
             >
               {items.map((item, index) => (
                 <section
-                  className={`
-                  GradientLayout__Section
-                  ${index !== sectionIndex ? 'hidden' : ''}
-                  ${item.className ? item.className : ''}
-                `}
+                  className={classnames(
+                    'GradientLayout__Section',
+                    { hidden: index !== sectionIndex },
+                    item.className
+                  )}
                   style={item.style}
                 >
                   {typeof item.content === 'function'
@@ -136,7 +170,7 @@ class GradientLayout extends Component {
           .GradientLayout__Container {
             display: flex;
             flex-direction: column;
-            background-image: radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%);
+            background-image: ${containerGradient};
             padding: 40px 0 0 40px;
             height: 100%;
             width: 100%;
@@ -148,21 +182,29 @@ class GradientLayout extends Component {
           .GradientLayout__List__Section {
             position: absolute;
             top: 0;
+            right: 0;
+            left: 0;
             height: 100%;
-            width: 100%;
-            margin-left: 70px;
             margin-right: -17px;
             transition: all 1s ease 0s;
           }
           .GradientLayout__Section {
-            height: 100%;
-            max-width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            height: 100%;
+            max-height: 100vh;
+            overflow-y: auto;
+            max-width: 50%;
           }
           .GradientLayout__Section.hidden {
             visibility: hidden;
+          }
+          .GradientLayout__Section.center {
+            margin: auto;
+          }
+          .GradientLayout__Section.left {
+            margin-left: 120px;
           }
 
           .GradientLayout :global(.ProgressSlider) {
@@ -170,6 +212,29 @@ class GradientLayout extends Component {
             height: calc(100% - 15px);
             max-height: 100%;
             margin-left: 10px;
+          }
+
+          .animate.slide-from-top {
+            animation: slide-from-top 1s;
+          }
+          .animate.slide-from-bottom {
+            animation: slide-from-bottom 1s;
+          }
+          @keyframes slide-from-bottom {
+            0% {
+              background-position: 0% 100vh;
+            }
+            100% {
+              background-position: 0% 0%;
+            }
+          }
+          @keyframes slide-from-top {
+            0% {
+              background-position: 0% -100vh;
+            }
+            100% {
+              background-position: 0% 0%;
+            }
           }
         `}</style>
       </div>

@@ -8,6 +8,7 @@ const Footer = () => {
           position: fixed;
           bottom: 0;
           left: 50%;
+          transform: translateX(-50%);
           text-transform: uppercase;
           font-size: 10px;
           letter-spacing: 2px;
