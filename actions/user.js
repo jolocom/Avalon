@@ -26,8 +26,8 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
       query: {
         user: JSON.stringify({
           ...params,
-          ...familyName,
-          ...givenName,
+          familyName,
+          givenName,
           nationality: 'avaloner',
         }),
         identifier,
@@ -64,8 +64,8 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
       query: {
         user: JSON.stringify({
           ...params,
-          ...familyName,
-          ...givenName,
+          familyName,
+          givenName,
         }), identifier,
       },
     });
