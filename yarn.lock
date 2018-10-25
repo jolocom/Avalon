@@ -1910,9 +1910,9 @@ cred-types-jolocom-core@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/cred-types-jolocom-core/-/cred-types-jolocom-core-0.0.9.tgz#6d3a0a0b59838ec68f6e7fdf0ff234b349a1f42a"
 
-cred-types-jolocom-demo@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/cred-types-jolocom-demo/-/cred-types-jolocom-demo-0.0.1.tgz#2ebfb162a342982d802c25eca2d075240e873849"
+cred-types-jolocom-demo@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/cred-types-jolocom-demo/-/cred-types-jolocom-demo-0.0.2.tgz#11344df3863f57d9a245d3d4b1d7c0a19c271a84"
 
 cross-spawn@5.1.0, cross-spawn@^5.0.1:
   version "5.1.0"

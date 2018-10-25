@@ -34,7 +34,6 @@ const configureSockets = (
       credentialRequest: {
         callbackURL,
         credentialRequirements: [
-          serverRuntimeConfig.credentialRequirements.email,
           serverRuntimeConfig.credentialRequirements.name,
         ],
       },

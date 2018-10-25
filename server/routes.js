@@ -56,7 +56,6 @@ const configureRoutes = async(app, redisApi, iw) => {
       const credentialRequest = CredentialRequest.create({
         callbackURL: '',
         credentialRequirements: [
-          serverRuntimeConfig.credentialRequirements.email,
           serverRuntimeConfig.credentialRequirements.name,
         ],
       });

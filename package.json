@@ -17,7 +17,7 @@
     "classnames": "^2.2.6",
     "cors": "^2.8.4",
     "cred-types-jolocom-core": "^0.0.9",
-    "cred-types-jolocom-demo": "^0.0.1",
+    "cred-types-jolocom-demo": "^0.0.2",
     "dotenv": "^6.0.0",
     "jolocom-lib": "^2.0.13",
     "lodash.throttle": "^4.1.1",
