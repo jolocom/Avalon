@@ -12,11 +12,10 @@ export default class MyDocument extends Document {
         <Head>
           <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
-        </Head>
-        <body>
-          <style global jsx>{`
+          <style>{`
             html {
               color: #ffefdf;
+              font-size: 12px;
               font-family: TTCommons;
               height: 100%;
               width: 100%;
@@ -33,8 +32,9 @@ export default class MyDocument extends Document {
               box-sizing: border-box;
             }
             h1 {
-              font-size: 56px !important;
-              font-weight: 400;
+              font-size: 4.67rem;
+              font-weight: 300;
+              margin: 3.58rem 0;
             }
             h2 {
               font-size: 32px !important;
@@ -43,8 +43,9 @@ export default class MyDocument extends Document {
               margin: 10px 0;
             }
             p {
-              font-size: 20px;
-              font-weight: 300;
+              font-size: 1.5rem;
+              line-height: 26px;
+              font-weight: 400;
               color: rgba(255, 239, 223, 0.8);
               margin: 10px 0;
             }
@@ -53,6 +54,11 @@ export default class MyDocument extends Document {
             }
             p.medium {
               font-size: 15px;
+            }
+            p.bold {
+              font-size: 32px;
+              line-height: 44px;
+              font-weight: 700;
             }
             p.pink {
               color: #942f51 !important;
@@ -70,7 +76,7 @@ export default class MyDocument extends Document {
               margin: auto;
             }
             .mt {
-              margin-top: 64px;
+              margin-top: 5rem;
             }
             .translate-center {
               margin-left: 50%;
@@ -108,6 +114,8 @@ export default class MyDocument extends Document {
               display: inherit;
             }
           `}</style>
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>

@@ -21,7 +21,7 @@ const Button = ({ className, full, ...props }) => (
         padding: 15px 30px 13px;
         background: #942f51;
         color: #fff;
-        font-size: 20px;
+        font-size: 1.67rem;
         line-height: 20px;
         outline: none;
         border: none;

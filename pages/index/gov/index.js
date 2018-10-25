@@ -21,7 +21,14 @@ class GovSpace extends Component {
   render() {
     const sections = [
       (
-        <div className="half-width margin-center ta-c">
+        <div
+          className="half-width margin-center ta-c"
+          style={{ padding: '60px 50px' }}
+        >
+          <img
+            src="/static/images/Avalon_logo.svg"
+            alt="imaginary city or country logo"
+          />
           <h1>Welcome to Avalon!</h1>
           <p>
             Please, register your arrival
@@ -40,7 +47,14 @@ class GovSpace extends Component {
         </div>
       ),
       (
-        <div className="half-width margin-center ta-c">
+        <div
+          className="half-width margin-center ta-c"
+          style={{ padding: '60px 50px' }}
+        >
+          <img
+            src="/static/images/Avalon_logo.svg"
+            alt="imaginary city or country logo"
+          />
           <h3>Scan the QR-code with your SmartWallet:</h3>
           <img src={this.props.qrCode} width={300} />
         </div>
@@ -62,8 +76,8 @@ class GovSpace extends Component {
 
           .GovSpace > :global(div:first-child) {
             background-color: #fff;
-            padding: 40px 80px;
           }
+
           .GovSpace :global(.half-width) {
             width: 50%;
             min-width: 300px;

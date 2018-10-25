@@ -57,29 +57,21 @@ class ProgressSlider extends React.PureComponent {
         ref={this.listContainerRef}
         className="ProgressSlider"
       >
-        <div className="ProgressSlider__Line" />
         <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
-        {Array(count).fill().map((item, index) => {
-          return (
-            <li
-              key={index}
-              ref={this[`${index}Ref`]}
-              className="ProgressSlider__Item"
-            />
-          );
-        })}
+        <div className="ProgressSlider__opacity">
+          <div className="ProgressSlider__Line" />
+          {Array(count).fill().map((item, index) => {
+            return (
+              <li
+                key={index}
+                ref={this[`${index}Ref`]}
+                className="ProgressSlider__Item"
+              />
+            );
+          })}
+        </div>
 
         <style jsx>{`
-          .ProgressSlider__Line {
-            position: absolute;
-            height: 100%;
-            left: 50%;
-            background-color: #fff;
-            opacity: .2;
-            width: 1px;
-            transform: translateX(-50%);
-          }
-
           .ProgressSlider {
             position: relative;
             list-style: none;
@@ -89,11 +81,25 @@ class ProgressSlider extends React.PureComponent {
             margin: 0;
             padding: 0;
             height: 100%;
+            z-index: 1;
+          }
+
+          .ProgressSlider__opacity {
+            opacity: .2;
+          }
+
+          .ProgressSlider__Line {
+            position: absolute;
+            height: 100%;
+            left: 50%;
+            background-color: #fff;
+            width: 1px;
+            transform: translateX(-50%);
           }
 
           .ProgressSlider__Item {
             position: relative;
-            background: #684653;
+            background-color: #fff;
             opacity: 1;
             width: 7px;
             min-width: 7px;
@@ -120,12 +126,12 @@ class ProgressSlider extends React.PureComponent {
             position: absolute;
             top: 0;
             background-image: url('/static/images/glow-checkbox.svg');
-            background-color: #fff;
-            box-shadow: 0 0 20px 5px #f6b362;
-            width: 7px;
-            height: 7px;
+            background-size: cover;
+            width: 51px;
+            height: 51px;
             border-radius: 50%;
             transition: all 1s ease 0s;
+            transform: translate(-42%, -42%);
             z-index: 2;
           }
         `}</style>
