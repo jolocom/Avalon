@@ -15,7 +15,6 @@ const validateCredentialSignatures = async credentialResponse => {
 
 const extractDataFromClaims = credentialResponse => {
   let response = {
-    email: '',
     givenName: '',
     familyName: '',
   };

@@ -30,6 +30,6 @@ module.exports = {
     },
   },
   publicRuntimeConfig: { // Will be available on both server and client
-	  BASE_URL: 'http://192.168.2.103:3000',
+	  BASE_URL: 'https://avalon.jolocom.com',
   },
 };
