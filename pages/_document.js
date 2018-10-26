@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
             }
             h1 {
               font-size: 4.67rem;
-              font-weight: 300;
+              font-weight: 400;
               margin: 3.58rem 0;
             }
             h2 {
@@ -56,7 +56,7 @@ export default class MyDocument extends Document {
             p {
               font-size: 1.5rem;
               line-height: 2.17rem;
-              font-weight: 400;
+              font-weight: 300;
               color: rgba(255, 239, 223, 0.8);
               margin: 3.33rem 0;
             }
@@ -84,6 +84,9 @@ export default class MyDocument extends Document {
             }
             .margin-center {
               margin: auto;
+            }
+            .mt-1 {
+              margin-top: 1rem;
             }
             .mt-5 {
               margin-top: 5rem;

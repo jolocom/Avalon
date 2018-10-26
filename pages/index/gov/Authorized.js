@@ -42,7 +42,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
                 alt=""
               />
               <h3>{service.title}</h3>
-              <p className="medium gray">
+              <p className="medium gray mt-1">
                 {service.description}
               </p>
               {user[service.name] ? (
@@ -66,15 +66,14 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
       <style jsx>{`
           .Authorized {
-            display: inline-flex;
+            display: flex;
             width: 100%;
-            min-height: 100vh;
-            color: #000;
-            overflow: auto;
+            height: 100vh;
+            overflow: hidden;
           }
 
           .Authorized__Content {
-            padding: 60px 50px;
+            padding: 5rem 4.17rem;
           }
 
           .BarImage {
