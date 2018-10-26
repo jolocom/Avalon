@@ -11,11 +11,11 @@ class GovSpace extends Component {
     sectionIndex: 0,
   }
 
-  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
+  setSection = idx => this.setState({ sectionIndex: idx })
 
   handleInitiateLogin = () => {
-    this.props.initiateLogin(this.nextSection)
-      .then(this.nextSection);
+    this.props.initiateLogin(() => this.setSection(1))
+      .then(() => this.setSection(2));
   }
 
   render() {
@@ -35,7 +35,7 @@ class GovSpace extends Component {
             Please, register your arrival
           </p>
           <br />
-          <Button onClick={() => this.handleInitiateLogin()}>
+          <Button onClick={this.handleInitiateLogin}>
             <img
               src="/static/images/jolocom-icon-transparent.svg"
               alt="Jolocom logo"

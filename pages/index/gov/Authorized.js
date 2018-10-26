@@ -55,7 +55,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           <li>
             <img src="https://placehold.it/230x120/?text=Private company" alt="" />
             <h3>Open a private company</h3>
-            <p className="medium gray">
+            <p className="medium gray mt-1">
               Allows you to open your business, apply for a job or stay in the country …
               something funny goes here.
             </p>

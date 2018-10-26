@@ -58,7 +58,7 @@ const configureSockets = (
   residencySocket.qrCode.on('connection', async socket => {
     try {
       const { user, identifier } = socket.handshake.query;
-
+      const callbackURL = `${publicRuntimeConfig.BASE_URL}/get-claim/${identifier}`;
 
       const residencySignedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoId,
@@ -69,6 +69,7 @@ const configureSockets = (
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
         typ: InteractionType.CredentialsReceive,
         credentialsReceive: {
+          callbackURL,
           signedCredentials: [residencySignedCredential],
         },
       });
@@ -97,17 +98,19 @@ const configureSockets = (
 
   drivingLicenceSocket.qrCode.on('connection', async socket => {
     try {
-      const { user, identifier, } = socket.handshake.query;
-      const {givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user)
+      const callbackURL = `${publicRuntimeConfig.BASE_URL}/get-claim/${identifier}`;
+      const { user, identifier } = socket.handshake.query;
+      const { givenName, familyName, birthDate, birthPlace, id } = JSON.parse(user);
       const signedCredential = await identityWallet.create.signedCredential({
         metadata: claimsMetadata.demoDriversLicence,
         claim: { givenName, familyName, birthDate, birthPlace, identifier },
-	subject: id
+        subject: id,
       });
 
       const credReceiveJWTClass = identityWallet.create.credentialsReceiveJSONWebToken({
         typ: InteractionType.CredentialsReceive,
         credentialsReceive: {
+          callbackURL,
           signedCredentials: [signedCredential],
         },
       });
