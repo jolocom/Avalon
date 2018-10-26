@@ -5,7 +5,7 @@ const About = ({ onClose }) => {
     <Overlay onClose={onClose}>
       <h1>About</h1>
 
-      <p className="bold">
+      <p className="big">
         This web experience is brought to you by <a href="https://jolocom.io">Jolocom</a>,
         to demonstrate how decentralized digital identity management can serve as a building
         block to revolutionize everyday interactions and activities.
@@ -73,10 +73,6 @@ const About = ({ onClose }) => {
           color: #FFEFDF;
         }
 
-        p {
-          font-weight: 700;
-        }
-
         .Sections {
           display: flex;
         }
@@ -92,6 +88,9 @@ const About = ({ onClose }) => {
           margin: 0;
           padding: 0;
           list-style: none;
+        }
+        .Social__List * + * {
+          margin-top: 0.92rem;
         }
         .Social__List a {
           color: #9B9B9F;

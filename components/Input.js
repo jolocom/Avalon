@@ -34,6 +34,7 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {} }) =>
 
         input ~ label {
           color: #b5b5b7;
+          font-size: 1.67rem;
           font-weight: normal;
           position: absolute;
           pointer-events: none;

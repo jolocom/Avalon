@@ -17,14 +17,13 @@ const sections = [
         <div className="margin-center" style={{ width: 560, maxWidth: '100%' }}>
           <p>
             Have you ever thought about how digital citizenship could look like?
-          </p>
-          <p>
+            <br /> <br />
             What will change for individuals and organisations if a country decides to make a leap
             from countless user accounts to self-sovereign identity technology?
           </p>
         </div>
         <br />
-        <Button className="mt" onClick={nextSection}>Start experience</Button>
+        <Button className="mt-2" onClick={nextSection}>Start experience</Button>
       </div>
     ),
     className: 'center',
@@ -37,13 +36,11 @@ const sections = [
         <p>
           Avalon is a smal sovereign country situated on the North Sea coast known for having the
           most urban infrastructure.
-        </p>
-        <p>
+          <br /> <br />
           Avalon had it's dark days - as every country. Two years ago, when society reached its
           limits of disengagement, its government decided to run a few experiments to improve
           people's lives.
-        </p>
-        <p>
+          <br /> <br />
           After several attempts, two implementations reached the level of mass adoption.
           One of them is a new approach to identity management.
         </p>
@@ -62,8 +59,7 @@ const sections = [
           In Avalon, this new identity system lets everyone access services of urban infrastructure.
           Wether you are visiting or relocating for good - a digital identity is the key to this
           country.
-        </p>
-        <p>
+          <br /><br />
           To install the <u>SmartWallet</u>, please scan the QR code:
         </p>
         <div>
@@ -87,14 +83,13 @@ const sections = [
         <h1>Set up your identity</h1>
         <p>
           Now it's time to create your own identity.
-        </p>
-        <p>
+          <br /><br />
           1. Open the SmartWallet. <br />
           2. Follow the instalation guide. <br />
           3. Finally, add your <u>full name</u>.
+          <br /><br />
+          Ready? Scroll down to enter the country.
         </p>
-        <br /><br />
-        <p>Ready? Scroll down to enter the country.</p>
 
         <Footer />
       </>

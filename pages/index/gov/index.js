@@ -23,11 +23,12 @@ class GovSpace extends Component {
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '60px 50px' }}
+          style={{ padding: '3.75rem 5.42rem 2.25rem' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
+            className="AvalonLogo"
           />
           <h1>Welcome to Avalon!</h1>
           <p>
@@ -49,14 +50,20 @@ class GovSpace extends Component {
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '60px 50px' }}
+          style={{ padding: '3.75rem 5.42rem 2.25rem' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
+            className="AvalonLogo"
           />
-          <h3>Scan the QR-code with your SmartWallet:</h3>
+          <h4>Scan the QR-code with your SmartWallet:</h4>
           <img src={this.props.qrCode} width={300} />
+          <h5
+            data-tooltip="Make sure that you have added your full name to the SmartWallet"
+          >
+            Doesn't work?
+          </h5>
         </div>
       ),
       Authorized,
@@ -71,7 +78,7 @@ class GovSpace extends Component {
         <style jsx>{`
           div,
           div :global(p) {
-            color: #000;
+            color: rgba(5,5,13,0.80);
           }
 
           .GovSpace > :global(div:first-child) {
@@ -79,7 +86,7 @@ class GovSpace extends Component {
           }
 
           .GovSpace :global(.half-width) {
-            width: 50%;
+            width: 56.67rem;
             min-width: 300px;
           }
         `}</style>

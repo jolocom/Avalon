@@ -1,11 +1,13 @@
 import classnames from 'classnames';
 
-const Button = ({ className, full, ...props }) => (
+const Button = ({ className, full, flat, pink, ...props }) => (
   <button
     {...props}
     className={classnames(
       'Button',
       { full: full },
+      { 'Button--flat': flat },
+      { 'Button--pink': pink },
       className
     )}
   >
@@ -35,12 +37,22 @@ const Button = ({ className, full, ...props }) => (
       .Button.full {
         width: 100%;
       }
+      .Button--flat {
+        font-size: 1.5rem;
+        background: none;
+      }
+      .Button--pink {
+        color: #942F51;
+      }
       .Button > :global(* + *) {
         margin-left: 10px;
       }
 
       .Button:hover {
         background: #8A2948;
+      }
+      .Button--flat:hover {
+        background: none;
       }
 
       .Button:active {

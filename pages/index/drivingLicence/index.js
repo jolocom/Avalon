@@ -52,7 +52,7 @@ class Residency extends Component {
               labelText="place of birth"
             />
             <Button
-              className="mt"
+              className="mt-5"
               disabled={!birthDate || !birthPlace}
             >
               Next
@@ -93,7 +93,9 @@ class Residency extends Component {
           </p>
           <br />
           <Button
-            className="mt"
+            flat
+            pink
+            className="mt-5"
             onClick={() => setSection(mainSectionIndex - 2)}
           >
             Return to home page
@@ -108,6 +110,7 @@ class Residency extends Component {
         <img
           src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
+          className="AvalonLogo"
         />
         {typeof currentSection === 'function'
           ? React.createElement(currentSection)

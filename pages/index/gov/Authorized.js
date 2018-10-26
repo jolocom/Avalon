@@ -26,10 +26,11 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         <img
           src="/static/images/Avalon_logo.svg"
           alt="Avalon logo"
+          className="AvalonLogo"
         />
-        <h2>Welcome, {user.givenName}!</h2>
-        <p>
-          Discover what services the Government of Avalon can offer you:
+        <h1 style={{ marginBottom: '1rem' }}>Welcome, {user.givenName}!</h1>
+        <p style={{ marginTop: 0 }}>
+          Discover what services the Government <br />of Avalon can offer you:
         </p>
 
         <ul>
@@ -45,7 +46,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
                 {service.description}
               </p>
               {user[service.name] ? (
-                <span className="green-text">Received</span>
+                <span className="green-text">Completed</span>
               ) : (
                 <Button onClick={service.onApply}>Apply</Button>
               )}
@@ -67,8 +68,9 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           .Authorized {
             display: inline-flex;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             color: #000;
+            overflow: auto;
           }
 
           .Authorized__Content {

@@ -32,7 +32,7 @@ class Residency extends Component {
     const sections = [
       (
         <>
-          <h1>Become <br /> an Avalonian citizen</h1>
+          <h2>Become <br /> an Avalonian citizen</h2>
           <h5>STEP 1</h5>
           <p>
             Please, provide additional information:
@@ -52,7 +52,7 @@ class Residency extends Component {
               labelText="place of birth"
             />
             <Button
-              className="mt"
+              className="mt-5"
               disabled={!birthDate || !birthPlace}
             >
               Next
@@ -86,13 +86,15 @@ class Residency extends Component {
       ),
       (
         <>
-          <h1>It's time to celebrate!</h1>
+          <h2>It's time to celebrate!</h2>
           <p>
             Now, you can proudly call yourself an Avalonian citizen.
           </p>
           <br />
           <Button
-            className="mt"
+            flat
+            pink
+            className="mt-5"
             onClick={() => setSection(mainSectionIndex - 1)}
           >
             Return to home page
@@ -107,6 +109,7 @@ class Residency extends Component {
         <img
           src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
+          className="AvalonLogo"
         />
         {typeof currentSection === 'function'
           ? React.createElement(currentSection)
@@ -114,8 +117,8 @@ class Residency extends Component {
         <style jsx>{`
           div {
             background-color: #fff;
-            width: 50%;
-            padding: 70px 65px;
+            width: 60.5rem;
+            padding: 2.5rem 7.33rem 3.33rem;
           }
           div,
           div :global(p) {

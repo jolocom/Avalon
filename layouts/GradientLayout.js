@@ -204,7 +204,8 @@ class GradientLayout extends Component {
             margin: auto;
           }
           .GradientLayout__Section.left {
-            margin-left: 120px;
+            margin-left: 10.67rem;
+            max-width: 37.08rem;
           }
 
           .GradientLayout :global(.ProgressSlider) {
