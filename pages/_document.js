@@ -56,7 +56,7 @@ export default class MyDocument extends Document {
             p {
               font-size: 1.5rem;
               line-height: 2.17rem;
-              font-weight: 300;
+              font-weight: 400;
               color: rgba(255, 239, 223, 0.8);
               margin: 3.33rem 0;
             }

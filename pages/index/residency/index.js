@@ -124,6 +124,11 @@ class Residency extends Component {
           div :global(p) {
             color: #000;
           }
+
+          div :global(h5) {
+            text-decoration: none;
+            letter-spacing: 2,58px;
+          }
         `}</style>
       </div>
     );

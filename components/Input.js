@@ -27,6 +27,7 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {} }) =>
           color: #05050d;
           padding-bottom: 4px;
           width: 100%;
+          font-size: 1.67rem;
         }
         input:focus {
           border-color: #942f51;

@@ -189,13 +189,11 @@ class GradientLayout extends Component {
             transition: all 1s ease 0s;
           }
           .GradientLayout__Section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             height: 100%;
             max-height: 100vh;
             overflow-y: auto;
             max-width: 50%;
+            padding-top: 13.08rem
           }
           .GradientLayout__Section.hidden {
             visibility: hidden;
@@ -206,6 +204,12 @@ class GradientLayout extends Component {
           .GradientLayout__Section.left {
             margin-left: 10.67rem;
             max-width: 37.08rem;
+          }
+          .GradientLayout__Section :global(h1) {
+            margin-bottom: 0;
+          }
+          .GradientLayout__Section :global(p) {
+            margin-top: 3.33rem;
           }
 
           .GradientLayout :global(.ProgressSlider) {

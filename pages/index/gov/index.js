@@ -79,6 +79,8 @@ class GovSpace extends Component {
           div,
           div :global(p) {
             color: rgba(5,5,13,0.80);
+            margin-top: 2.5rem !important;
+            margin-bottom: 3.67rem;
           }
 
           .GovSpace > :global(div:first-child) {
