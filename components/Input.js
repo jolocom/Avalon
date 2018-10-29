@@ -1,27 +1,30 @@
-const Input = ({ type = 'text', labelText, value = '', onChange = () => {} }) => {
+import Cleave from 'cleave.js/react';
+
+const Input = ({ type = 'text', labelText, value = '', onChange = () => {}, ...other }) => {
   return (
-    <div>
-      <input
+    <div className="Input">
+      <Cleave
         type={type}
         value={value}
         onChange={onChange}
+        {...other}
       />
       <label>{labelText}</label>
 
       <style jsx>{`
-        div {
+        .Input {
           position: relative;
           display: inline-block;
           margin-top: 30px;
         }
 
-        input,
-        input:hover,
-        input:active,
-        input:focus {
+        .Input :global(input),
+        .Input :global(input:hover),
+        .Input :global(input:active),
+        .Input :global(input:focus) {
           outline: 0;
         }
-        input {
+        .Input :global(input) {
           border: none;
           border-bottom: 2px solid #05050d;
           color: #05050d;
@@ -29,11 +32,12 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {} }) =>
           width: 100%;
           font-size: 1.67rem;
         }
-        input:focus {
+        .Input :global(input:focus) {
           border-color: #942f51;
         }
 
-        input ~ label {
+        .Input :global(input ~ label) {
+          background: #fff;
           color: #b5b5b7;
           font-size: 1.67rem;
           font-weight: normal;
@@ -48,8 +52,8 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {} }) =>
           width: auto;
         }
 
-        input:focus ~ label,
-        input:not([value=""]) ~ label {
+        .Input :global(input:focus ~ label),
+        .Input :global(input:not([value=""]) ~ label) {
           top: -10px;
           font-size: 15px;
         }

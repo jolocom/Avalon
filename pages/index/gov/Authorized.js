@@ -74,6 +74,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
           .Authorized__Content {
             padding: 5rem 4.17rem;
+            overflow: auto;
           }
 
           .BarImage {

@@ -23,7 +23,6 @@ class GovSpace extends Component {
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '3.75rem 5.42rem 2.25rem' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
@@ -50,7 +49,6 @@ class GovSpace extends Component {
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '3.75rem 5.42rem 2.25rem' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
@@ -79,8 +77,6 @@ class GovSpace extends Component {
           div,
           div :global(p) {
             color: rgba(5,5,13,0.80);
-            margin-top: 2.5rem !important;
-            margin-bottom: 3.67rem;
           }
 
           .GovSpace > :global(div:first-child) {
@@ -90,6 +86,8 @@ class GovSpace extends Component {
           .GovSpace :global(.half-width) {
             width: 56.67rem;
             min-width: 300px;
+            padding: 3.75rem 5.42rem 2.25rem;
+            margin-top: 13.08rem;
           }
         `}</style>
       </div>

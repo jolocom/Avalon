@@ -2,70 +2,58 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button, Input } from 'components';
-import { setResidency } from 'actions/user';
+import { getDrivingLicence } from 'actions/user';
 
-class Residency extends Component {
+class GetCredentialsForm extends Component {
   state = {
     sectionIndex: 0,
-    birthDate: '',
-    birthPlace: '',
+    residence: '',
+    postalCode: '',
   }
 
   nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
   handleChangeInput = (key, value) => this.setState({ [key]: value })
-  handleSetResidency = evt => {
+  handleGetDrivingLicence = evt => {
     evt.preventDefault();
-    const { birthDate, birthPlace } = this.state;
+    const { residence, postalCode } = this.state;
 
-    this.props.setResidency(
+    this.props.getDrivingLicence(
       {
-        birthDate,
-        birthPlace,
+        residence,
+        postalCode,
       },
       this.nextSection
     )
       .then(this.nextSection);
   }
   render() {
-    const { birthDate, birthPlace } = this.state;
+    const { residence, postalCode } = this.state;
     const { setSection, mainSectionIndex } = this.props;
     const sections = [
       (
         <>
-          <h2>Become <br /> an Avalonian citizen</h2>
+          <h1>Get Avalonian driver's licence</h1>
           <h5>STEP 1</h5>
           <p>
             Please, provide additional information:
           </p>
           <br />
-          <form onSubmit={this.handleSetResidency}>
+          <form onSubmit={this.handleGetDrivingLicence}>
             <Input
-              placeholder="date of birth"
-              onChange={evt => this.handleChangeInput('birthDate', evt.target.rawValue)}
-              value={birthDate}
-              labelText="date of birth"
-              placeholder="dd•mm•yyy"
-              options={{
-                date: true,
-                datePattern: ['d', 'm', 'Y'],
-                delimiter: '•',
-              }}
+              placeholder="residence"
+              onChange={evt => this.handleChangeInput('residence', evt.target.rawValue)}
+              value={residence}
+              labelText="residence"
             />
             <Input
-              placeholder="place of birth"
-              onChange={evt => this.handleChangeInput('birthPlace', evt.target.rawValue)}
-              value={birthPlace}
-              labelText="place of birth"
-              placeholder="dd•mm•yyy"
-              options={{
-                date: true,
-                datePattern: ['d', 'm', 'Y'],
-                delimiter: '•',
-              }}
+              placeholder="postal code"
+              onChange={evt => this.handleChangeInput('postalCode', evt.target.rawValue)}
+              value={postalCode}
+              labelText="postal code"
             />
             <Button
               className="mt-5"
-              disabled={!birthDate || !birthPlace}
+              disabled={!residence || !postalCode}
             >
               Next
             </Button>
@@ -83,10 +71,10 @@ class Residency extends Component {
       ),
       (
         <>
-          <h2>Become an Avalonian citizen</h2>
+          <h1>Get Avalonian driver's licence</h1>
           <h5>STEP 2</h5>
           <p>
-            Scan the QR-code with the SmartWallet to save your new digital ID:
+            Scan the QR-code with the SmartWallet to save your driver's licence:
           </p>
           <br />
           <img
@@ -98,16 +86,17 @@ class Residency extends Component {
       ),
       (
         <>
-          <h2>It's time to celebrate!</h2>
+          <h1>It's time to drive!</h1>
           <p>
-            Now, you can proudly call yourself an Avalonian citizen.
+            You have succefully received Avalonian driver’s licence. Please, drive carefully:
+            be fast, but never furious.
           </p>
           <br />
           <Button
             flat
             pink
             className="mt-5"
-            onClick={() => setSection(mainSectionIndex - 1)}
+            onClick={() => setSection(mainSectionIndex - 2)}
           >
             Return to home page
           </Button>
@@ -129,14 +118,13 @@ class Residency extends Component {
         <style jsx>{`
           div {
             background-color: #fff;
-            width: 60.5rem;
-            padding: 2.5rem 7.33rem 3.33rem;
+            width: 50%;
+            padding: 70px 65px;
           }
           div,
           div :global(p) {
             color: #000;
           }
-
           div :global(h5) {
             text-decoration: none;
             letter-spacing: 2.58px;
@@ -147,10 +135,10 @@ class Residency extends Component {
   }
 }
 
-Residency = connect(state => ({
+GetCredentialsForm = connect(state => ({
   qrCode: state.qrCode,
 }), {
-  setResidency,
-})(Residency);
+  getDrivingLicence,
+})(GetCredentialsForm);
 
-export default Residency;
+export default GetCredentialsForm;

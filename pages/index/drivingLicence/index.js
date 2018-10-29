@@ -41,13 +41,13 @@ class Residency extends Component {
           <form onSubmit={this.handleGetDrivingLicence}>
             <Input
               placeholder="residence"
-              onChange={evt => this.handleChangeInput('residence', evt.target.value)}
+              onChange={evt => this.handleChangeInput('residence', evt.target.rawValue)}
               value={residence}
               labelText="residence"
             />
             <Input
               placeholder="postal code"
-              onChange={evt => this.handleChangeInput('postalCode', evt.target.value)}
+              onChange={evt => this.handleChangeInput('postalCode', evt.target.rawValue)}
               value={postalCode}
               labelText="postal code"
             />
@@ -124,6 +124,10 @@ class Residency extends Component {
           div,
           div :global(p) {
             color: #000;
+          }
+          div :global(h5) {
+            text-decoration: none;
+            letter-spacing: 2.58px;
           }
         `}</style>
       </div>

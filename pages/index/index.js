@@ -26,7 +26,7 @@ const sections = [
         <Button className="mt-2" onClick={nextSection}>Start experience</Button>
       </div>
     ),
-    className: 'center',
+    className: 'center special-space-top',
   },
   {
     bgImage: '/static/images/OSiP_01.jpg',
@@ -48,7 +48,7 @@ const sections = [
         <Footer />
       </>
     ),
-    className: 'left',
+    className: 'left special-space-top',
   },
   {
     bgImage: '/static/images/OSiP_02.jpg',
@@ -74,7 +74,7 @@ const sections = [
         <Footer />
       </>
     ),
-    className: 'left',
+    className: 'left special-space-top',
   },
   {
     bgImage: '/static/images/OSiP_03.jpg',
@@ -94,7 +94,7 @@ const sections = [
         <Footer />
       </>
     ),
-    className: 'left',
+    className: 'left special-space-top',
   },
   {
     bgImage: '/static/images/GOV_01.jpg',
@@ -108,6 +108,7 @@ const sections = [
   },
   {
     bgImage: '/static/images/recidency_bg.jpg',
+    bgSize: '85% 100%',
     content: Residency,
     style: {
       width: '100%',
@@ -144,7 +145,7 @@ class Home extends Component {
               forward: !!userData.did,
             },
           }}
-          noGradient={[4]}
+          noGradient={[4, 5, 6]}
         />
 
         {ui.showAboutOverlay && (
