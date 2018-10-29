@@ -30,6 +30,6 @@ module.exports = {
     },
   },
   publicRuntimeConfig: { // Will be available on both server and client
-    BASE_URL: process.env.BASE_URL,
+	  BASE_URL: 'https://avalon.jolocom.com',
   },
 };
