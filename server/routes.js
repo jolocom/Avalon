@@ -13,7 +13,7 @@ const configureRoutes = async(app, redisApi, iw) => {
   app.post('/receive/:type', async(req, res) => {
     const { token } = req.body;
     const { type } = req.params;
-    const { iss } = await JolocomLib.parse.interactionJSONWebToken.decode(token);
+    const { iss, ...rest } = await JolocomLib.parse.interactionJSONWebToken.decode(token);
     const did = iss.substring(0, iss.indexOf('#'));
 
     const metadataMap = {
@@ -41,7 +41,7 @@ const configureRoutes = async(app, redisApi, iw) => {
         },
       })
       .encode();
-    console.log({ encodedCredential });
+    console.log({ rest });
     res.json({ token: encodedCredential });
   });
 
