@@ -37,7 +37,7 @@ const configureRoutes = async(app, redisApi, iw) => {
         iss: iw.getIdentity().getDID(),
         typ: 'credentialsReceive',
         credentialsReceive: {
-          signedCredentials: [residencySignedCredential.toJSON()]
+          signedCredentials: [residencySignedCredential.toJSON()],
         },
       })
       .encode();
