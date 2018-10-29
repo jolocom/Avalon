@@ -8,7 +8,8 @@ import Residency from './residency';
 import DrivingLicence from './drivingLicence';
 
 import { setAboutOverlayState } from 'actions/ui';
-
+const pinkGradient = 'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
+const blackGradient = 'linear-gradient(251deg, rgba(145,145,145,0.00) 17%, rgba(5,5,13,0.22) 44%, #010100 99%)';
 const sections = [
   {
     content: ({ nextSection }) => (
@@ -27,6 +28,7 @@ const sections = [
       </div>
     ),
     className: 'center special-space-top',
+    containerGradient: pinkGradient,
   },
   {
     bgImage: '/static/images/OSiP_01.jpg',
@@ -49,6 +51,7 @@ const sections = [
       </>
     ),
     className: 'left special-space-top',
+    containerGradient: pinkGradient,
   },
   {
     bgImage: '/static/images/OSiP_02.jpg',
@@ -75,6 +78,7 @@ const sections = [
       </>
     ),
     className: 'left special-space-top',
+    containerGradient: pinkGradient,
   },
   {
     bgImage: '/static/images/OSiP_03.jpg',
@@ -95,6 +99,7 @@ const sections = [
       </>
     ),
     className: 'left special-space-top',
+    containerGradient: pinkGradient,
   },
   {
     bgImage: '/static/images/GOV_01.jpg',
@@ -126,6 +131,7 @@ const sections = [
       display: 'flex',
       justifyContent: 'center',
     },
+    containerGradient: blackGradient,
   },
 ];
 

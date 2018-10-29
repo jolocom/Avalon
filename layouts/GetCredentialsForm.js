@@ -32,7 +32,7 @@ class GetCredentialsForm extends Component {
     const sections = [
       (
         <>
-          <h1>Get Avalonian driver's licence</h1>
+          <h1>Get an Avalonian driver's licence</h1>
           <h5>STEP 1</h5>
           <p>
             Please, provide additional information:
@@ -71,10 +71,10 @@ class GetCredentialsForm extends Component {
       ),
       (
         <>
-          <h1>Get Avalonian driver's licence</h1>
+          <h1>Get an Avalonian driver's licence</h1>
           <h5>STEP 2</h5>
           <p>
-            Scan the QR-code with the SmartWallet to save your driver's licence:
+            Scan the QR-code with the SmartWallet to save your new digital ID:
           </p>
           <br />
           <img
@@ -88,7 +88,7 @@ class GetCredentialsForm extends Component {
         <>
           <h1>It's time to drive!</h1>
           <p>
-            You have succefully received Avalonian driver’s licence. Please, drive carefully:
+            You have successfully received an Avalonian driver’s licence. Please, drive carefully:
             be fast, but never furious.
           </p>
           <br />

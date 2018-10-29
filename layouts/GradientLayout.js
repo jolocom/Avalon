@@ -91,7 +91,7 @@ class GradientLayout extends Component {
   }
 
   render() {
-    const { items, noGradient } = this.props;
+    const { items } = this.props;
     const { sectionIndex, direction, containerTopPosition } = this.state;
     const isFirstSlide = sectionIndex === 0;
     const imagesToPrefetch = items
@@ -102,9 +102,7 @@ class GradientLayout extends Component {
     }
     const currentImage = currentSection.bgImage || '';
     const currentImageSize = currentSection.bgSize || '100% 100%';
-    const containerGradient = noGradient.includes(sectionIndex)
-      ? ''
-      : 'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
+    const containerGradient = currentSection.containerGradient || '';
 
     return (
       <div className={classnames(
