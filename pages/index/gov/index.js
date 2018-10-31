@@ -56,7 +56,10 @@ class GovSpace extends Component {
             className="AvalonLogo"
           />
           <h4>Scan the QR-code with your SmartWallet:</h4>
-          <img src={this.props.qrCode} width={300} />
+          <img
+            src={this.props.qrCode}
+            className="qrCode"
+          />
           <h5
             data-tooltip="Make sure that you have added your full name to the SmartWallet"
           >
@@ -85,9 +88,16 @@ class GovSpace extends Component {
 
           .GovSpace :global(.half-width) {
             width: 56.67rem;
+            height: 35.83rem;
             min-width: 300px;
             padding: 3.75rem 5.42rem 2.25rem;
             margin-top: 13.08rem;
+          }
+
+          @media only screen and (min-width: 1440px) {
+            .GovSpace :global(.half-width) {
+              margin-top: 15rem;
+            }
           }
         `}</style>
       </div>

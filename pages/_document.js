@@ -98,6 +98,10 @@ export default class MyDocument extends Document {
               margin-left: 50%;
               transform: translateX(-50%);
             }
+            .qrCode {
+              width: 16.67rem;
+              height: 16.67rem;
+            }
 
             *[data-tooltip] {
               position:relative;

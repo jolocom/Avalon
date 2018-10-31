@@ -3,7 +3,7 @@ import { Overlay } from 'components';
 const About = ({ onClose }) => {
   return (
     <Overlay onClose={onClose}>
-      <h1>About</h1>
+      <h2>About</h2>
 
       <p className="big">
         This web experience is brought to you by <a href="https://jolocom.io">Jolocom</a>,
@@ -14,57 +14,57 @@ const About = ({ onClose }) => {
 
       <div className="Sections">
         <div>
-          <p className="gray">
+          <p>
             Who owns your digital identity? <br />
             At Jolocom we build software systems that enable individual people,
             organizations, and smart agents to own and control the identity that defines them.
-          </p>
-          <p className="gray">
+            <br /><br />
             Our vision is for a future in which every entity capable of any type of identity
             is equally capable of communicating and sharing information about itself.
           </p>
         </div>
         <div>
-          <p className="gray">
+          <p>
             This interactive experience was built using our universal, open source protocol for
             digital identity management.
-          </p>
-          <p className="gray">
+            <br /><br />
             Have a look at the technical documentation here.
-          </p>
-          <p className="gray">
+            <br /><br />
             Want to learn how your sector can benefit from implementing Jolocom’s protocol? Contact us.
           </p>
         </div>
         <div className="Social">
-          <h4>Follow us</h4>
-          <ul className="Social__List">
-            <li>
-              <a href="https://twitter.com/GETJolocom" target="_blank" rel="noopener noreferrer">
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="https://t.me/joinchat/BRZ49A1ysPrieF4drcIDow" target="_blank" rel="noopener noreferrer">
-                Telegram
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/jolocom" target="_blank" rel="noopener noreferrer">
-                Github
-              </a>
-            </li>
-            <li>
-              <a href="https://www.youtube.com/channel/UCmpF6TdeLM2H6XcpZI2ceBg" target="_blank" rel="noopener noreferrer">
-                Youtube
-              </a>
-            </li>
-            <li>
-              <a href="https://stories.jolocom.com/" target="_blank" rel="noopener noreferrer">
-                Medium
-              </a>
-            </li>
-          </ul>
+          <p>
+            <h4>Follow us</h4>
+            <ul className="Social__List">
+              <li>
+                <a href="https://twitter.com/GETJolocom" target="_blank" rel="noopener noreferrer">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://t.me/joinchat/BRZ49A1ysPrieF4drcIDow" target="_blank" rel="noopener noreferrer">
+                  Telegram
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/jolocom" target="_blank" rel="noopener noreferrer">
+                  Github
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UCmpF6TdeLM2H6XcpZI2ceBg" target="_blank" rel="noopener noreferrer">
+                  Youtube
+                </a>
+              </li>
+              <li>
+                <a href="https://stories.jolocom.com/" target="_blank" rel="noopener noreferrer">
+                  Medium
+                </a>
+              </li>
+            </ul>
+          </p>
+
         </div>
       </div>
 
@@ -73,8 +73,26 @@ const About = ({ onClose }) => {
           color: #FFEFDF;
         }
 
+        h2 {
+          font-size: 4.67rem!important;
+          color: #FFEFDF;
+          margin-top: 0;
+        }
+
+        hr {
+          opacity: .3;
+        }
+        
+        p a {
+          color: #fff;
+          text-decoration: none;
+        }
+
         .Sections {
           display: flex;
+        }
+        .Sections p {
+          color: #9B9B9F;
         }
 
         .Sections > div + div {
@@ -89,6 +107,9 @@ const About = ({ onClose }) => {
           padding: 0;
           list-style: none;
         }
+        .Social__List li {
+          display: flex;
+        }
         .Social__List * + * {
           margin-top: 0.92rem;
         }
@@ -96,6 +117,7 @@ const About = ({ onClose }) => {
           color: #9B9B9F;
           font-size: 16px;
           line-height: 20px;
+          text-decoration: underline;
         }
 
         a:hover {

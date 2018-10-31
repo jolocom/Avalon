@@ -101,7 +101,7 @@ class GradientLayout extends Component {
       throw Error('Current section canoot be less than 0');
     }
     const currentImage = currentSection.bgImage || '';
-    const currentImageSize = currentSection.bgSize || '100% 100%';
+    const currentImageSize = currentSection.bgSize || 'cover';
     const containerGradient = currentSection.containerGradient || '';
 
     return (
@@ -113,7 +113,7 @@ class GradientLayout extends Component {
           <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
 
           <main>
-            <ProgressSlider count={items.length} progress={sectionIndex} />
+            <ProgressSlider progress={sectionIndex} />
             <div
               ref={this.listRef}
               className="GradientLayout__List__Section"
@@ -170,7 +170,7 @@ class GradientLayout extends Component {
             display: flex;
             flex-direction: column;
             background-image: ${containerGradient};
-            padding: 40px 0 0 40px;
+            padding: 65px 0 0 65px;
             height: 100%;
             width: 100%;
           }
@@ -214,9 +214,6 @@ class GradientLayout extends Component {
           }
 
           .GradientLayout :global(.ProgressSlider) {
-            position: relative;
-            height: calc(100% - 15px);
-            max-height: 100%;
             margin-left: 10px;
           }
 

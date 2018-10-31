@@ -42,7 +42,7 @@ const configureRoutes = async(app, redisApi, iw) => {
         },
       })
       .encode();
-    console.log({ identifier, credentialOffer  });
+
     await setAsync(identifier, JSON.stringify({ status: 'success' }));
     res.json({ token: encodedCredential });
   });

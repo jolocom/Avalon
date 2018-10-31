@@ -56,12 +56,7 @@ class Residency extends Component {
               onChange={evt => this.handleChangeInput('birthPlace', evt.target.rawValue)}
               value={birthPlace}
               labelText="place of birth"
-              placeholder="dd•mm•yyy"
-              options={{
-                date: true,
-                datePattern: ['d', 'm', 'Y'],
-                delimiter: '•',
-              }}
+              placeholder="place of birth"
             />
             <Button
               className="mt-5"
