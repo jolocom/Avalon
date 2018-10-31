@@ -31,7 +31,7 @@ class ProgressSlider extends React.PureComponent {
   }
 
   getCurrentStepPosition = () => {
-    const dotsPosition = ['0%', '20%', '27%', '33.5%', '40.5%', '47%', '54%'];
+    const dotsPosition = ['0%', '20%', '27%', '34%', '41%', '48%', '55%'];
     const currentStepPosition = dotsPosition[this.props.progress] || 0;
 
     return currentStepPosition || 0;
@@ -45,10 +45,11 @@ class ProgressSlider extends React.PureComponent {
         <style jsx>{`
           .ProgressSlider {
             position: relative;
-            width: 10px;
+            width: 7px;
             height: 100%;
             background: url('/static/images/timeline.svg');
             background-size: cover;
+            z-index: 1;
           }
 
           .ProgressSlider__Active {
@@ -60,7 +61,7 @@ class ProgressSlider extends React.PureComponent {
             height: 51px;
             border-radius: 50%;
             transition: all 1s ease 0s;
-            transform: translate(-42%, -42%);
+            transform: translate(-43%,-41%);
             z-index: 2;
           }
         `}</style>
