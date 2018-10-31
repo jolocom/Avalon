@@ -177,6 +177,7 @@ class GradientLayout extends Component {
           main {
             display: flex;
             flex: 1;
+            align-items: flex-start
           }
           .GradientLayout__List__Section {
             position: absolute;
