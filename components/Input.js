@@ -1,12 +1,21 @@
 import Cleave from 'cleave.js/react';
 
-const Input = ({ type = 'text', labelText, value = '', onChange = () => {}, ...other }) => {
+const DEFAULT_OPTIONS = {
+  blocks: [99999],
+  delimiter: '',
+};
+
+const Input = ({
+  type = 'text', labelText, value = '', options = DEFAULT_OPTIONS,
+  onChange = () => {}, ...other
+}) => {
   return (
     <div className="Input">
       <Cleave
         type={type}
         value={value}
         onChange={onChange}
+        options={options}
         {...other}
       />
       <label>{labelText}</label>
@@ -35,6 +44,11 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {}, ...o
         .Input :global(input:focus) {
           border-color: #942f51;
         }
+        .Input :global(input::placehoder),
+        .Input :global(input::-webkit-input-placeholder) {
+          line-height: 2.5rem;
+          color: #b5b5b7;
+        }
 
         .Input :global(input ~ label) {
           background: #fff;
@@ -45,11 +59,12 @@ const Input = ({ type = 'text', labelText, value = '', onChange = () => {}, ...o
           pointer-events: none;
           left: 0;
           top: 50%;
+          width: 100%;
+          text-align: left;
           transform: translateY(-50%);
           transition: 0.2s ease all;
           -moz-transition: 0.2s ease all;
           -webkit-transition: 0.2s ease all;
-          width: auto;
         }
 
         .Input :global(input:focus ~ label),
