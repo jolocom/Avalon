@@ -29,37 +29,46 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           className="AvalonLogo"
         />
         <h1 style={{ marginBottom: '1rem' }}>Welcome, {user.givenName}!</h1>
-        <p style={{ marginTop: 0 }}>
+        <p style={{ marginTop: 0, fontSize: '1.67rem', lineHeight: '2.5rem' }}>
           Discover what services the Government <br />of Avalon can offer you:
         </p>
 
         <ul>
           {services.map(service => (
-            <li>
+            <li className="Service">
               <img
                 src={`/static/images/${service.img}.jpg`}
                 srcSet={`/static/images/${service.img}@2x.jpg 2x`}
                 alt=""
               />
               <h3>{service.title}</h3>
-              <p className="medium gray mt-1">
+              <p className="Service__Description medium gray mt-1">
                 {service.description}
               </p>
               {user[service.name] ? (
-                <span className="green-text">Completed</span>
+                <span
+                  className="green-text"
+                  style={{ marginTop: '3.75rem' }}
+                >
+                  Completed
+                </span>
               ) : (
-                <Button onClick={service.onApply}>Apply</Button>
+                <Button
+                  onClick={service.onApply}
+                  style={{ marginTop: '2.5rem' }}
+                >Apply
+                </Button>
               )}
             </li>
           ))}
-          <li>
+          <li className="Service">
             <img
               src="/static/images/business.png"
               alt=""
               width="230"
             />
             <h3>Open a business</h3>
-            <p className="medium gray mt-1">
+            <p className="Service__Description medium gray mt-1">
               For any person or organisation wishing to start a new company or move existing
               operations to Avalon.
             </p>
@@ -74,6 +83,10 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             width: 100%;
             height: 100vh;
             overflow: hidden;
+          }
+
+          h1 {
+            line-height: 4.83rem;
           }
 
           .Authorized__Content {
@@ -93,18 +106,26 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             flex-wrap: wrap;
           }
 
-          li {
+          .Service {
             flex: 1;
-            padding-right: 50px;
-            padding-left: 20px;
+            padding-right: 6.67rem;
+            padding-left: 1.67rem;
           }
+          .Service h3 {
+            font-family: TTCommons-DemiBold;
+            font-weight: 400;
+          }
+          .Service__Description {
+            margin-top: 1.67rem !important;
+            margin-bottom: 0;
+          } 
 
-          li:hover,
-          li:hover p {
+          .Service:hover,
+          .Service:hover p {
             color: #942f51 !important;
           }
 
-          li {
+          .Service {
             border-left: 1px solid #ececec;
           }
         `}</style>
