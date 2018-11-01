@@ -40,12 +40,12 @@ class ProgressSlider extends React.PureComponent {
   render() {
     return (
       <div className="ProgressSlider">
-        <img src="/static/images/timeline.svg" style={{ visibility: 'hidden' }} />
         <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition }} />
 
         <style jsx>{`
           .ProgressSlider {
             position: relative;
+            height: 55rem;
             width: 7px;
             background: url('/static/images/timeline.svg');
             background-repeat: no-repeat;
