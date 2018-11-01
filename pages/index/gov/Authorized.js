@@ -87,10 +87,13 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
           h1 {
             line-height: 4.83rem;
+            color: #05050D;
           }
 
           .Authorized__Content {
-            padding: 5rem 4.17rem;
+            width: 100%;
+            padding-top: 5rem;
+            padding-left: 4.17rem;
             overflow: auto;
           }
 
@@ -102,22 +105,24 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-wrap: wrap;
           }
 
           .Service {
-            flex: 1;
-            padding-right: 6.67rem;
             padding-left: 1.67rem;
+            margin-right: 6.67rem;
+            width: 20.33rem;
+            display: inline-block;
+            height: 37.75rem;
           }
           .Service h3 {
             font-family: TTCommons-DemiBold;
+            margin-top: 1.67rem;
             font-weight: 400;
           }
           .Service__Description {
             margin-top: 1.67rem !important;
             margin-bottom: 0;
+            line-height: 1.83rem;
           } 
 
           .Service:hover,
