@@ -33,7 +33,6 @@ class GovSpace extends Component {
           <p>
             Please, register your arrival
           </p>
-          <br />
           <Button onClick={this.handleInitiateLogin}>
             <img
               src="/static/images/jolocom-icon-transparent.svg"
@@ -44,6 +43,16 @@ class GovSpace extends Component {
               Continue with Jolocom
             </span>
           </Button>
+
+          <style jsx>{`
+            h1 {
+              margin-top: 2.92rem;
+            }
+            p {
+              margin-top: 2.5rem !important;
+              margin-bottom: 3.67rem;
+            }
+          `}</style>
         </div>
       ),
       (

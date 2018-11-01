@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
             }
             h1 {
               font-size: 4.67rem;
+              line-height: 4.67rem;
               font-weight: 400;
               margin: 3.58rem 0;
             }
