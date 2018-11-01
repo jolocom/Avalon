@@ -86,8 +86,11 @@ class GovSpace extends Component {
           ? React.createElement(currentSection, this.props)
           : currentSection}
         <style jsx>{`
-          div,
-          div :global(p) {
+          .GovSpace {
+            width: 100%;
+          }
+          .GovSpace,
+          .GovSpace :global(p) {
             color: rgba(5,5,13,0.80);
           }
 
@@ -101,6 +104,7 @@ class GovSpace extends Component {
             min-width: 300px;
             padding: 3.75rem 5.42rem 2.25rem;
             margin-top: 13.08rem;
+            border-radius: 2px;
           }
 
           @media only screen and (min-width: 1440px) {
