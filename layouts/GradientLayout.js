@@ -9,7 +9,7 @@ class GradientLayout extends Component {
     super(props);
 
     this.state = {
-      sectionIndex: 0,
+      sectionIndex: 4,
       direction: 0,
       containerTopPosition: 0,
     };

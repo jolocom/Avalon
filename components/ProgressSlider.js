@@ -31,7 +31,7 @@ class ProgressSlider extends React.PureComponent {
   }
 
   getCurrentStepPosition = () => {
-    const dotsPosition = ['0%', '19.5%', '26.5%', '33.2%', '40.1%', '46.7%', '53.5%'];
+    const dotsPosition = ['0%', '16.2%', '21.8%', '27.3%', '33%', '38.7%', '44.2%'];
     const currentStepPosition = dotsPosition[this.props.progress] || 0;
 
     return currentStepPosition || 0;
