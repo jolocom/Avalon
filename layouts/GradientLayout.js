@@ -35,9 +35,10 @@ class GradientLayout extends Component {
 
   setContainerTopPosition = () => {
     return throttle(
-      () => this.setState({ containerTopPosition: this.containerTopPosition }),
-      1500,
-      { trailing: false }
+      () => {
+        this.setState({ containerTopPosition: this.containerTopPosition });
+      },
+      1000
     );
   }
 

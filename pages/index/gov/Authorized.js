@@ -45,18 +45,23 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
               <p className="Service__Description medium gray mt-1">
                 {service.description}
               </p>
-              {user[service.name] ? (
-                <span
-                  className="green-text"
+              {!user[service.name] ? (
+                <div
+                  className="success-text"
                   style={{ marginTop: '3.75rem' }}
                 >
+                  <img
+                    src="/static/images/verified_green.svg"
+                    style={{ transform: 'translate(-0.5rem, 3px)' }}
+                  />
                   Completed
-                </span>
+                </div>
               ) : (
                 <Button
                   onClick={service.onApply}
                   style={{ marginTop: '2.5rem' }}
-                >Apply
+                >
+                  Apply
                 </Button>
               )}
             </li>
@@ -113,6 +118,9 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             width: 20.33rem;
             display: inline-block;
             height: 37.75rem;
+          }
+          .Service > img {
+            width: 19.17rem;
           }
           .Service h3 {
             font-family: TTCommons-DemiBold;

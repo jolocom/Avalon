@@ -77,8 +77,10 @@ export default class MyDocument extends Document {
             p.gray {
               color: rgba(5,5,13,0.60) !important;
             }
-            .green-text {
+            .success-text {
               color: #28A52D;
+              font-size: 1.5rem;
+              line-height: 1.42rem;
             }
             .ta-c {
               text-align: center;
