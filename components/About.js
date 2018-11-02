@@ -25,12 +25,16 @@ const About = ({ onClose }) => {
         </div>
         <div>
           <p>
-            This interactive experience was built using our universal, open source protocol for
-            digital identity management.
+            This interactive experience was built using our universal,{' '}
+            <a href="https://jolocom.io/solution/" target="_blank">
+              open source protocol for digital identity management
+            </a>.
             <br /><br />
-            Have a look at the technical documentation here.
+            Have a look at the technical documentation{' '}
+            <a href="https://jolocom-lib.readthedocs.io/en/latest/index.html" target="_blank">here</a>.
             <br /><br />
-            Want to learn how your sector can benefit from implementing Jolocom’s protocol? Contact us.
+            Want to learn how your sector can benefit from implementing Jolocom’s protocol?{' '}
+            <a href="https://jolocom.io/solution/#conversation" target="_blank">Contact us</a>.
           </p>
         </div>
         <div className="Social">
@@ -77,6 +81,12 @@ const About = ({ onClose }) => {
           font-size: 4.67rem!important;
           color: #FFEFDF;
           margin-top: 0;
+          margin-bottom: 2.5rem;
+        }
+
+        h4 {
+          margin-top: 0;
+          margin-bottom: 1.17rem;
         }
 
         hr {
@@ -93,6 +103,7 @@ const About = ({ onClose }) => {
         }
         .Sections p {
           color: #9B9B9F;
+          margin-top: 1.67rem;
         }
 
         .Sections > div + div {
@@ -109,19 +120,20 @@ const About = ({ onClose }) => {
         }
         .Social__List li {
           display: flex;
+          font-size: 16px;
+          line-height: 20px;
         }
         .Social__List * + * {
           margin-top: 0.92rem;
         }
-        .Social__List a {
+        .Sections a {
           color: #9B9B9F;
-          font-size: 16px;
-          line-height: 20px;
           text-decoration: underline;
         }
 
-        a:hover {
-          color: #fff;
+        .Sections a:hover {
+          color: #FFDEBC;
+          text-decoration: none;
         }
       `}</style>
     </Overlay>

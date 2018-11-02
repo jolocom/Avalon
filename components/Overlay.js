@@ -1,7 +1,9 @@
 const Overlay = ({ onClose: handleClose, children }) => {
   return (
     <aside>
-      <button onClick={handleClose}>&times;</button>
+      <button onClick={handleClose}>
+        <img src="/static/images/close.png" alt="close times button" />
+      </button>
       {children}
 
       <style jsx>{`
@@ -11,7 +13,7 @@ const Overlay = ({ onClose: handleClose, children }) => {
           top: 0;
           right: 0;
           bottom: 0;
-          padding: 128px 210px 116px 36px;
+          padding: 10.83rem 11.67rem 0 9.17rem;
           background-color: #000;
           z-index: 100;
         }
