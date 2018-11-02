@@ -45,7 +45,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
               <p className="Service__Description medium gray mt-1">
                 {service.description}
               </p>
-              {!user[service.name] ? (
+              {user[service.name] ? (
                 <div
                   className="success-text"
                   style={{ marginTop: '3.75rem' }}
