@@ -154,9 +154,9 @@ class Home extends Component {
           noGradient={[4, 5, 6]}
         />
 
-        {/* {ui.showAboutOverlay && ( */}
+        {ui.showAboutOverlay && (
           <About onClose={() => this.props.setAboutOverlayState(false)} />
-        {/* )} */}
+        )}
       </>
     );
   }
