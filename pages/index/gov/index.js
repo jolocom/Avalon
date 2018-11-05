@@ -33,15 +33,8 @@ class GovSpace extends Component {
           <p>
             Please, register your arrival
           </p>
-          <Button onClick={this.handleInitiateLogin}>
-            <img
-              src="/static/images/jolocom-icon-transparent.svg"
-              alt="Jolocom logo"
-              height={20}
-            />
-            <span>
-              Continue with Jolocom
-            </span>
+          <Button withLogo onClick={this.handleInitiateLogin}>
+            Continue with Jolocom
           </Button>
 
           <style jsx>{`
