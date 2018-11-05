@@ -36,7 +36,6 @@ export default class MyDocument extends Document {
               padding: 0;
               overflow: auto;
               margin: 0;
-              -webkit-overflow-scrolling: touch;
             }
             * {
               box-sizing: border-box;
