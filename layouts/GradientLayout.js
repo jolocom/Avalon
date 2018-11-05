@@ -125,6 +125,7 @@ class GradientLayout extends Component {
             >
               {items.map((item, index) => (
                 <section
+                  key={index}
                   className={classnames(
                     'GradientLayout__Section',
                     { hidden: index !== sectionIndex },

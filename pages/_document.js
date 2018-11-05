@@ -12,6 +12,15 @@ export default class MyDocument extends Document {
         <Head>
           <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link rel="stylesheet" href="/static/fonts/fonts.css" />
+
+          <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png" />
+          <link rel="manifest" href="/static/favicon/site.webmanifest" />
+          <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#942f51" />
+          <meta name="msapplication-TileColor" content="#da532c" />
+          <meta name="theme-color" content="#ffffff" />
+
           <style>{`
             html {
               color: #ffefdf;
