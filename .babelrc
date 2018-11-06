@@ -12,5 +12,14 @@
       }
     ]
   ],
-  "presets": ["next/babel"]
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "useBuiltIns": "usage"
+        }
+      }
+    ]
+  ]
 }
