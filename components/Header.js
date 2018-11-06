@@ -34,10 +34,11 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
         }
         header :global(.Logo svg .image) {
           opacity: ${isPrimaryBrandVersion ? 1 : 0.285673};
+          transition: opacity .4s;
         }
         header:hover .Brand {
-          visibility: visible;
           color: ${isPrimaryBrandVersion ? '' : '#fff'};
+          opacity: 1;
         }
         header:hover :global(.Logo svg .image) {
           opacity: 1;
@@ -45,12 +46,13 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
         .Brand {
           margin-left: 20px;
           text-transform: uppercase;
-          visibility: ${isPrimaryBrandVersion ? 'visible' : 'hidden'};
+          opacity: ${isPrimaryBrandVersion ? 1 : 0};
           cursor: ${isPrimaryBrandVersion ? 'default' : 'pointer'};
           color: rgba(255, 255, 255, 0.4);
           font-size: 1rem;
           line-height: 12px;
           letter-spacing: 2.6px;
+          transition: ${isPrimaryBrandVersion ? 'none' : 'opacity .4s'};
         }
         .Brand a {
           color: rgba(255,255,255,0.4);

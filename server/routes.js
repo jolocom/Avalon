@@ -13,8 +13,9 @@ const configureRoutes = async(app, redisApi, iw) => {
   app.post('/receive/:type', async(req, res) => {
     const { token } = req.body;
     const { type } = req.params;
-    const { iss } = await JolocomLib.parse.interactionJSONWebToken.decode(token);
+    const { iss, credentialOffer } = await JolocomLib.parse.interactionJSONWebToken.decode(token);
     const did = iss.substring(0, iss.indexOf('#'));
+    const identifier = credentialOffer.challenge;
 
     const metadataMap = {
       residency: claimsMetadata.demoId,
@@ -37,11 +38,12 @@ const configureRoutes = async(app, redisApi, iw) => {
         iss: iw.getIdentity().getDID(),
         typ: 'credentialsReceive',
         credentialsReceive: {
-          signedCredentials: [residencySignedCredential.toJSON()]
+          signedCredentials: [residencySignedCredential.toJSON()],
         },
       })
       .encode();
 
+    await setAsync(identifier, JSON.stringify({ status: 'success' }));
     res.json({ token: encodedCredential });
   });
 

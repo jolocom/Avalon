@@ -41,18 +41,18 @@ class Residency extends Component {
           <form onSubmit={this.handleGetDrivingLicence}>
             <Input
               placeholder="residence"
-              onChange={evt => this.handleChangeInput('residence', evt.target.value)}
+              onChange={evt => this.handleChangeInput('residence', evt.target.rawValue)}
               value={residence}
               labelText="residence"
             />
             <Input
               placeholder="postal code"
-              onChange={evt => this.handleChangeInput('postalCode', evt.target.value)}
+              onChange={evt => this.handleChangeInput('postalCode', evt.target.rawValue)}
               value={postalCode}
               labelText="postal code"
             />
             <Button
-              className="mt"
+              className="mt-5"
               disabled={!residence || !postalCode}
             >
               Next
@@ -93,7 +93,9 @@ class Residency extends Component {
           </p>
           <br />
           <Button
-            className="mt"
+            flat
+            pink
+            className="mt-5"
             onClick={() => setSection(mainSectionIndex - 2)}
           >
             Return to home page
@@ -108,6 +110,7 @@ class Residency extends Component {
         <img
           src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
+          className="AvalonLogo"
         />
         {typeof currentSection === 'function'
           ? React.createElement(currentSection)
@@ -121,6 +124,10 @@ class Residency extends Component {
           div,
           div :global(p) {
             color: #000;
+          }
+          div :global(h5) {
+            text-decoration: none;
+            letter-spacing: 2.58px;
           }
         `}</style>
       </div>

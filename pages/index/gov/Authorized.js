@@ -26,37 +26,56 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         <img
           src="/static/images/Avalon_logo.svg"
           alt="Avalon logo"
+          className="AvalonLogo"
         />
-        <h2>Welcome, {user.givenName}!</h2>
-        <p>
-          Discover what services the Government of Avalon can offer you:
+        <h1 style={{ marginBottom: '1rem' }}>Welcome, {user.givenName}!</h1>
+        <p style={{ marginTop: 0, fontSize: '1.67rem', lineHeight: '2.5rem' }}>
+          Discover what services the Government <br />of Avalon can offer you:
         </p>
 
         <ul>
           {services.map(service => (
-            <li>
+            <li className="Service">
               <img
                 src={`/static/images/${service.img}.jpg`}
                 srcSet={`/static/images/${service.img}@2x.jpg 2x`}
                 alt=""
               />
               <h3>{service.title}</h3>
-              <p className="medium gray">
+              <p className="Service__Description medium gray mt-1">
                 {service.description}
               </p>
               {user[service.name] ? (
-                <span className="green-text">Received</span>
+                <div
+                  className="success-text"
+                  style={{ marginTop: '3.75rem' }}
+                >
+                  <img
+                    src="/static/images/verified_green.svg"
+                    style={{ transform: 'translate(-0.5rem, 3px)' }}
+                  />
+                  Completed
+                </div>
               ) : (
-                <Button onClick={service.onApply}>Apply</Button>
+                <Button
+                  onClick={service.onApply}
+                  style={{ marginTop: '2.5rem' }}
+                >
+                  Apply
+                </Button>
               )}
             </li>
           ))}
-          <li>
-            <img src="https://placehold.it/230x120/?text=Private company" alt="" />
-            <h3>Open a private company</h3>
-            <p className="medium gray">
-              Allows you to open your business, apply for a job or stay in the country …
-              something funny goes here.
+          <li className="Service">
+            <img
+              src="/static/images/business.png"
+              alt=""
+              width="230"
+            />
+            <h3>Open a business</h3>
+            <p className="Service__Description medium gray mt-1">
+              For any person or organisation wishing to start a new company or move existing
+              operations to Avalon.
             </p>
             <p className="small pink">Comming soon in this demo</p>
           </li>
@@ -65,14 +84,22 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
       <style jsx>{`
           .Authorized {
-            display: inline-flex;
+            display: flex;
             width: 100%;
             height: 100vh;
-            color: #000;
+            overflow: hidden;
+          }
+
+          h1 {
+            line-height: 4.83rem;
+            color: #05050D;
           }
 
           .Authorized__Content {
-            padding: 60px 50px;
+            width: 100%;
+            padding-top: 5rem;
+            padding-left: 4.17rem;
+            overflow: auto;
           }
 
           .BarImage {
@@ -83,22 +110,35 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-wrap: wrap;
           }
 
-          li {
-            flex: 1;
-            padding-right: 50px;
-            padding-left: 20px;
+          .Service {
+            padding-left: 1.67rem;
+            margin-right: 6.67rem;
+            width: 20.33rem;
+            display: inline-block;
+            height: 37.75rem;
           }
+          .Service > img {
+            width: 19.17rem;
+          }
+          .Service h3 {
+            font-family: TTCommons-DemiBold;
+            margin-top: 1.67rem;
+            font-weight: 400;
+          }
+          .Service__Description {
+            margin-top: 1.67rem !important;
+            margin-bottom: 0;
+            line-height: 1.83rem;
+          } 
 
-          li:hover,
-          li:hover p {
+          .Service:hover,
+          .Service:hover p {
             color: #942f51 !important;
           }
 
-          li {
+          .Service {
             border-left: 1px solid #ececec;
           }
         `}</style>

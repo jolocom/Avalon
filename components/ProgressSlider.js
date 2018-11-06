@@ -5,12 +5,6 @@ class ProgressSlider extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    Array(this.props.count).fill().forEach((item, index) => {
-      this[`${index}Ref`] = React.createRef();
-    });
-
-    this.listContainerRef = React.createRef();
-
     this.state = {
       currentStepPosition: this.getCurrentStepPosition(),
     };
@@ -37,89 +31,25 @@ class ProgressSlider extends React.PureComponent {
   }
 
   getCurrentStepPosition = () => {
-    const currentStepEl = this[`${this.props.progress}Ref`].current;
-    const listContainerEl = this.listContainerRef.current;
+    const dotsPosition = ['0%', '16.2%', '21.8%', '27.3%', '33%', '38.7%', '44.2%'];
+    const currentStepPosition = dotsPosition[this.props.progress] || 0;
 
-    const currentStepInfo = currentStepEl ? currentStepEl.getBoundingClientRect() : {};
-    const currentStepPosition = currentStepInfo.y || 0;
-    const listContainerInfo = listContainerEl ? listContainerEl.getBoundingClientRect() : {};
-    const listContainerPosition = listContainerInfo.y || 0;
-    const currentStepRelativePosition = currentStepPosition - listContainerPosition;
-
-    return currentStepRelativePosition || 0;
+    return currentStepPosition || 0;
   }
 
   render() {
-    const { count } = this.props;
-
     return (
-      <ul
-        ref={this.listContainerRef}
-        className="ProgressSlider"
-      >
-        <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition + 'px' }} />
-        <div className="ProgressSlider__opacity">
-          <div className="ProgressSlider__Line" />
-          {Array(count).fill().map((item, index) => {
-            return (
-              <li
-                key={index}
-                ref={this[`${index}Ref`]}
-                className="ProgressSlider__Item"
-              />
-            );
-          })}
-        </div>
+      <div className="ProgressSlider">
+        <div className="ProgressSlider__Active" style={{ top: this.state.currentStepPosition }} />
 
         <style jsx>{`
           .ProgressSlider {
             position: relative;
-            list-style: none;
-            display: inline-flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            z-index: 1;
-          }
-
-          .ProgressSlider__opacity {
-            opacity: .2;
-          }
-
-          .ProgressSlider__Line {
-            position: absolute;
-            height: 100%;
-            left: 50%;
-            background-color: #fff;
-            width: 1px;
-            transform: translateX(-50%);
-          }
-
-          .ProgressSlider__Item {
-            position: relative;
-            background-color: #fff;
-            opacity: 1;
+            height: 55rem;
             width: 7px;
-            min-width: 7px;
-            height: 7px;
-            min-height: 7px;
-            border-radius: 50%;
+            background: url('/static/images/timeline.svg');
+            background-repeat: no-repeat;
             z-index: 1;
-          }
-
-          .ProgressSlider__Item + .ProgressSlider__Item {
-            margin-top: 20px;
-          }
-
-          .ProgressSlider__Item:first-of-type {
-            margin-bottom: 100px;
-          }
-
-          .ProgressSlider__Item:last-of-type {
-            margin-top: 100px !important;
-            margin-bottom: 70px
           }
 
           .ProgressSlider__Active {
@@ -131,11 +61,11 @@ class ProgressSlider extends React.PureComponent {
             height: 51px;
             border-radius: 50%;
             transition: all 1s ease 0s;
-            transform: translate(-42%, -42%);
+            transform: translate(-43%,-41%);
             z-index: 2;
           }
         `}</style>
-      </ul>
+      </div>
     );
   }
 }

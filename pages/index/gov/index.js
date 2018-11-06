@@ -11,11 +11,11 @@ class GovSpace extends Component {
     sectionIndex: 0,
   }
 
-  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
+  setSection = idx => this.setState({ sectionIndex: idx })
 
   handleInitiateLogin = () => {
-    this.props.initiateLogin(this.nextSection)
-      .then(this.nextSection);
+    this.props.initiateLogin(() => this.setSection(1))
+      .then(() => this.setSection(2));
   }
 
   render() {
@@ -23,40 +23,50 @@ class GovSpace extends Component {
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '60px 50px' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
+            className="AvalonLogo"
           />
           <h1>Welcome to Avalon!</h1>
           <p>
             Please, register your arrival
           </p>
-          <br />
-          <Button onClick={() => this.handleInitiateLogin()}>
-            <img
-              src="/static/images/jolocom-icon-transparent.svg"
-              alt="Jolocom logo"
-              height={20}
-            />
-            <span>
-              Continue with Jolocom
-            </span>
+          <Button withLogo onClick={this.handleInitiateLogin}>
+            Continue with Jolocom
           </Button>
+
+          <style jsx>{`
+            h1 {
+              margin-top: 2.92rem;
+            }
+            p {
+              margin-top: 2.5rem !important;
+              margin-bottom: 3.67rem;
+            }
+          `}</style>
         </div>
       ),
       (
         <div
           className="half-width margin-center ta-c"
-          style={{ padding: '60px 50px' }}
         >
           <img
             src="/static/images/Avalon_logo.svg"
             alt="imaginary city or country logo"
+            className="AvalonLogo"
           />
-          <h3>Scan the QR-code with your SmartWallet:</h3>
-          <img src={this.props.qrCode} width={300} />
+          <h4>Scan the QR-code with your SmartWallet:</h4>
+          <img
+            src={this.props.qrCode}
+            className="qrCode"
+          />
+          <h5
+            data-tooltip="Make sure that you have added your full name to the SmartWallet"
+          >
+            Doesn't work?
+          </h5>
         </div>
       ),
       Authorized,
@@ -69,9 +79,12 @@ class GovSpace extends Component {
           ? React.createElement(currentSection, this.props)
           : currentSection}
         <style jsx>{`
-          div,
-          div :global(p) {
-            color: #000;
+          .GovSpace {
+            width: 100%;
+          }
+          .GovSpace,
+          .GovSpace :global(p) {
+            color: rgba(5,5,13,0.80);
           }
 
           .GovSpace > :global(div:first-child) {
@@ -79,8 +92,18 @@ class GovSpace extends Component {
           }
 
           .GovSpace :global(.half-width) {
-            width: 50%;
+            width: 56.67rem;
+            height: 35.83rem;
             min-width: 300px;
+            padding: 3.75rem 5.42rem 2.25rem;
+            margin-top: 13.08rem;
+            border-radius: 2px;
+          }
+
+          @media only screen and (min-width: 1440px) {
+            .GovSpace :global(.half-width) {
+              margin-top: 15rem;
+            }
           }
         `}</style>
       </div>

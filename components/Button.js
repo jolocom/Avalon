@@ -1,15 +1,27 @@
 import classnames from 'classnames';
+import SVG from 'react-inlinesvg';
 
-const Button = ({ className, full, ...props }) => (
+const logoPath = '/static/images/jolocom-icon-transparent.svg';
+
+const Button = ({ className, full, flat, pink, withLogo, ...props }) => (
   <button
     {...props}
     className={classnames(
       'Button',
       { full: full },
+      { 'Button--flat': flat },
+      { 'Button--pink': pink },
       className
     )}
   >
-    {props.children}
+    {withLogo && (
+      <SVG className="Logo" src={logoPath}>
+        <img src={logoPath} alt="Jolocom's logo" />
+      </SVG>
+    )}
+    <span>
+      {props.children}
+    </span>
 
     <style jsx>{`
       .Button {
@@ -18,7 +30,7 @@ const Button = ({ className, full, ...props }) => (
         justify-content: center;
         border-radius: 4px;
         cursor: pointer;
-        padding: 15px 30px 13px;
+        padding: 13px 30px;
         background: #942f51;
         color: #fff;
         font-size: 1.67rem;
@@ -35,16 +47,34 @@ const Button = ({ className, full, ...props }) => (
       .Button.full {
         width: 100%;
       }
-      .Button > :global(* + *) {
-        margin-left: 10px;
+      .Button--flat {
+        font-size: 1.5rem;
+        background: none;
+      }
+      .Button--pink {
+        color: #942F51;
       }
 
       .Button:hover {
         background: #8A2948;
       }
+      .Button--flat:hover {
+        background: none;
+      }
 
       .Button:active {
         transform: scale(0.95);
+      }
+
+      .Button :global(.Logo) {
+        width: 28px;
+        margin-right: 12px;
+      }
+      .Button :global(.Logo .image) {
+        opacity: 1;
+      }
+      .Button :global(.Logo) ~ * {
+        margin-top: 3px;
       }
     `}</style>
   </button>

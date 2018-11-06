@@ -27,23 +27,21 @@ app.use(cors());
 const { getAsync, setAsync, delAsync } = configureRedisClient();
 const registry = JolocomLib.registry.jolocom.create();
 
-registry.authenticate(serverRuntimeConfig.privateIdentityKey)
-  .then(identityWallet => {
+(async() => {
+  try {
+    const identityWallet = await registry.authenticate(serverRuntimeConfig.privateIdentityKey);
     configureRoutes(app, { setAsync, getAsync, delAsync }, identityWallet);
     configureSockets(server, identityWallet, new DbWatcher(getAsync), { getAsync, setAsync, delAsync });
-  })
-  .catch(e => console.log(e));
 
-nextApp.prepare()
-  .then(() => {
+    await nextApp.prepare();
     app.get('*', (req, res) => nextHandler(req, res));
 
     server.listen(port, err => {
       if (err) throw err;
       console.log('> Ready on http://localhost:' + port);
     });
-  })
-  .catch(ex => {
-    console.error(ex.stack);
+  } catch (error) {
+    console.log(error);
     process.exit(1);
-  });
+  }
+})();

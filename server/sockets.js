@@ -1,4 +1,5 @@
-const io = require('socket.io'); const { SSO } = require('jolocom-lib/js/sso/index');
+const io = require('socket.io');
+const { SSO } = require('jolocom-lib/js/sso/index');
 const { InteractionType } = require('jolocom-lib/js/interactionFlows/types');
 
 const configureSockets = (
