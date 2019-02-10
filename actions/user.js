@@ -18,28 +18,18 @@ export const updateUserData = data => {
 
 
 export const setResidency = (params, cb) => async(dispatch, getState) => {
-  const identifier = randomString(5);
   try {
     const user = getState().userData;
-    const qrCode = await getQrCode({
-      socketName: 'residency',
-      query: {
-        user: JSON.stringify({
-          ...params,
-          ...user,
-          nationality: 'avalonier',
-        }),
-        identifier,
-      },
+
+    const { qrCode, socket, identifier } = await getQrCode('receive', {
+      credentialType: 'driving-license',
+      data: JSON.stringify({ ...user, nationality: 'avalonier' }),
     });
 
     dispatch(setQRCode(qrCode));
     cb();
 
-    const data = await awaitStatus({
-      socketName: 'residency',
-      identifier,
-    });
+    const data = await awaitStatus({ socket, identifier });
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
@@ -47,34 +37,24 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
         residency: true,
       }));
     }
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
 };
 
 export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
-  const identifier = randomString(5);
   try {
     const user = getState().userData;
-    const qrCode = await getQrCode({
-      socketName: 'driving-licence',
-      query: {
-        user: JSON.stringify({
-          ...params,
-          ...user,
-        }), identifier,
-      },
+
+    const { qrCode, socket, identifier } = await getQrCode('receive', {
+      credentialType: 'driving-license',
+      data: JSON.stringify(user),
     });
 
     dispatch(setQRCode(qrCode));
     cb();
 
-    const data = await awaitStatus({
-      socketName: 'driving-licence',
-      identifier,
-    });
+    const data = await awaitStatus({ socket, identifier });
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
