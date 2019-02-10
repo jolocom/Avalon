@@ -73,7 +73,6 @@ const sections = [
           />
         </div>
 
-
         <Footer />
       </>
     ),

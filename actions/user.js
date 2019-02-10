@@ -1,5 +1,4 @@
 import * as ACTIONS from './';
-import { randomString } from 'utils';
 import { getQrCode, awaitStatus } from 'utils/sockets';
 
 export const setQRCode = encodedImage => {
@@ -16,15 +15,14 @@ export const updateUserData = data => {
   };
 };
 
-
 export const setResidency = (params, cb) => async(dispatch, getState) => {
   try {
-    const user = getState().userData;
-
+    // Quick way to filter out a key. TODO find something eslint friendly
+    const { did, status, ...user } = getState().userData;
     const { qrCode, socket, identifier } = await getQrCode('receive', {
-      credentialType: 'driving-license',
-      data: JSON.stringify({ ...user, nationality: 'avalonier' }),
-    });
+      credentialType: 'id-card',
+      data: JSON.stringify({ ...user, ...params, nationality: 'avalonier' }),
+    })
 
     dispatch(setQRCode(qrCode));
     cb();
@@ -44,11 +42,11 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
 
 export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
   try {
-    const user = getState().userData;
+    const { did, status, ...user } = getState().userData;
 
     const { qrCode, socket, identifier } = await getQrCode('receive', {
       credentialType: 'driving-license',
-      data: JSON.stringify(user),
+      data: JSON.stringify({ ...user, ...params }),
     });
 
     dispatch(setQRCode(qrCode));
@@ -62,8 +60,6 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
         drivingLicence: true,
       }));
     }
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

@@ -3,7 +3,6 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 
 export const getQrCode = (socketName, query) => {
-  console.log(`${publicRuntimeConfig.backendUrl}/${socketName}/`)
   const socket = io(`${publicRuntimeConfig.backendUrl}/${socketName}/`, { forceNew: true, query });
   return new Promise(resolve => socket.on('qrCode', ({ qrCode, identifier }) => resolve({ qrCode, socket, identifier })));
 };
