@@ -36,10 +36,10 @@ const sections = [
       <>
         <h1>Discover Avalon</h1>
         <p>
-          Avalon is a smal sovereign country situated on the North Sea coast known for having the
+          Avalon is a small sovereign country situated on the North Sea coast known for having the
           most urban infrastructure.
           <br /> <br />
-          Avalon had it's dark days - as every country. Two years ago, when society reached its
+          Avalon had its dark days - as every country. Two years ago, when society reached its
           limits of disengagement, its government decided to run a few experiments to improve
           people's lives.
           <br /> <br />
@@ -60,7 +60,7 @@ const sections = [
         <h1>Prepare for arrival</h1>
         <p>
           In Avalon, this new identity system lets everyone access services of urban infrastructure.
-          Wether you are visiting or relocating for good - a digital identity is the key to this
+          Whether you are visiting or relocating for good - a digital identity is the key to this
           country.
           <br /><br />
           To install the <u>SmartWallet</u>, please scan the QR code:
@@ -88,7 +88,7 @@ const sections = [
           Now it's time to create your own identity.
           <br /><br />
           1. Open the SmartWallet. <br />
-          2. Follow the instalation guide. <br />
+          2. Follow the installation guide. <br />
           3. Finally, add your <u>full name</u>.
           <br /><br />
           Ready? Scroll down to enter the country.
