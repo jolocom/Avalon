@@ -9,17 +9,20 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
   return (
     <header>
       <SVG className="Logo" src="/static/images/jolocom-icon-transparent.svg">
-        <img src={'/static/images/jolocom-icon-transparent.svg'} alt="Jolocom's logo" />
+        <img
+          src={'/static/images/jolocom-icon-transparent.svg'}
+          alt="Jolocom's logo"
+        />
       </SVG>
       {isPrimaryBrandVersion ? (
         <span className="Brand">
-          powered by <a href="https://jolocom.io" target="_blank">jolocom</a>
+          powered by{' '}
+          <a href="https://jolocom.io" target="_blank">
+            jolocom
+          </a>
         </span>
       ) : (
-        <span
-          className="Brand"
-          onClick={() => setAboutOverlayState(true)}
-        >
+        <span className="Brand" onClick={() => setAboutOverlayState(true)}>
           About
         </span>
       )}
@@ -34,7 +37,7 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
         }
         header :global(.Logo svg .image) {
           opacity: ${isPrimaryBrandVersion ? 1 : 0.285673};
-          transition: opacity .4s;
+          transition: opacity 0.4s;
         }
         header:hover .Brand {
           color: ${isPrimaryBrandVersion ? '' : '#fff'};
@@ -55,8 +58,8 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
           transition: ${isPrimaryBrandVersion ? 'none' : 'opacity .4s'};
         }
         .Brand a {
-          color: rgba(255,255,255,0.4);
-          transition: color .4s;
+          color: rgba(255, 255, 255, 0.4);
+          transition: color 0.4s;
           text-decoration: none;
         }
         .Brand a:hover {
@@ -67,8 +70,11 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
   );
 };
 
-Header = connect(null, {
-  setAboutOverlayState,
-})(Header);
+Header = connect(
+  null,
+  {
+    setAboutOverlayState,
+  }
+)(Header);
 
 export default Header;

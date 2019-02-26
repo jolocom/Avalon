@@ -2,7 +2,6 @@ const Footer = () => {
   return (
     <footer>
       scroll
-
       <style jsx>{`
         footer {
           position: fixed;
@@ -20,7 +19,11 @@ const Footer = () => {
           content: '';
           width: 1px;
           height: 60px;
-          background-image: linear-gradient(to bottom,rgba(255,241,223,0),rgba(255, 222, 188, 0.7));
+          background-image: linear-gradient(
+            to bottom,
+            rgba(255, 241, 223, 0),
+            rgba(255, 222, 188, 0.7)
+          );
         }
       `}</style>
     </footer>

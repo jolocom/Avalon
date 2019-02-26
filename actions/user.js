@@ -22,7 +22,7 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
     const { qrCode, socket, identifier } = await getQrCode('receive', {
       credentialType: 'id-card',
       data: JSON.stringify({ ...user, ...params, nationality: 'avalonier' }),
-    })
+    });
 
     dispatch(setQRCode(qrCode));
     cb();
@@ -31,9 +31,11 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
-      dispatch(updateUserData({
-        residency: true,
-      }));
+      dispatch(
+        updateUserData({
+          residency: true,
+        })
+      );
     }
   } catch (error) {
     console.log(error);
@@ -56,9 +58,11 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
-      dispatch(updateUserData({
-        drivingLicence: true,
-      }));
+      dispatch(
+        updateUserData({
+          drivingLicence: true,
+        })
+      );
     }
   } catch (error) {
     console.log(error);

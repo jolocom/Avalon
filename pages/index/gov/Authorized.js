@@ -7,21 +7,27 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       name: 'residency',
       img: 'residency',
       title: 'Apply for citizenship',
-      description: 'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
+      description:
+        'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
       onApply: () => setSection(mainSectionIndex + 1),
     },
     {
       name: 'drivingLicence',
       img: 'driving-permit',
       title: 'Get a driving permit',
-      description: 'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
+      description:
+        'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
       onApply: () => setSection(mainSectionIndex + 2),
     },
   ];
 
   return (
     <div className="Authorized">
-      <img className="BarImage" src="/static/images/GOV_bg_bar.jpg" alt="bar image" />
+      <img
+        className="BarImage"
+        src="/static/images/GOV_bg_bar.jpg"
+        alt="bar image"
+      />
       <div className="Authorized__Content">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -30,7 +36,8 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         />
         <h1 style={{ marginBottom: '1rem' }}>Welcome, {user.givenName}!</h1>
         <p style={{ marginTop: 0, fontSize: '1.67rem', lineHeight: '2.5rem' }}>
-          Discover what services the Government <br />of Avalon can offer you:
+          Discover what services the Government <br />
+          of Avalon can offer you:
         </p>
 
         <ul>
@@ -46,10 +53,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
                 {service.description}
               </p>
               {user[service.name] ? (
-                <div
-                  className="success-text"
-                  style={{ marginTop: '3.75rem' }}
-                >
+                <div className="success-text" style={{ marginTop: '3.75rem' }}>
                   <img
                     src="/static/images/verified_green.svg"
                     style={{ transform: 'translate(-0.5rem, 3px)' }}
@@ -67,15 +71,11 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
             </li>
           ))}
           <li className="Service">
-            <img
-              src="/static/images/business.png"
-              alt=""
-              width="230"
-            />
+            <img src="/static/images/business.png" alt="" width="230" />
             <h3>Open a business</h3>
             <p className="Service__Description medium gray mt-1">
-              For any person or organisation wishing to start a new company or move existing
-              operations to Avalon.
+              For any person or organisation wishing to start a new company or
+              move existing operations to Avalon.
             </p>
             <p className="small pink">Comming soon in this demo</p>
           </li>
@@ -83,65 +83,65 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       </div>
 
       <style jsx>{`
-          .Authorized {
-            display: flex;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-          }
+        .Authorized {
+          display: flex;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+        }
 
-          h1 {
-            line-height: 4.83rem;
-            color: #05050D;
-          }
+        h1 {
+          line-height: 4.83rem;
+          color: #05050d;
+        }
 
-          .Authorized__Content {
-            width: 100%;
-            padding-top: 5rem;
-            padding-left: 4.17rem;
-            overflow: auto;
-          }
+        .Authorized__Content {
+          width: 100%;
+          padding-top: 5rem;
+          padding-left: 4.17rem;
+          overflow: auto;
+        }
 
-          .BarImage {
-            height: 100vh;
-          }
+        .BarImage {
+          height: 100vh;
+        }
 
-          ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-          }
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
 
-          .Service {
-            padding-left: 1.67rem;
-            margin-right: 6.67rem;
-            width: 20.33rem;
-            display: inline-block;
-            height: 37.75rem;
-          }
-          .Service > img {
-            width: 19.17rem;
-          }
-          .Service h3 {
-            font-family: TTCommons-DemiBold;
-            margin-top: 1.67rem;
-            font-weight: 400;
-          }
-          .Service__Description {
-            margin-top: 1.67rem !important;
-            margin-bottom: 0;
-            line-height: 1.83rem;
-          } 
+        .Service {
+          padding-left: 1.67rem;
+          margin-right: 6.67rem;
+          width: 20.33rem;
+          display: inline-block;
+          height: 37.75rem;
+        }
+        .Service > img {
+          width: 19.17rem;
+        }
+        .Service h3 {
+          font-family: TTCommons-DemiBold;
+          margin-top: 1.67rem;
+          font-weight: 400;
+        }
+        .Service__Description {
+          margin-top: 1.67rem !important;
+          margin-bottom: 0;
+          line-height: 1.83rem;
+        }
 
-          .Service:hover,
-          .Service:hover p {
-            color: #942f51 !important;
-          }
+        .Service:hover,
+        .Service:hover p {
+          color: #942f51 !important;
+        }
 
-          .Service {
-            border-left: 1px solid #ececec;
-          }
-        `}</style>
+        .Service {
+          border-left: 1px solid #ececec;
+        }
+      `}</style>
     </div>
   );
 };

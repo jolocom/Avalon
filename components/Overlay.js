@@ -23,7 +23,7 @@ const Overlay = ({ onClose: handleClose, children }) => {
           top: 68px;
           right: 66px;
           font-size: 30px;
-          background: rgba(0,0,0,0);
+          background: rgba(0, 0, 0, 0);
           border: none;
           color: #fff;
           cursor: pointer;

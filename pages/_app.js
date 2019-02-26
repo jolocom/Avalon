@@ -1,4 +1,3 @@
-
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
@@ -9,16 +8,19 @@ import { SmallScreenMsg } from 'components';
 import initStore from '../utils/store';
 
 const MOBILE_BREAKPINT = 1200;
-const getWidth = () => window.innerWidth > 0 ? window.innerWidth : screen.width;
+const getWidth = () =>
+  window.innerWidth > 0 ? window.innerWidth : screen.width;
 const isMobile = () => getWidth() < MOBILE_BREAKPINT;
 
 class MyApp extends App {
   state = {
     isMobile: false,
-  }
+  };
   static async getInitialProps({ Component, ctx }) {
     return {
-      pageProps: (Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+      pageProps: Component.getInitialProps
+        ? await Component.getInitialProps(ctx)
+        : {},
     };
   }
 
@@ -32,11 +34,8 @@ class MyApp extends App {
 
   setIsMobile = () => {
     this.setState({ isMobile: isMobile() });
-  }
-  _setIsMobile = throttle(
-    this.setIsMobile,
-    1500
-  )
+  };
+  _setIsMobile = throttle(this.setIsMobile, 1500);
 
   render() {
     const { Component, pageProps, store } = this.props;
@@ -56,4 +55,3 @@ class MyApp extends App {
 }
 
 export default withRedux(initStore)(MyApp);
-

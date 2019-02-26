@@ -18,8 +18,14 @@ class GradientLayout extends Component {
 
   componentDidMount() {
     this.setState({ containerTopPosition: this.containerTopPosition });
-    window.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
-    window.addEventListener('DOMMouseScroll', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener(
+      'mousewheel',
+      throttle(this.handleScroll, 1500, { trailing: false })
+    );
+    window.addEventListener(
+      'DOMMouseScroll',
+      throttle(this.handleScroll, 1500, { trailing: false })
+    );
     window.addEventListener('resize', this.setContainerTopPosition());
   }
   componentDidUpdate(prevProps, prevState) {
@@ -33,17 +39,14 @@ class GradientLayout extends Component {
     window.removeEventListener('resize', this.setContainerTopPosition());
   }
   get containerTopPosition() {
-    return -(this.getListHeight()) * this.state.sectionIndex + 'px';
+    return -this.getListHeight() * this.state.sectionIndex + 'px';
   }
 
   setContainerTopPosition = () => {
-    return throttle(
-      () => {
-        this.setState({ containerTopPosition: this.containerTopPosition });
-      },
-      1000
-    );
-  }
+    return throttle(() => {
+      this.setState({ containerTopPosition: this.containerTopPosition });
+    }, 1000);
+  };
 
   canScroll = delta => {
     const { scrollValidations = {} } = this.props;
@@ -57,14 +60,14 @@ class GradientLayout extends Component {
     }
 
     return typeof canScroll === 'undefined' ? true : canScroll;
-  }
+  };
 
   getListHeight = () => {
     const element = this.listRef.current;
     const elementInfo = element ? element.getBoundingClientRect() : {};
 
     return elementInfo.height || 0;
-  }
+  };
 
   handleScroll = evt => {
     const delta = evt.wheelDeltaY;
@@ -77,10 +80,10 @@ class GradientLayout extends Component {
     } else {
       this.nextSection();
     }
-  }
+  };
 
-  nextSection = () => this.setSection(this.state.sectionIndex + 1)
-  prevSection = () => this.setSection(this.state.sectionIndex - 1)
+  nextSection = () => this.setSection(this.state.sectionIndex + 1);
+  prevSection = () => this.setSection(this.state.sectionIndex - 1);
   setSection = idx => {
     const { items } = this.props;
     const isInItemsRange = idx >= 0 && idx < items.length;
@@ -92,14 +95,15 @@ class GradientLayout extends Component {
         direction,
       });
     }
-  }
+  };
 
   render() {
     const { items } = this.props;
     const { sectionIndex, direction, containerTopPosition } = this.state;
     const isFirstSlide = sectionIndex === 0;
     const imagesToPrefetch = items
-      .map((item = {}) => item.bgImage ? `url(${item.bgImage})` : '').join(' ');
+      .map((item = {}) => (item.bgImage ? `url(${item.bgImage})` : ''))
+      .join(' ');
     const currentSection = items[sectionIndex] || {};
     if (currentSection < 0) {
       throw Error('Current section canoot be less than 0');
@@ -109,10 +113,11 @@ class GradientLayout extends Component {
     const containerGradient = currentSection.containerGradient || '';
 
     return (
-      <div className={classnames(
-        'GradientLayout animate',
-        { [`slide-from-${direction}`]: direction }
-      )}>
+      <div
+        className={classnames('GradientLayout animate', {
+          [`slide-from-${direction}`]: direction,
+        })}
+      >
         <div className="GradientLayout__Container">
           <Header brandVersion={isFirstSlide ? 'primary' : 'secondary'} />
 
@@ -142,8 +147,7 @@ class GradientLayout extends Component {
                       mainSectionIndex: sectionIndex,
                       setSection: this.setSection,
                     })
-                    : item.content
-                  }
+                    : item.content}
                 </section>
               ))}
             </div>
@@ -155,18 +159,15 @@ class GradientLayout extends Component {
           .GradientLayout:before {
             content: '';
             content: ${imagesToPrefetch};
-            position:absolute;
-            width:0;
-            height:0;
-            overflow:hidden;
-            z-index:-1;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
           }
           .GradientLayout {
-            background:
-              url(${currentImage})
-              right top / ${currentImageSize}
-              no-repeat
-              #000;
+            background: url(${currentImage}) right top / ${currentImageSize}
+              no-repeat #000;
             overflow: hidden;
             min-height: 100vh;
             height: 100vh;
@@ -182,7 +183,7 @@ class GradientLayout extends Component {
           main {
             display: flex;
             flex: 1;
-            align-items: flex-start
+            align-items: flex-start;
           }
           .GradientLayout__List__Section {
             position: absolute;

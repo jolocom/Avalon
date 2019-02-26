@@ -3,8 +3,15 @@ import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
 
 export const getQrCode = (socketName, query) => {
-  const socket = io(`${publicRuntimeConfig.backendUrl}/${socketName}/`, { forceNew: true, query });
-  return new Promise(resolve => socket.on('qrCode', ({ qrCode, identifier }) => resolve({ qrCode, socket, identifier })));
+  const socket = io(`${publicRuntimeConfig.backendUrl}/${socketName}/`, {
+    forceNew: true,
+    query,
+  });
+  return new Promise(resolve =>
+    socket.on('qrCode', ({ qrCode, identifier }) =>
+      resolve({ qrCode, socket, identifier })
+    )
+  );
 };
 
 export const awaitStatus = ({ socket, identifier }) => {
