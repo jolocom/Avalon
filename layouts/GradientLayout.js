@@ -19,6 +19,7 @@ class GradientLayout extends Component {
   componentDidMount() {
     this.setState({ containerTopPosition: this.containerTopPosition });
     window.addEventListener('mousewheel', throttle(this.handleScroll, 1500, { trailing: false }));
+    window.addEventListener('DOMMouseScroll', throttle(this.handleScroll, 1500, { trailing: false }));
     window.addEventListener('resize', this.setContainerTopPosition());
   }
   componentDidUpdate(prevProps, prevState) {
@@ -28,6 +29,7 @@ class GradientLayout extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('mousewheel', throttle(this.handleScroll));
+    window.removeEventListener('DOMMouseScroll', throttle(this.handleScroll));
     window.removeEventListener('resize', this.setContainerTopPosition());
   }
   get containerTopPosition() {
