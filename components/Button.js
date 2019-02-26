@@ -19,9 +19,7 @@ const Button = ({ className, full, flat, pink, withLogo, ...props }) => (
         <img src={logoPath} alt="Jolocom's logo" />
       </SVG>
     )}
-    <span>
-      {props.children}
-    </span>
+    <span>{props.children}</span>
 
     <style jsx>{`
       .Button {
@@ -37,7 +35,7 @@ const Button = ({ className, full, flat, pink, withLogo, ...props }) => (
         line-height: 20px;
         outline: none;
         border: none;
-        transition: transform .15s ease;
+        transition: transform 0.15s ease;
       }
       .Button[disabled] {
         background: #ffefdf;
@@ -52,11 +50,11 @@ const Button = ({ className, full, flat, pink, withLogo, ...props }) => (
         background: none;
       }
       .Button--pink {
-        color: #942F51;
+        color: #942f51;
       }
 
       .Button:hover {
-        background: #8A2948;
+        background: #8a2948;
       }
       .Button--flat:hover {
         background: none;

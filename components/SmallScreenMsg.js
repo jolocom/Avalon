@@ -9,14 +9,13 @@ const SmallScreenMsg = () => {
 
         <p>
           This experience has a desktop version only (for now). <br />
-          If you see this message, please switch to your laptop and maximize the browser window to
-          the full width of your device screen.
+          If you see this message, please switch to your laptop and maximize the
+          browser window to the full width of your device screen.
         </p>
-
       </div>
       <style jsx>{`
         main {
-          background: #05050D;
+          background: #05050d;
           width: 100vw;
           height: 100vh;
           display: flex;
@@ -34,7 +33,7 @@ const SmallScreenMsg = () => {
         }
 
         p {
-          color: #FFEFDF;
+          color: #ffefdf;
         }
       `}</style>
     </main>

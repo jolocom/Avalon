@@ -9,99 +9,90 @@ class Residency extends Component {
     sectionIndex: 0,
     residence: '',
     postalCode: '',
-  }
+  };
 
-  nextSection = () => this.setState({ sectionIndex: this.state.sectionIndex + 1 })
-  handleChangeInput = (key, value) => this.setState({ [key]: value })
+  nextSection = () =>
+    this.setState({ sectionIndex: this.state.sectionIndex + 1 });
+  handleChangeInput = (key, value) => this.setState({ [key]: value });
   handleGetDrivingLicence = evt => {
     evt.preventDefault();
     const { residence, postalCode } = this.state;
 
-    this.props.getDrivingLicence(
-      {
-        residence,
-        postalCode,
-      },
-      this.nextSection
-    )
+    this.props
+      .getDrivingLicence(
+        {
+          residence,
+          postalCode,
+        },
+        this.nextSection
+      )
       .then(this.nextSection);
-  }
+  };
   render() {
     const { residence, postalCode } = this.state;
     const { setSection, mainSectionIndex } = this.props;
     const sections = [
-      (
-        <>
-          <h1>Get Avalonian driver's licence</h1>
-          <h5>STEP 1</h5>
-          <p>
-            Please, provide additional information:
-          </p>
-          <br />
-          <form onSubmit={this.handleGetDrivingLicence}>
-            <Input
-              placeholder="residence"
-              onChange={evt => this.handleChangeInput('residence', evt.target.rawValue)}
-              value={residence}
-              labelText="residence"
-            />
-            <Input
-              placeholder="postal code"
-              onChange={evt => this.handleChangeInput('postalCode', evt.target.rawValue)}
-              value={postalCode}
-              labelText="postal code"
-            />
-            <Button
-              className="mt-5"
-              disabled={!residence || !postalCode}
-            >
-              Next
-            </Button>
-
-            <style jsx>{`
-              form {
-                display: flex;
-                flex-direction: column;
-                width: 50%;
-                margin: auto;
-              }
-            `}</style>
-          </form>
-        </>
-      ),
-      (
-        <>
-          <h1>Get Avalonian driver's licence</h1>
-          <h5>STEP 2</h5>
-          <p>
-            Scan the QR-code with the SmartWallet to save your driver's licence:
-          </p>
-          <br />
-          <img
-            src={this.props.qrCode}
-            width={300}
-            alt="qr code"
+      <>
+        <h1>Get Avalonian driver's licence</h1>
+        <h5>STEP 1</h5>
+        <p>Please, provide additional information:</p>
+        <br />
+        <form onSubmit={this.handleGetDrivingLicence}>
+          <Input
+            placeholder="residence"
+            onChange={evt =>
+              this.handleChangeInput('residence', evt.target.rawValue)
+            }
+            value={residence}
+            labelText="residence"
           />
-        </>
-      ),
-      (
-        <>
-          <h1>It's time to drive!</h1>
-          <p>
-            You have succefully received Avalonian driver’s licence. Please, drive carefully:
-            be fast, but never furious.
-          </p>
-          <br />
-          <Button
-            flat
-            pink
-            className="mt-5"
-            onClick={() => setSection(mainSectionIndex - 2)}
-          >
-            Return to home page
+          <Input
+            placeholder="postal code"
+            onChange={evt =>
+              this.handleChangeInput('postalCode', evt.target.rawValue)
+            }
+            value={postalCode}
+            labelText="postal code"
+          />
+          <Button className="mt-5" disabled={!residence || !postalCode}>
+            Next
           </Button>
-        </>
-      ),
+
+          <style jsx>{`
+            form {
+              display: flex;
+              flex-direction: column;
+              width: 50%;
+              margin: auto;
+            }
+          `}</style>
+        </form>
+      </>,
+      <>
+        <h1>Get Avalonian driver's licence</h1>
+        <h5>STEP 2</h5>
+        <p>
+          Scan the QR-code with the SmartWallet to save your driver's licence:
+        </p>
+        <br />
+        <img src={this.props.qrCode} width={300} alt="qr code" />
+      </>,
+      <>
+        <h1>It's time to drive!</h1>
+        <p>
+          You have succefully received Avalonian driver’s licence. Please, drive
+          carefully: be fast, but never furious.
+        </p>
+        <br />
+        <Button
+          flat
+          pink
+          className="mt-5"
+          onClick={() => setSection(mainSectionIndex - 2)}
+        >
+          Return to home page
+        </Button>
+      </>,
     ];
     const currentSection = sections[this.state.sectionIndex];
 
@@ -135,10 +126,13 @@ class Residency extends Component {
   }
 }
 
-Residency = connect(state => ({
-  qrCode: state.qrCode,
-}), {
-  getDrivingLicence,
-})(Residency);
+Residency = connect(
+  state => ({
+    qrCode: state.qrCode,
+  }),
+  {
+    getDrivingLicence,
+  }
+)(Residency);
 
 export default Residency;

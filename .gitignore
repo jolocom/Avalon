@@ -10,6 +10,7 @@ dump.rdb
 
 # production
 /build
+/out
 .next
 
 # misc
@@ -19,6 +20,7 @@ dump.rdb
 .env.test.local
 .env.production.local
 
+.idea/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
