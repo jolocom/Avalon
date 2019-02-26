@@ -6,8 +6,12 @@ const DEFAULT_OPTIONS = {
 };
 
 const Input = ({
-  type = 'text', labelText, value = '', options = DEFAULT_OPTIONS,
-  onChange = () => {}, ...other
+  type = 'text',
+  labelText,
+  value = '',
+  options = DEFAULT_OPTIONS,
+  onChange = () => {},
+  ...other
 }) => {
   return (
     <div className="Input">
@@ -68,7 +72,7 @@ const Input = ({
         }
 
         .Input :global(input:focus ~ label),
-        .Input :global(input:not([value=""]) ~ label) {
+        .Input :global(input:not([value='']) ~ label) {
           top: -10px;
           font-size: 15px;
         }

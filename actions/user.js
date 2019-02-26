@@ -1,5 +1,4 @@
 import * as ACTIONS from './';
-import { randomString } from 'utils';
 import { getQrCode, awaitStatus } from 'utils/sockets';
 
 export const setQRCode = encodedImage => {
@@ -16,74 +15,55 @@ export const updateUserData = data => {
   };
 };
 
-
 export const setResidency = (params, cb) => async(dispatch, getState) => {
-  const identifier = randomString(5);
   try {
-    const user = getState().userData;
-    const qrCode = await getQrCode({
-      socketName: 'residency',
-      query: {
-        user: JSON.stringify({
-          ...params,
-          ...user,
-          nationality: 'avalonier',
-        }),
-        identifier,
-      },
+    // Quick way to filter out a key. TODO find something eslint friendly
+    const { did, status, ...user } = getState().userData;
+    const { qrCode, socket, identifier } = await getQrCode('receive', {
+      credentialType: 'id-card',
+      data: JSON.stringify({ ...user, ...params, nationality: 'avalonier' }),
     });
 
     dispatch(setQRCode(qrCode));
     cb();
 
-    const data = await awaitStatus({
-      socketName: 'residency',
-      identifier,
-    });
+    const data = await awaitStatus({ socket, identifier });
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
-      dispatch(updateUserData({
-        residency: true,
-      }));
+      dispatch(
+        updateUserData({
+          residency: true,
+        })
+      );
     }
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
 };
 
 export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
-  const identifier = randomString(5);
   try {
-    const user = getState().userData;
-    const qrCode = await getQrCode({
-      socketName: 'driving-licence',
-      query: {
-        user: JSON.stringify({
-          ...params,
-          ...user,
-        }), identifier,
-      },
+    const { did, status, ...user } = getState().userData;
+
+    const { qrCode, socket, identifier } = await getQrCode('receive', {
+      credentialType: 'driving-license',
+      data: JSON.stringify({ ...user, ...params }),
     });
 
     dispatch(setQRCode(qrCode));
     cb();
 
-    const data = await awaitStatus({
-      socketName: 'driving-licence',
-      identifier,
-    });
+    const data = await awaitStatus({ socket, identifier });
     const dataJson = JSON.parse(data);
 
     if (dataJson.status === 'success') {
-      dispatch(updateUserData({
-        drivingLicence: true,
-      }));
+      dispatch(
+        updateUserData({
+          drivingLicence: true,
+        })
+      );
     }
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

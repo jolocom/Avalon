@@ -18,7 +18,7 @@ export const defaultState = {
 export function rootReducer(state = defaultState, action) {
   switch (action.type) {
     case ACTIONS.USER_DATA_SET:
-      return { ...state, userData: { ...action.value.data } };
+      return { ...state, userData: { ...action.value } };
     case ACTIONS.USER_DATA_PATCH:
       return {
         ...state,

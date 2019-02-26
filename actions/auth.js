@@ -1,5 +1,4 @@
 import * as ACTIONS from './';
-import { randomString } from 'utils';
 import { getQrCode, awaitStatus } from 'utils/sockets';
 
 export const setQRCode = encodedImage => {
@@ -17,21 +16,10 @@ export const setUserData = data => {
 };
 
 export const initiateLogin = cb => async dispatch => {
-  const identifier = randomString(5);
-  const qrCode = await getQrCode({
-    socketName: 'sso',
-    query: {
-      identifier,
-    },
-  });
-
+  const { qrCode, socket, identifier } = await getQrCode('authenticate');
   dispatch(setQRCode(qrCode));
   cb();
 
-  const data = await awaitStatus({
-    socketName: 'sso',
-    identifier,
-  });
-
-  dispatch(setUserData(JSON.parse(data)));
+  const data = await awaitStatus({ socket, identifier });
+  dispatch(setUserData(data));
 };

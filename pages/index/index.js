@@ -8,8 +8,10 @@ import Residency from './residency';
 import DrivingLicence from './drivingLicence';
 
 import { setAboutOverlayState } from 'actions/ui';
-const pinkGradient = 'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
-const blackGradient = 'linear-gradient(251deg, rgba(145,145,145,0.00) 17%, rgba(5,5,13,0.22) 44%, #010100 99%)';
+const pinkGradient =
+  'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
+const blackGradient =
+  'linear-gradient(251deg, rgba(145,145,145,0.00) 17%, rgba(5,5,13,0.22) 44%, #010100 99%)';
 const sections = [
   {
     content: ({ nextSection }) => (
@@ -19,12 +21,15 @@ const sections = [
           <p>
             Have you ever thought about how digital citizenship could look like?
             <br /> <br />
-            What will change for individuals and organisations if a country decides to make a leap
-            from countless user accounts to self-sovereign identity technology?
+            What will change for individuals and organisations if a country
+            decides to make a leap from countless user accounts to
+            self-sovereign identity technology?
           </p>
         </div>
         <br />
-        <Button className="mt-2" onClick={nextSection}>Start experience</Button>
+        <Button className="mt-2" onClick={nextSection}>
+          Start experience
+        </Button>
       </div>
     ),
     className: 'center special-space-top',
@@ -36,15 +41,15 @@ const sections = [
       <>
         <h1>Discover Avalon</h1>
         <p>
-          Avalon is a smal sovereign country situated on the North Sea coast known for having the
-          most urban infrastructure.
+          Avalon is a small sovereign country situated on the North Sea coast
+          known for having the most urban infrastructure.
           <br /> <br />
-          Avalon had it's dark days - as every country. Two years ago, when society reached its
-          limits of disengagement, its government decided to run a few experiments to improve
-          people's lives.
+          Avalon had its dark days - as every country. Two years ago, when
+          society reached its limits of disengagement, its government decided to
+          run a few experiments to improve people's lives.
           <br /> <br />
-          After several attempts, two implementations reached the level of mass adoption.
-          One of them is a new approach to identity management.
+          After several attempts, two implementations reached the level of mass
+          adoption. One of them is a new approach to identity management.
         </p>
 
         <Footer />
@@ -59,10 +64,11 @@ const sections = [
       <>
         <h1>Prepare for arrival</h1>
         <p>
-          In Avalon, this new identity system lets everyone access services of urban infrastructure.
-          Wether you are visiting or relocating for good - a digital identity is the key to this
-          country.
-          <br /><br />
+          In Avalon, this new identity system lets everyone access services of
+          urban infrastructure. Whether you are visiting or relocating for good
+          - a digital identity is the key to this country.
+          <br />
+          <br />
           To install the <u>SmartWallet</u>, please scan the QR code:
         </p>
         <div>
@@ -72,7 +78,6 @@ const sections = [
             style={{ marginLeft: 130 }}
           />
         </div>
-
 
         <Footer />
       </>
@@ -87,11 +92,13 @@ const sections = [
         <h1>Set up your identity</h1>
         <p>
           Now it's time to create your own identity.
-          <br /><br />
+          <br />
+          <br />
           1. Open the SmartWallet. <br />
-          2. Follow the instalation guide. <br />
+          2. Follow the installation guide. <br />
           3. Finally, add your <u>full name</u>.
-          <br /><br />
+          <br />
+          <br />
           Ready? Scroll down to enter the country.
         </p>
 
@@ -162,6 +169,9 @@ class Home extends Component {
   }
 }
 
-export default connect(state => state, {
-  setAboutOverlayState,
-})(Home);
+export default connect(
+  state => state,
+  {
+    setAboutOverlayState,
+  }
+)(Home);
