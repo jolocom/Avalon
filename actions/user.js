@@ -28,9 +28,8 @@ export const setResidency = (params, cb) => async(dispatch, getState) => {
     cb();
 
     const data = await awaitStatus({ socket, identifier });
-    const dataJson = JSON.parse(data);
 
-    if (dataJson.status === 'success') {
+    if (data.status === 'success') {
       dispatch(
         updateUserData({
           residency: true,
@@ -55,9 +54,8 @@ export const getDrivingLicence = (params, cb) => async(dispatch, getState) => {
     cb();
 
     const data = await awaitStatus({ socket, identifier });
-    const dataJson = JSON.parse(data);
 
-    if (dataJson.status === 'success') {
+    if (data.status === 'success') {
       dispatch(
         updateUserData({
           drivingLicence: true,
