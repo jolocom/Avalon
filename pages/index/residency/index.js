@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Button, Input } from 'components';
 import { setResidency } from 'actions/user';
+import { formatDateString } from '../../../utils/date_format';
 
 class Residency extends Component {
   state = {
@@ -16,7 +17,9 @@ class Residency extends Component {
   handleChangeInput = (key, value) => this.setState({ [key]: value });
   handleSetResidency = evt => {
     evt.preventDefault();
-    const { birthDate, birthPlace } = this.state;
+    const { birthPlace } = this.state;
+    let { birthDate } = this.state;
+    birthDate = formatDateString(birthDate);
 
     this.props
       .setResidency(
