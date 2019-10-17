@@ -91,7 +91,7 @@ class Residency extends Component {
       <>
         <h2>Success</h2>
         <p>
-          You have now received citizenship in Avalon.
+          A proof of citizenship has been issued to your device.
         <br /><br />
           You can view your new digital Avalon ID credential in your SmartWallet under <i>Documents</i>.
         </p>
