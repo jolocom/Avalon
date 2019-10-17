@@ -7,10 +7,10 @@ import { SmallScreenMsg } from 'components';
 
 import initStore from '../utils/store';
 
-const MOBILE_BREAKPINT = 1200;
+const MOBILE_BREAKPOINT = 1024;
 const getWidth = () =>
   window.innerWidth > 0 ? window.innerWidth : screen.width;
-const isMobile = () => getWidth() < MOBILE_BREAKPINT;
+const isMobile = () => getWidth() < MOBILE_BREAKPOINT;
 
 class MyApp extends App {
   state = {

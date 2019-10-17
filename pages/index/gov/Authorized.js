@@ -8,15 +8,15 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       img: 'residency',
       title: 'Apply for citizenship',
       description:
-        'Being an Avalon citizen allows you to stay self-employed, get a job without a work visa, have an official clone, etc.',
+        'For individuals wishing to extend their stay or establish long-term residency.',
       onApply: () => setSection(mainSectionIndex + 1),
     },
     {
       name: 'drivingLicence',
       img: 'driving-permit',
-      title: 'Get a driving permit',
+      title: 'Request a driving permit',
       description:
-        'Allows you to rent&drive any ground electric vehicle (except trains and military transport) or import your own.',
+        'For individuals wishing to operate any class of motor vehicle, including rentals.',
       onApply: () => setSection(mainSectionIndex + 2),
     },
   ];
@@ -36,8 +36,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         />
         <h1 style={{ marginBottom: '1rem' }}>Welcome, {user.givenName}!</h1>
         <p style={{ marginTop: 0, fontSize: '1.67rem', lineHeight: '2.5rem' }}>
-          Discover what services the Government <br />
-          of Avalon can offer you:
+          The following online services are available:
         </p>
 
         <ul>
@@ -72,12 +71,12 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           ))}
           <li className="Service">
             <img src="/static/images/business.png" alt="" width="230" />
-            <h3>Open a business</h3>
+            <h3>Register a business</h3>
             <p className="Service__Description medium gray mt-1">
               For any person or organisation wishing to start a new company or
               move existing operations to Avalon.
             </p>
-            <p className="small pink">Comming soon in this demo</p>
+            <p className="small pink">Coming soon in this demo</p>
           </li>
         </ul>
       </div>

@@ -28,7 +28,7 @@ class GovSpace extends Component {
           className="AvalonLogo"
         />
         <h1>Welcome to Avalon!</h1>
-        <p>Please, register your arrival</p>
+        <p>Please click the continue button to register your arrival.</p>
         <Button withLogo onClick={this.handleInitiateLogin}>
           Continue with Jolocom
         </Button>
@@ -51,8 +51,8 @@ class GovSpace extends Component {
         />
         <h4>Scan the QR-code with your SmartWallet:</h4>
         <img src={this.props.qrCode} className="qrCode" />
-        <h5 data-tooltip="Make sure that you have added your full name to the SmartWallet">
-          Doesn't work?
+        <h5 data-tooltip="Make sure that you have added your full name to your SmartWallet">
+          Not working?
         </h5>
       </div>,
       Authorized,
