@@ -8,12 +8,19 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
 
   return (
     <header>
-      <SVG className="Logo" src="/static/images/jolocom-icon-transparent.svg">
-        <img
-          src={'/static/images/jolocom-icon-transparent.svg'}
-          alt="Jolocom's logo"
-        />
-      </SVG>
+      <span
+        className="Icon"
+        onClick={
+          !isPrimaryBrandVersion ? () => setAboutOverlayState(true) : null
+        }
+      >
+        <SVG className="Logo" src="/static/images/jolocom-icon-transparent.svg">
+          <img
+            src={'/static/images/jolocom-icon-transparent.svg'}
+            alt="Jolocom's logo"
+          />
+        </SVG>
+      </span>
       {isPrimaryBrandVersion ? (
         <span className="Brand">
           powered by{' '}
@@ -45,6 +52,9 @@ let Header = ({ brandVersion = 'primary', setAboutOverlayState }) => {
         }
         header:hover :global(.Logo svg .image) {
           opacity: 1;
+        }
+        .Icon {
+          cursor: ${isPrimaryBrandVersion ? 'default' : 'pointer'};
         }
         .Brand {
           margin-left: 20px;
