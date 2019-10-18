@@ -132,12 +132,6 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           margin-bottom: 0;
           line-height: 1.83rem;
         }
-
-        .Service:hover,
-        .Service:hover p {
-          color: #942f51 !important;
-        }
-
         .Service {
           border-left: 1px solid #ececec;
         }
