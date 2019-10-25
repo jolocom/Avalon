@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Button } from 'components';
+import React from 'react';
 
 let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
   const services = [
