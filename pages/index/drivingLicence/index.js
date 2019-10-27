@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Button, Input } from 'components';
 import { getDrivingLicence } from 'actions/user';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 class Residency extends Component {
   state = {
@@ -11,22 +12,33 @@ class Residency extends Component {
     postalCode: '',
   };
 
-  nextSection = () =>
-    this.setState({ sectionIndex: this.state.sectionIndex + 1 });
+  nextSection = cb => this.setState({ sectionIndex: this.state.sectionIndex + 1 }, cb);
+  nextLoading = cb => {
+    this.nextSection(() => {
+      setTimeout(() => {
+        this.nextSection(() => {
+          setTimeout(() => {
+            cb();
+          }, 1000);
+        });
+      }, 3000);
+    });
+  };
+
   handleChangeInput = (key, value) => this.setState({ [key]: value });
   handleGetDrivingLicence = evt => {
     evt.preventDefault();
     const { residence, postalCode } = this.state;
-
-    this.props
-      .getDrivingLicence(
-        {
-          residence,
-          postalCode,
-        },
-        this.nextSection
-      )
-      .then(this.nextSection);
+    this.nextLoading(() => {
+      this.props
+        .getDrivingLicence(
+          {
+            residence,
+            postalCode,
+          },
+          this.nextSection
+        ).then(this.nextSection);
+    });
   };
   render() {
     const { residence, postalCode } = this.state;
@@ -70,6 +82,50 @@ class Residency extends Component {
         </form>
       </>,
       <>
+        <div className="loading">
+          <ClipLoader
+            sizeUnit={'px'}
+            size={40}
+            color={'#000000'}
+            loading={true}
+          />
+        </div>
+        <br />
+        <p>
+          Your request is now being processed.
+        </p>
+        <style jsx>{`
+          .loading {
+            height: 50px;
+            margin-top: 100px;
+          }
+          p {
+            margin-bottom: 100px;
+          }
+        `}</style>
+      </>,
+      <>
+        <div className="done-icon">
+          <img
+            src="/static/images/verified_green.svg"
+            style={{ width: 50, height: 50 }}
+          />
+        </div>
+        <p>
+          Your request was approved.
+        </p>
+        <br />
+        <style jsx>{`
+          .done-icon {
+            height: 50px;
+            margin-top: 100px;
+          }
+          p {
+            margin-bottom: 100px;
+          }
+        `}</style>
+      </>,
+      <>
         <h1>Get an Avalon driving permit</h1>
         <h5>STEP 2</h5>
         <p>
@@ -82,7 +138,7 @@ class Residency extends Component {
         <h1>Success</h1>
         <p>
           You have been issued a driving permit for Avalon. Respect the local traffic laws.
-        <br /><br />
+          <br /><br />
           You can view your new digital driving permit credential in your SmartWallet under <i>Documents</i>.
         </p>
         <br />

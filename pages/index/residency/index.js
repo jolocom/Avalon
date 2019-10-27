@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Input } from 'components';
 import { setResidency } from 'actions/user';
 import { formatDateString } from '../../../utils/date_format';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 class Residency extends Component {
   state = {
@@ -12,25 +13,39 @@ class Residency extends Component {
     birthPlace: '',
   };
 
-  nextSection = () =>
-    this.setState({ sectionIndex: this.state.sectionIndex + 1 });
+  nextSection = cb => this.setState({ sectionIndex: this.state.sectionIndex + 1 }, cb);
+  nextLoading = cb => {
+    this.nextSection(() => {
+      setTimeout(() => {
+        this.nextSection(() => {
+          setTimeout(() => {
+            cb();
+          }, 1000);
+        });
+      }, 3000);
+    });
+  };
+
   handleChangeInput = (key, value) => this.setState({ [key]: value });
+
   handleSetResidency = evt => {
     evt.preventDefault();
     const { birthPlace } = this.state;
     let { birthDate } = this.state;
     birthDate = formatDateString(birthDate);
-
-    this.props
-      .setResidency(
-        {
-          birthDate,
-          birthPlace,
-        },
-        this.nextSection
-      )
-      .then(this.nextSection);
+    this.nextLoading(() => {
+      this.props
+        .setResidency(
+          {
+            birthDate,
+            birthPlace,
+          },
+          this.nextSection
+        )
+        .then(this.nextSection);
+    });
   };
+
   render() {
     const { birthDate, birthPlace } = this.state;
     const { setSection, mainSectionIndex } = this.props;
@@ -80,6 +95,50 @@ class Residency extends Component {
         </form>
       </>,
       <>
+        <div className="loading">
+          <ClipLoader
+            sizeUnit={'px'}
+            size={40}
+            color={'#000000'}
+            loading={true}
+          />
+        </div>
+        <br />
+        <p>
+          Your request is now being processed.
+        </p>
+        <style jsx>{`
+          .loading {
+            height: 50px;
+            margin-top: 100px;
+          }
+          p {
+            margin-bottom: 100px;
+          }
+        `}</style>
+      </>,
+      <>
+        <div className="done-icon">
+          <img
+            src="/static/images/verified_green.svg"
+            style={{ width: 50, height: 50 }}
+          />
+        </div>
+        <p>
+          Your request was approved.
+        </p>
+        <br />
+        <style jsx>{`
+          .done-icon {
+            height: 50px;
+            margin-top: 100px;
+          }
+          p {
+            margin-bottom: 100px;
+          }
+        `}</style>
+      </>,
+      <>
         <h2>Become an Avalonian citizen</h2>
         <h5>STEP 2</h5>
         <p>
@@ -92,7 +151,7 @@ class Residency extends Component {
         <h2>Success</h2>
         <p>
           A proof of citizenship has been issued to your device.
-        <br /><br />
+          <br /><br />
           You can view your new digital Avalon ID credential in your SmartWallet under <i>Documents</i>.
         </p>
         <Button
