@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import Link from 'next/link';
 
 import { Button, Input } from 'components';
 import { getDrivingLicence } from 'actions/user';
@@ -42,7 +43,6 @@ class Residency extends Component {
   };
   render() {
     const { residence, postalCode } = this.state;
-    const { setSection, mainSectionIndex } = this.props;
     const sections = [
       <>
         <h1>Get an Avalon driving permit</h1>
@@ -70,7 +70,6 @@ class Residency extends Component {
           <Button className="mt-5" disabled={!residence || !postalCode}>
             Next
           </Button>
-
           <style jsx>{`
             form {
               display: flex;
@@ -142,29 +141,40 @@ class Residency extends Component {
           You can view your new digital driving permit credential in your SmartWallet under <i>Documents</i>.
         </p>
         <br />
-        <Button
-          flat
-          pink
-          className="mt-5"
-          onClick={() => setSection(mainSectionIndex - 2)}
-        >
-          Return to home page
-        </Button>
+        <Link href="/index/gov/authorized">
+          <Button
+            flat
+            pink
+            className="mt-5"
+          >
+            Return to home page
+          </Button>
+        </Link>
       </>,
     ];
     const currentSection = sections[this.state.sectionIndex];
 
     return (
-      <div className="ta-c margin-center">
-        <img
-          src="/static/images/Avalon_logo.svg"
-          alt="imaginary city or country logo"
-          className="AvalonLogo"
-        />
-        {typeof currentSection === 'function'
-          ? React.createElement(currentSection)
-          : currentSection}
+      <div className="wrapper">
+        <div className="ta-c margin-center">
+          <img
+            src="/static/images/Avalon_logo.svg"
+            alt="imaginary city or country logo"
+            className="AvalonLogo"
+          />
+          {typeof currentSection === 'function'
+            ? React.createElement(currentSection)
+            : currentSection}
+        </div>
         <style jsx>{`
+          .wrapper {
+            background: url(/static/images/GOV_01.jpg) right top / cover
+              no-repeat #000;
+            overflow: hidden;
+            width: 100%;
+            min-height: 100%;
+            height: 100vh;
+          }
           div {
             background-color: #fff;
             width: 50%;

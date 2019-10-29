@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'components';
-import Authorized from './Authorized';
 import ClipLoader from 'react-spinners/ClipLoader';
+import Router from 'next/router';
 
 import { initiateLogin } from 'actions/auth';
 
@@ -19,7 +19,7 @@ class GovSpace extends Component {
       setTimeout(() => {
         this.props
           .initiateLogin(() => this.setSection(2))
-          .then(() => this.setSection(3));
+          .then(() => Router.push('/index/gov/authorized'));
       }, 500);
     });
   };
@@ -82,7 +82,6 @@ class GovSpace extends Component {
           Doesn't work?
         </h5>
       </div>,
-      Authorized,
     ];
 
     const currentSection = sections[this.state.sectionIndex];

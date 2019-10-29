@@ -1,11 +1,13 @@
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
+import Router from 'next/router';
 import withRedux from 'next-redux-wrapper';
 import throttle from 'lodash.throttle';
 
 import { SmallScreenMsg } from 'components';
 
 import initStore from '../utils/store';
+import React from 'react';
 
 const MOBILE_BREAKPOINT = 1024;
 const getWidth = () =>
@@ -25,9 +27,11 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    this.handleExternalRoutes();
     this.setIsMobile();
     window.addEventListener('resize', this._setIsMobile);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this._setIsMobile);
   }
@@ -36,6 +40,12 @@ class MyApp extends App {
     this.setState({ isMobile: isMobile() });
   };
   _setIsMobile = throttle(this.setIsMobile, 1500);
+
+  handleExternalRoutes = () => {
+    if(Router.route !== '/') {
+      Router.replace('/');
+    }
+  };
 
   render() {
     const { Component, pageProps, store } = this.props;

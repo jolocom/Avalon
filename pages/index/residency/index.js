@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import Link from 'next/link';
 
 import { Button, Input } from 'components';
 import { setResidency } from 'actions/user';
@@ -48,7 +49,6 @@ class Residency extends Component {
 
   render() {
     const { birthDate, birthPlace } = this.state;
-    const { setSection, mainSectionIndex } = this.props;
     const sections = [
       <>
         <h2>
@@ -154,33 +154,44 @@ class Residency extends Component {
           <br /><br />
           You can view your new digital Avalon ID credential in your SmartWallet under <i>Documents</i>.
         </p>
-        <Button
-          flat
-          pink
-          className="mt-5"
-          onClick={() => setSection(mainSectionIndex - 1)}
-        >
-          Return to home page
-        </Button>
+        <Link href="/index/gov/authorized">
+          <Button
+            flat
+            pink
+            className="mt-5"
+          >
+            Return to home page
+          </Button>
+        </Link>
       </>,
     ];
     const currentSection = sections[this.state.sectionIndex];
 
     return (
-      <div className="ta-c margin-center">
-        <img
-          src="/static/images/Avalon_logo.svg"
-          alt="imaginary city or country logo"
-          className="AvalonLogo"
-        />
-        {typeof currentSection === 'function'
-          ? React.createElement(currentSection)
-          : currentSection}
+      <div className="wrapper">
+        <div className="ta-c margin-center">
+          <img
+            src="/static/images/Avalon_logo.svg"
+            alt="imaginary city or country logo"
+            className="AvalonLogo"
+          />
+          {typeof currentSection === 'function'
+            ? React.createElement(currentSection)
+            : currentSection}
+        </div>
         <style jsx>{`
+          .wrapper {
+            background: url(/static/images/GOV_01.jpg) right top / cover
+              no-repeat #000;
+            overflow: hidden;
+            width: 100%;
+            min-height: 100%;
+            height: 100vh;
+          }
           div {
             background-color: #fff;
             width: 60.5rem;
-            padding: 2.5rem 7.33rem 3.33rem;
+            padding: 70px 65px;
           }
           div,
           div :global(p) {

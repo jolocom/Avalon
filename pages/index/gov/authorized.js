@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import { Button } from 'components';
+import Link from 'next/link';
 import React from 'react';
 
 let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
+
   const services = [
     {
       name: 'residency',
@@ -11,6 +13,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       description:
         'For individuals wishing to extend their stay or establish long-term residency.',
       onApply: () => setSection(mainSectionIndex + 1),
+      url: '/index/residency',
     },
     {
       name: 'drivingLicence',
@@ -19,16 +22,12 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       description:
         'For individuals wishing to operate any class of motor vehicle, including rentals.',
       onApply: () => setSection(mainSectionIndex + 2),
+      url: '/index/drivingLicence',
     },
   ];
 
   return (
     <div className="Authorized">
-      <img
-        className="BarImage"
-        src="/static/images/GOV_bg_bar.jpg"
-        alt="bar image"
-      />
       <div className="Authorized__Content">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -61,12 +60,13 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
                   Completed
                 </div>
               ) : (
-                <Button
-                  onClick={service.onApply}
-                  style={{ marginTop: '2.5rem' }}
-                >
-                  Apply
-                </Button>
+                <Link href={service.url}>
+                  <Button
+                    style={{ marginTop: '2.5rem' }}
+                  >
+                    Apply
+                  </Button>
+                </Link>
               )}
             </li>
           ))}
@@ -94,11 +94,15 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           line-height: 4.83rem;
           color: #05050d;
         }
+        
+        p {
+          color: #05050d;
+        }
 
         .Authorized__Content {
           width: 100%;
           padding-top: 5rem;
-          padding-left: 4.17rem;
+          padding-left: 20.17rem;
           overflow: auto;
         }
 
@@ -126,6 +130,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           font-family: TTCommons-DemiBold;
           margin-top: 1.67rem;
           font-weight: 400;
+          color: #05050d;
         }
         .Service__Description {
           margin-top: 1.67rem !important;

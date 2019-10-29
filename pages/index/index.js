@@ -123,28 +123,6 @@ const sections = [
       justifyContent: 'center',
     },
   },
-  {
-    bgImage: '/static/images/recidency_bg.jpg',
-    bgSize: '85% 100%',
-    content: Residency,
-    style: {
-      width: '100%',
-      maxWidth: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-    },
-  },
-  {
-    bgImage: '/static/images/driver_licence_bg.jpg',
-    content: DrivingLicence,
-    style: {
-      width: '100%',
-      maxWidth: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-    },
-    containerGradient: blackGradient,
-  },
 ];
 
 class Home extends Component {
