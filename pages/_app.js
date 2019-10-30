@@ -1,11 +1,15 @@
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
+import Router from 'next/router';
 import withRedux from 'next-redux-wrapper';
 import throttle from 'lodash.throttle';
 
 import { SmallScreenMsg } from 'components';
 
 import initStore from '../utils/store';
+import React from 'react';
+import About from '../components/About';
+import { setAboutOverlayState } from '../actions/ui';
 
 const MOBILE_BREAKPOINT = 1024;
 const getWidth = () =>
@@ -15,6 +19,7 @@ const isMobile = () => getWidth() < MOBILE_BREAKPOINT;
 class MyApp extends App {
   state = {
     isMobile: false,
+    isAbout: false,
   };
   static async getInitialProps({ Component, ctx }) {
     return {
@@ -25,9 +30,16 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    let store;
+    this.props.store.subscribe(() => {
+      store = this.props.store.getState();
+      this.setState({ isAbout: store.ui.showAboutOverlay });
+    });
+    this.handleExternalRoutes();
     this.setIsMobile();
     window.addEventListener('resize', this._setIsMobile);
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this._setIsMobile);
   }
@@ -36,6 +48,12 @@ class MyApp extends App {
     this.setState({ isMobile: isMobile() });
   };
   _setIsMobile = throttle(this.setIsMobile, 1500);
+
+  handleExternalRoutes = () => {
+    if(Router.route !== '/') {
+      Router.replace('/');
+    }
+  };
 
   render() {
     const { Component, pageProps, store } = this.props;
@@ -46,7 +64,9 @@ class MyApp extends App {
           {this.state.isMobile ? (
             <SmallScreenMsg />
           ) : (
-            <Component {...pageProps} />
+            this.state.isAbout
+              ? <About onClose={() => store.dispatch(setAboutOverlayState(false))} />
+              : <Component {...pageProps} />
           )}
         </Provider>
       </Container>

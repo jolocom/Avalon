@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import { Button } from 'components';
+import Link from 'next/link';
 import React from 'react';
+import { setAboutOverlayState } from 'actions/ui';
 
-let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
+let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayState }) => {
   const services = [
     {
       name: 'residency',
@@ -11,6 +13,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       description:
         'For individuals wishing to extend their stay or establish long-term residency.',
       onApply: () => setSection(mainSectionIndex + 1),
+      url: '/index/residency',
     },
     {
       name: 'drivingLicence',
@@ -19,16 +22,29 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
       description:
         'For individuals wishing to operate any class of motor vehicle, including rentals.',
       onApply: () => setSection(mainSectionIndex + 2),
+      url: '/index/drivingLicence',
     },
   ];
 
   return (
     <div className="Authorized">
-      <img
-        className="BarImage"
-        src="/static/images/GOV_bg_bar.jpg"
-        alt="bar image"
-      />
+      <div className="topBar">
+        <div
+          onClick={
+            () => {
+              setAboutOverlayState(true);
+            }
+          }
+        >
+          <img
+            src={'/static/favicon/apple-touch-icon.png'}
+            width={40}
+            height={40}
+            alt="Jolocom's logo"
+          />
+          <text>About</text>
+        </div>
+      </div>
       <div className="Authorized__Content">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -61,12 +77,13 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
                   Completed
                 </div>
               ) : (
-                <Button
-                  onClick={service.onApply}
-                  style={{ marginTop: '2.5rem' }}
-                >
-                  Apply
-                </Button>
+                <Link href={service.url}>
+                  <Button
+                    style={{ marginTop: '2.5rem' }}
+                  >
+                    Apply
+                  </Button>
+                </Link>
               )}
             </li>
           ))}
@@ -88,17 +105,49 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           width: 100%;
           height: 100vh;
           overflow: hidden;
+          display: flex;
+          justify-content: center;
+          alignItems: flex-start;
+        }
+        
+        .topBar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 10rem;
+        }
+        
+        .topBar div {
+          border: 1px solid blue;
+          margin-left: 50px;
+          margin-top: 25px;
+          height: 60px;
+          width: 100px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+        }
+        
+        .topBar text {
+          color: black;
+          font-size: 20px;
+          font-we
         }
 
         h1 {
           line-height: 4.83rem;
           color: #05050d;
         }
-
+        
+        p {
+          color: #05050d;
+        }
+        
         .Authorized__Content {
-          width: 100%;
-          padding-top: 5rem;
-          padding-left: 4.17rem;
+          margin-top: 10rem;
+          alignSelf: center;
           overflow: auto;
         }
 
@@ -126,28 +175,25 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           font-family: TTCommons-DemiBold;
           margin-top: 1.67rem;
           font-weight: 400;
+          color: #05050d;
         }
         .Service__Description {
           margin-top: 1.67rem !important;
           margin-bottom: 0;
           line-height: 1.83rem;
         }
-
-        .Service:hover,
-        .Service:hover p {
-          color: #942f51 !important;
-        }
-
-        .Service {
-          border-left: 1px solid #ececec;
-        }
       `}</style>
     </div>
   );
 };
 
-AuthorizedGovSpace = connect(state => ({
+const mapStateToProps = state => ({
   user: state.userData,
-}))(AuthorizedGovSpace);
+});
+
+AuthorizedGovSpace = connect(
+  mapStateToProps,
+  { setAboutOverlayState },
+)(AuthorizedGovSpace);
 
 export default AuthorizedGovSpace;

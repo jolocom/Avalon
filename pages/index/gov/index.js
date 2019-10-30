@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'components';
-import Authorized from './Authorized';
 import ClipLoader from 'react-spinners/ClipLoader';
+import Router from 'next/router';
 
 import { initiateLogin } from 'actions/auth';
 
@@ -19,7 +19,7 @@ class GovSpace extends Component {
       setTimeout(() => {
         this.props
           .initiateLogin(() => this.setSection(2))
-          .then(() => this.setSection(3));
+          .then(() => Router.push('/index/gov/authorized'));
       }, 500);
     });
   };
@@ -77,12 +77,11 @@ class GovSpace extends Component {
           className="AvalonLogo"
         />
         <h4>Scan the QR-code with your SmartWallet:</h4>
-        <img src={this.props.qrCode} className="qrCode" />
+        <img width={300} src={this.props.qrCode} />
         <h5 data-tooltip="Make sure that you have added your full name to the SmartWallet">
           Doesn't work?
         </h5>
       </div>,
-      Authorized,
     ];
 
     const currentSection = sections[this.state.sectionIndex];
@@ -104,9 +103,8 @@ class GovSpace extends Component {
           }
           .GovSpace :global(.half-width) {
             width: 56.67rem;
-            height: 35.83rem;
             min-width: 300px;
-            padding: 3.75rem 5.42rem 2.25rem;
+            padding: 70px 65px;
             margin-top: 13.08rem;
             border-radius: 2px;
           }

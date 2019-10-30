@@ -2,16 +2,12 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { GradientLayout } from 'layouts';
-import { Button, Footer, About } from 'components';
+import { Button, Footer } from 'components';
 import Gov from './gov';
-import Residency from './residency';
-import DrivingLicence from './drivingLicence';
 
 import { setAboutOverlayState } from 'actions/ui';
 const pinkGradient =
   'radial-gradient(circle at top left, rgba(148, 47, 81, 0.5), rgba(6,6,16,0) 45%)';
-const blackGradient =
-  'linear-gradient(251deg, rgba(145,145,145,0.00) 17%, rgba(5,5,13,0.22) 44%, #010100 99%)';
 const sections = [
   {
     content: ({ nextSection }) => (
@@ -123,33 +119,11 @@ const sections = [
       justifyContent: 'center',
     },
   },
-  {
-    bgImage: '/static/images/recidency_bg.jpg',
-    bgSize: '85% 100%',
-    content: Residency,
-    style: {
-      width: '100%',
-      maxWidth: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-    },
-  },
-  {
-    bgImage: '/static/images/driver_licence_bg.jpg',
-    content: DrivingLicence,
-    style: {
-      width: '100%',
-      maxWidth: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-    },
-    containerGradient: blackGradient,
-  },
 ];
 
 class Home extends Component {
   render() {
-    const { userData, ui } = this.props;
+    const { userData } = this.props;
 
     return (
       <>
@@ -165,10 +139,6 @@ class Home extends Component {
           }}
           noGradient={[4, 5, 6]}
         />
-
-        {ui.showAboutOverlay && (
-          <About onClose={() => this.props.setAboutOverlayState(false)} />
-        )}
       </>
     );
   }
