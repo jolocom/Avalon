@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { Button } from 'components';
 import Link from 'next/link';
 import React from 'react';
+import { setAboutOverlayState } from 'actions/ui';
 
-let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
-
+let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayState }) => {
   const services = [
     {
       name: 'residency',
@@ -28,6 +28,23 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
 
   return (
     <div className="Authorized">
+      <div className="topBar">
+        <div
+          onClick={
+            () => {
+              setAboutOverlayState(true);
+            }
+          }
+        >
+          <img
+            src={'/static/favicon/apple-touch-icon.png'}
+            width={40}
+            height={40}
+            alt="Jolocom's logo"
+          />
+          <text>About</text>
+        </div>
+      </div>
       <div className="Authorized__Content">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -88,6 +105,35 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           width: 100%;
           height: 100vh;
           overflow: hidden;
+          display: flex;
+          justify-content: center;
+          alignItems: flex-start;
+        }
+        
+        .topBar {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 10rem;
+        }
+        
+        .topBar div {
+          border: 1px solid blue;
+          margin-left: 50px;
+          margin-top: 25px;
+          height: 60px;
+          width: 100px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+        }
+        
+        .topBar text {
+          color: black;
+          font-size: 20px;
+          font-we
         }
 
         h1 {
@@ -98,11 +144,10 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
         p {
           color: #05050d;
         }
-
+        
         .Authorized__Content {
-          width: 100%;
-          padding-top: 5rem;
-          padding-left: 20.17rem;
+          margin-top: 10rem;
+          alignSelf: center;
           overflow: auto;
         }
 
@@ -137,22 +182,18 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex }) => {
           margin-bottom: 0;
           line-height: 1.83rem;
         }
-
-        .Service:hover,
-        .Service:hover p {
-          color: #942f51 !important;
-        }
-
-        .Service {
-          border-left: 1px solid #ececec;
-        }
       `}</style>
     </div>
   );
 };
 
-AuthorizedGovSpace = connect(state => ({
+const mapStateToProps = state => ({
   user: state.userData,
-}))(AuthorizedGovSpace);
+});
+
+AuthorizedGovSpace = connect(
+  mapStateToProps,
+  { setAboutOverlayState },
+)(AuthorizedGovSpace);
 
 export default AuthorizedGovSpace;

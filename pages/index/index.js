@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { GradientLayout } from 'layouts';
-import { Button, Footer, About } from 'components';
+import { Button, Footer } from 'components';
 import Gov from './gov';
 
 import { setAboutOverlayState } from 'actions/ui';
@@ -123,7 +123,7 @@ const sections = [
 
 class Home extends Component {
   render() {
-    const { userData, ui } = this.props;
+    const { userData } = this.props;
 
     return (
       <>
@@ -139,10 +139,6 @@ class Home extends Component {
           }}
           noGradient={[4, 5, 6]}
         />
-
-        {ui.showAboutOverlay && (
-          <About onClose={() => this.props.setAboutOverlayState(false)} />
-        )}
       </>
     );
   }

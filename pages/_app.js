@@ -8,6 +8,8 @@ import { SmallScreenMsg } from 'components';
 
 import initStore from '../utils/store';
 import React from 'react';
+import About from '../components/About';
+import { setAboutOverlayState } from '../actions/ui';
 
 const MOBILE_BREAKPOINT = 1024;
 const getWidth = () =>
@@ -17,6 +19,7 @@ const isMobile = () => getWidth() < MOBILE_BREAKPOINT;
 class MyApp extends App {
   state = {
     isMobile: false,
+    isAbout: false,
   };
   static async getInitialProps({ Component, ctx }) {
     return {
@@ -27,6 +30,11 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    let store;
+    this.props.store.subscribe(() => {
+      store = this.props.store.getState();
+      this.setState({ isAbout: store.ui.showAboutOverlay });
+    });
     this.handleExternalRoutes();
     this.setIsMobile();
     window.addEventListener('resize', this._setIsMobile);
@@ -56,7 +64,9 @@ class MyApp extends App {
           {this.state.isMobile ? (
             <SmallScreenMsg />
           ) : (
-            <Component {...pageProps} />
+            this.state.isAbout
+              ? <About onClose={() => store.dispatch(setAboutOverlayState(false))} />
+              : <Component {...pageProps} />
           )}
         </Provider>
       </Container>
