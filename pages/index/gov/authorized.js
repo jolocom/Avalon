@@ -11,7 +11,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
       img: 'residency',
       title: 'Apply for citizenship',
       description:
-        'For individuals wishing to extend their stay or establish long-term residency.',
+        'For individuals wishing to extend their stay or establish long-term residency in Avalon',
       onApply: () => setSection(mainSectionIndex + 1),
       url: '/index/residency',
     },
@@ -109,7 +109,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
           justify-content: center;
           alignItems: flex-start;
         }
-        
+
         .topBar {
           position: absolute;
           top: 0;
@@ -117,7 +117,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
           right: 0;
           height: 10rem;
         }
-        
+
         .topBar div {
           border: 1px solid blue;
           margin-left: 50px;
@@ -129,7 +129,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
           align-items: center;
           cursor: pointer;
         }
-        
+
         .topBar text {
           color: black;
           font-size: 20px;
@@ -140,11 +140,11 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
           line-height: 4.83rem;
           color: #05050d;
         }
-        
+
         p {
           color: #05050d;
         }
-        
+
         .Authorized__Content {
           margin-top: 10rem;
           alignSelf: center;
