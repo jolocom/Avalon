@@ -15,11 +15,9 @@ const sections = [
         <h1>The future of digital identity</h1>
         <div className="margin-center" style={{ width: 560, maxWidth: '100%' }}>
           <p>
-            How will decentralised technologies emerging today change the world of tomorrow?
-            What will citizenship, access, and freedom of movement look like when
-            people and organisations own and control the data that defines them?
+            Today's next-generation technologies will change how we interact in the world of tomorrow.
             <br /> <br />
-            This web experience is a demo of the future of self-owned digital identity.
+            What will citizenship, access, and freedom of movement look like when people & end-users control their own data?
           </p>
         </div>
         <br />
@@ -37,18 +35,11 @@ const sections = [
       <>
         <h1>Discover Avalon</h1>
         <p>
-          Recognised around the globe for its state-of-the-art urban infrastructure,
-          Avalon is a hypermodern, technologically advanced nation from some not-so-distant future.
+          A next-generation metropolis. Intelligent urban environments. Interactive. Responsive. Decentralized.
           <br /> <br />
-          Like every country, Avalon also had its dark days: just two years ago, public
-          trust in basic civic institutions had reached record lows. In a collaborative
-          effort to restore trust in the system, state officials & private citizens
-          came together to address the country’s infrastructural
-          challenges and inefficiencies. Among those initiatives was the introduction
-          of a decentralised digital identity and access rights management system.
+          Avalon is the technologically-advanced model of society for communities around the globe from some not-so-distant future.
           <br /> <br />
-          Experience what possibilities the future of digital identity has in store.
-          It’s time to discover Avalon.
+          Experience the forefront of digital identity. It’s time to discover Avalon.
         </p>
 
         <Footer />
@@ -63,12 +54,12 @@ const sections = [
       <>
         <h1>Prepare for arrival</h1>
         <p>
-          Both visitors and residents use the SmartWallet to interact with the
-          urban environment in Avalon & access local public services.
-          The SmartWallet holds your digital identity and documents.
+          Anyone can interact with the local urban environment in Avalon simply by using a mobile app.
+          The SmartWallet allows you to keep digital IDs & identification documents on a smartphone,
+          allowing instant access to a range of public services.
           <br />
           <br />
-          You can get your own copy of the SmartWallet free of charge <br/>— just scan this QR code:
+          The best part? It's absolutely free of charge and easy to install! Just scan this QR code:
         </p>
         <div>
           <img
@@ -77,9 +68,6 @@ const sections = [
             style={{ marginLeft: 130 }}
           />
         </div>
-        <p>
-          Learn more about the Jolocom SmartWallet <u>here</u>.
-        </p>
         <Footer />
       </>
     ),
@@ -92,7 +80,7 @@ const sections = [
       <>
         <h1>Set up your identity</h1>
         <p>
-          Now it's time to create a decentralised identity for yourself.
+          Now it's time to create a public digital identity for yourself.
           <br />
           <br />
           1. Open the SmartWallet. <br />

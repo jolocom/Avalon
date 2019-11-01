@@ -33,7 +33,7 @@ class GovSpace extends Component {
           className="AvalonLogo"
         />
         <h1>Welcome to Avalon!</h1>
-        <p>Please, register your arrival</p>
+        <p>Please click the continue button to register your arrival.</p>
         <Button withLogo onClick={this.handleInitiateLogin}>
           Continue with Jolocom
         </Button>
@@ -48,6 +48,7 @@ class GovSpace extends Component {
           }
         `}</style>
       </div>,
+
       <div className="half-width margin-center ta-c">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -70,6 +71,7 @@ class GovSpace extends Component {
           }
         `}</style>
       </div>,
+
       <div className="half-width margin-center ta-c">
         <img
           src="/static/images/Avalon_logo.svg"
@@ -78,7 +80,7 @@ class GovSpace extends Component {
         />
         <h4>Scan the QR-code with your SmartWallet:</h4>
         <img width={300} src={this.props.qrCode} />
-        <h5 data-tooltip="Make sure that you have added your full name to the SmartWallet">
+        <h5 data-tooltip="Make sure that you have added your full name to your SmartWallet">
           Doesn't work?
         </h5>
       </div>,

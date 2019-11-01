@@ -45,10 +45,10 @@ class Residency extends Component {
     const { residence, postalCode } = this.state;
     const sections = [
       <>
-        <h1>Get an Avalon driving permit</h1>
+        <h2>Get an Avalon driving permit</h2>
         <h5>STEP 1</h5>
-        <p>Before the local municipal authority can issue you an Avalon driving permit credential,
-        you must provide certain personal information in the fields below.</p>
+        <p>Before the local municipal authority can issue you an Avalon driving permit,
+        you must provide the information requested below.</p>
         <br />
         <form onSubmit={this.handleGetDrivingLicence}>
           <Input
@@ -125,7 +125,7 @@ class Residency extends Component {
         `}</style>
       </>,
       <>
-        <h1>Get an Avalon driving permit</h1>
+        <h2>Get an Avalon driving permit</h2>
         <h5>STEP 2</h5>
         <p>
           Scan the QR code with your SmartWallet to save your driving permit onto your device:
@@ -136,9 +136,9 @@ class Residency extends Component {
       <>
         <h1>Success</h1>
         <p>
-          You have been issued a driving permit for Avalon. Respect the local traffic laws.
+          You have been issued a driving permit for Avalon.
           <br /><br />
-          You can view your new digital driving permit credential in your SmartWallet under <i>Documents</i>.
+          You can view your new digital driving permit in your SmartWallet (under the <i>Documents</i> tab).
         </p>
         <br />
         <Link href="/index/gov/authorized">
