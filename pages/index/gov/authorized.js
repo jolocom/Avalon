@@ -103,7 +103,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
         .Authorized {
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: auto;
           overflow: hidden;
           display: flex;
           justify-content: center;
@@ -119,7 +119,6 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
         }
         
         .topBar div {
-          border: 1px solid blue;
           margin-left: 50px;
           margin-top: 25px;
           height: 60px;
@@ -166,7 +165,7 @@ let AuthorizedGovSpace = ({ user, setSection, mainSectionIndex, setAboutOverlayS
           margin-right: 6.67rem;
           width: 20.33rem;
           display: inline-block;
-          height: 37.75rem;
+          height: auto;
         }
         .Service > img {
           width: 19.17rem;
