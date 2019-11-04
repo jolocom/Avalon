@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'components';
-import ClipLoader from 'react-spinners/ClipLoader';
 import Router from 'next/router';
 
 import { initiateLogin } from 'actions/auth';
@@ -12,21 +11,17 @@ class GovSpace extends Component {
     sectionIndex: 0,
   };
 
-  setSection = (idx, cb) => this.setState({ sectionIndex: idx }, cb);
+  setSection = idx => this.setState({ sectionIndex: idx });
 
   handleInitiateLogin = () => {
-    this.setSection(1, () => {
-      setTimeout(() => {
-        this.props
-          .initiateLogin(() => this.setSection(2))
-          .then(() => Router.push('/index/gov/authorized'));
-      }, 500);
-    });
+    this.props
+      .initiateLogin(() => this.setSection(1))
+      .then(() => Router.push('/index/gov/authorized'));
   };
 
   render() {
     const sections = [
-      <div className="half-width margin-center ta-c">
+      <div className="half-width ta-c">
         <img
           src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
@@ -48,31 +43,7 @@ class GovSpace extends Component {
           }
         `}</style>
       </div>,
-
-      <div className="half-width margin-center ta-c">
-        <img
-          src="/static/images/Avalon_logo.svg"
-          alt="imaginary city or country logo"
-          className="AvalonLogo"
-        />
-        <div className="loading">
-          <ClipLoader
-            sizeUnit={'px'}
-            size={40}
-            color={'#000000'}
-            loading={true}
-          />
-        </div>
-        <h4>Preparing QR Code</h4>
-        <style jsx>{`
-          .loading {
-            margin-top: 100px;
-            height: 50px;
-          }
-        `}</style>
-      </div>,
-
-      <div className="half-width margin-center ta-c">
+      <div className="half-width ta-c">
         <img
           src="/static/images/Avalon_logo.svg"
           alt="imaginary city or country logo"
@@ -95,6 +66,9 @@ class GovSpace extends Component {
         <style jsx>{`
           .GovSpace {
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
           .GovSpace,
           .GovSpace :global(p) {
@@ -107,15 +81,7 @@ class GovSpace extends Component {
             width: 56.67rem;
             min-width: 300px;
             padding: 70px 65px;
-            margin-top: 13.08rem;
             border-radius: 2px;
-          }
-
-          @media only screen and (min-width: 1440px) {
-            .GovSpace :global(.half-width) {
-              margin-top: 15rem;
-            }
-          }
         `}</style>
       </div>
     );
