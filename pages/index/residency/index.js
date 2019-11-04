@@ -52,11 +52,11 @@ class Residency extends Component {
     const sections = [
       <>
         <h2>
-          Become<br />a citizen of Avalon
+          Become a citizen of Avalon
         </h2>
         <h5>STEP 1</h5>
-        <p>Before the local municipal authority can issue you an Avalon citizenship
-        credential, you must provide certain personal information in the fields below.</p>
+        <p>Before the local municipal authority can issue you an digital ID card for Avalon,
+        you must provide the information requested below.</p>
         <br />
         <form onSubmit={this.handleSetResidency}>
           <Input
@@ -78,7 +78,7 @@ class Residency extends Component {
               this.handleChangeInput('birthPlace', evt.target.rawValue)
             }
             value={birthPlace}
-            labelText="country of birth"
+            labelText="place of birth"
           />
           <Button className="mt-5" disabled={!birthDate || !birthPlace}>
             Next
@@ -139,7 +139,7 @@ class Residency extends Component {
         `}</style>
       </>,
       <>
-        <h2>Become an Avalonian citizen</h2>
+        <h2>Become a citizen of Avalon</h2>
         <h5>STEP 2</h5>
         <p>
           Scan the QR code with your SmartWallet to save your new digital ID onto your device:
@@ -150,9 +150,9 @@ class Residency extends Component {
       <>
         <h2>Success</h2>
         <p>
-          A proof of citizenship has been issued to your device.
+          A digital ID card has been issued to your device.
           <br /><br />
-          You can view your new digital Avalon ID credential in your SmartWallet under <i>Documents</i>.
+          You can view your new digital ID in your SmartWallet (under the <i>Documents</i> tab).
         </p>
         <Link href="/index/gov/authorized">
           <Button
