@@ -1,6 +1,8 @@
 const { parsed: localEnv } = require('dotenv').config();
 const webpack = require('webpack');
 
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:9000'
+
 module.exports = {
   webpack: config => {
     // Unshift polyfills in main entrypoint.
@@ -18,6 +20,6 @@ module.exports = {
     return config;
   },
   publicRuntimeConfig: { // Will be available on both server and client
-    backendUrl: 'http://192.168.2.109:9000',
+    backendUrl
   },
 };
