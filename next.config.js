@@ -1,7 +1,7 @@
 const { parsed: localEnv } = require('dotenv').config();
 const webpack = require('webpack');
 
-const backendUrl = process.env.BACKEND_URL || 'http://localhost:9000'
+const backendUrl = process.env.SERVICE_URL || 'http://localhost:9000'
 
 module.exports = {
   webpack: config => {
